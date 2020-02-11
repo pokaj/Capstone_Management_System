@@ -7,7 +7,7 @@
             <div class="col-xl-10 col-lg-9 col-md-8 mt-3">
                 <div class="row align-items-center">
                     <div class="col-xl-10 col-12 mb-4 mb-xl-0 pl-0">
-                        <h3 class="text-muted text-center mb-3">Milestones</h3>
+                        <h3 class="text-muted mb-3 ml-3">Milestones</h3>
                         <table class="table table-striped bg-light text-center">
                             <thead>
                             <tr class="text-muted">

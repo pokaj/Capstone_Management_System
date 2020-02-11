@@ -31,12 +31,7 @@
                                                 <p><i class="fa fa-user" aria-hidden="true"></i>  {{Auth::user()->first_name}} {{Auth::user()->last_name}}</p>
                                                 <p><i class="fa fa-address-card" aria-hidden="true"></i> 63032020</p>
                                                 <p><i class="fa fa-envelope" aria-hidden="true"></i>  {{Auth::user()->email}} </p>
-                                                <p><i class="fa fa-phone" aria-hidden="true"></i> {{Auth::user()->phone}} </p>
-
-                                                <h4>Interests</h4>
-                                                <p>
-                                                    Indie music, skiing and hiking. I love the great outdoors.
-                                                </p>
+                                                <p><i class="fa fa-phone" aria-hidden="true"></i> 0{{Auth::user()->phone}} </p>
                                             </div>
                                         </div>
                                         <!--/row-->
@@ -93,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 order-lg-1 text-center">
-                                <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+                                <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="profile_picture">
                                 <h6 class="mt-2">Upload a different photo</h6>
                                 <label class="custom-file">
                                     <input type="file" id="file" class="custom-file-input">
