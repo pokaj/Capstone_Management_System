@@ -28,7 +28,7 @@
                     <a href="###" class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">Dashboard</a>
                     <div class="bottom-border pb-3">
                         <img src="images/avatar.png" width="40" class="rounded-circle mr-3">
-                        <a href="/profile" class="text-white">{{Auth::user()->username}}</a>
+                        <a href="/profile" class="text-white"> {{Auth::user()->username}}</a>
                     </div>
 
                     <ul class="navbar-nav flex-column mt-4">
