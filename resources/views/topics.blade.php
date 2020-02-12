@@ -9,13 +9,13 @@
 {{--                Beginning of navigation tab--}}
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a href="" data-target="#student_topics" data-toggle="tab" class="nav-link active">Student Topics</a>
+                        <a href="" data-target="#student_topics" data-toggle="tab" class="nav-link active">Student Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#my_topics" data-toggle="tab" class="nav-link">My Topics</a>
+                        <a href="" data-target="#my_topics" data-toggle="tab" class="nav-link">My Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#add_topic" data-toggle="tab" class="nav-link">Add Topic</a>
+                        <a href="" data-target="#add_topic" data-toggle="tab" class="nav-link">Add Project</a>
                     </li>
                 </ul>
                 {{--                End of navigation tab--}}
@@ -26,89 +26,72 @@
                     <div class="tab-pane active" id="student_topics">
                         {{--                        Beginning of section for viewing student topics--}}
 
-                        <h3 class="text-muted mb-3 mt-3">Student Topics</h3>
+                        <h3 class="text-muted mb-3 mt-3">Student Projects</h3>
+
+                        @if(count($projects) > 1)
 
                         <table class="table text-center table-dark table-hover">
                             <thead>
                             <tr class="text-muted">
-                                <th>Topic</th>
                                 <th>Student Name</th>
+                                <th>Type</th>
                                 <th>Field</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-
-                                <td>Philip Owusu-Afriyie</td>
-                                <td>Applied</td>
-                                <td>Management System</td>
+                            @foreach($projects as $project)
+                                <tr>
+                                <td>{{$project->project_user}}</td>
+                                <td>{{$project->project_type}}</td>
+                                <td>{{$project->project_field}}</td>
                                 <td>
                                     <a href="" class="nav-link" data-toggle="modal" data-target="#view"><i class="fas fa-eye text-muted fa-lg"></i></a>
                                 </td>
 
                             </tr>
-                            <tr>
-
-                                <td>Munira Adam</td>
-                                <td>Thesis</td>
-                                <td>Cyber-security</td>
-                                <td>
-                                    <a href="" class="nav-link" data-toggle="modal" data-target="#view"><i class="fas fa-eye text-muted fa-lg"></i></a>
-                                </td>
-
-                            </tr>
-                            <tr>
-
-                                <td>Kojo Owusu</td>
-                                <td>Applied</td>
-                                <td>Machine Learning</td>
-                                <td>
-                                    <a href="" class="nav-link" data-toggle="modal" data-target="#view"><i class="fas fa-eye text-muted fa-lg"></i></a>
-                                </td>
-
-                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
+                        @else
+                            <h4>There are no student Topics yet</h4>
+                    @endif
 
                         <!-- beginning of modal -->
 
+                        @if(count($projects) > 1)
+                            @foreach($projects as $row)
                         <div class="modal fade" id="view">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <p class="modal-title font-weight-bold">Ticketing and seat selection system to support activities
-                                            at the SilverBird Cinemas
+                                        <p class="modal-title font-weight-bold">
+                                            {{$row->project_title}}
                                         </p><br>
-
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
-
                                     <div class="modal-body">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                                        anim id est laboru.
+                                    {{$row->project_desc}}
                                     </div>
-
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-success" data-dismiss="modal">Accept</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Decline </button>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- End of Section -->
+                        @endforeach
+                    @endif
+
+
+                    <!-- End of modal -->
                     </div>
                     {{--                    End of section for viewing student topics--}}
 
                     <div class="tab-pane" id="my_topics">
                         {{--                        Beginning of section for viewing and editing capstone topics--}}
 
-                        <h3 class="text-muted mb-3 mt-3">My Topics</h3>
+                        <h3 class="text-muted mb-3 mt-3">My Projects</h3>
                         <table class="table text-center table-dark table-hover">
                             <thead>
                             <tr class="text-muted">
@@ -179,7 +162,7 @@
                     <div class="tab-pane" id="add_topic">
                         {{--                    Beginning of section for adding a new capstone topic--}}
 
-                        <h3 class="text-muted mb-3 mt-3">Add a new Capstone Topic</h3>
+                        <h3 class="text-muted mb-3 mt-3">Add a new Capstone Project</h3>
 
 
                         <div class="card">

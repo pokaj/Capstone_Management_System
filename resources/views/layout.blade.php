@@ -45,7 +45,7 @@
                         </li>
 
                         <li class="nav-item"><a href="/topics" class="nav-link text-white p-3 mb-2 sidebar-link ">
-                                <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Topics</a>
+                                <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Projects</a>
                         </li>
 
                         <li class="nav-item"><a href="/milestones" class="nav-link text-white p-3 mb-2 sidebar-link ">

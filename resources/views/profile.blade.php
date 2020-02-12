@@ -80,7 +80,7 @@
                                                             <div class="form-group row">
                                                                 <label class="col-lg-3 col-form-label form-control-label">Interests</label>
                                                                 <div class="col-lg-9">
-                                                                    <textarea class="form-control" type="text" value="janeuser"></textarea>
+                                                                    <textarea class="form-control" type="text" value=""></textarea>
                                                                 </div>
                                                             </div>
 

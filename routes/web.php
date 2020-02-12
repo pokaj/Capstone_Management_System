@@ -29,6 +29,7 @@ Route::get('/studentTopics','StudentController@student_topics');
 Route::get('/studentMilestones','StudentController@student_milestones');
 
 
+Route::resource('projects','ProjectsController');
 
 Auth::routes();
 
