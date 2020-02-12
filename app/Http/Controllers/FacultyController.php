@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Project;
 class FacultyController extends Controller
 {
     public function __construct()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use App\Project;
 
 class ProjectsController extends Controller
@@ -14,7 +15,7 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        $projects =  Project::all();
+        $projects = Project::all();
         return view('topics')->with('projects',$projects);
     }
 
@@ -47,7 +48,13 @@ class ProjectsController extends Controller
      */
     public function show($id)
     {
-        //
+//        return Project::find($id);
+        if(Auth::user()->category == 'faculty'){
+
+            $projectID = Project::find($id);
+
+            return view('viewProject')->with('projectID',$projectID);
+        }
     }
 
     /**

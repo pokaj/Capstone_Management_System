@@ -72,10 +72,10 @@
                                     </div>
                                     <div class="modal-body">
                                     {{$row->project_desc}}
+
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" data-dismiss="modal">Accept</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Decline </button>
+                                        <a href="/topics/{{$row->project_Id}}" class="btn btn-primary">View Project</a>
                                     </div>
                                 </div>
                             </div>

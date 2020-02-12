@@ -142,6 +142,7 @@
                 @yield('students')
                 @yield('topics')
                 @yield('milestones')
+                @yield('viewProject')
             </div>
         </div>
     </div>

@@ -29,7 +29,7 @@ Route::get('/studentTopics','StudentController@student_topics');
 Route::get('/studentMilestones','StudentController@student_milestones');
 
 
-Route::resource('projects','ProjectsController');
+Route::resource('topics','ProjectsController');
 
 Auth::routes();
 
@@ -38,5 +38,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth','faculty']], function() {
 
 });
+
+//Route::get('/projects/show/{projectId}', 'FacultyController@show')->name('show.project');
+
 
 
