@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Student;
+use App\User;
 use Illuminate\Http\Request;
 use Auth;
 use App\Project;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ProjectsController extends Controller
 {
@@ -13,10 +17,14 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $projects = Project::all();
-        return view('topics')->with('projects',$projects);
+    public function index(){
+        $users = DB::table('users')
+            ->join('project','project.project_user','=','users.userId')
+            ->select('users.first_name','users.last_name', 'project.*')
+            ->get();
+
+        return view('topics')->with('users',$users);
+
     }
 
     /**
@@ -37,7 +45,17 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        print_r($request->input());
+        $project = new Project;
+        $date = now();
+        $project->project_user = Auth::user()->userId;
+        $project->project_date = $date;
+        $project->project_title = $request->project_title;
+        $project->project_field = $request->project_field;
+        $project->project_type = $request->project_type;
+        $project->project_desc = $request->project_description;
+        $project->save();
+        return back();
     }
 
     /**
@@ -48,13 +66,7 @@ class ProjectsController extends Controller
      */
     public function show($id)
     {
-//        return Project::find($id);
-        if(Auth::user()->category == 'faculty'){
 
-            $projectID = Project::find($id);
-
-            return view('viewProject')->with('projectID',$projectID);
-        }
     }
 
     /**

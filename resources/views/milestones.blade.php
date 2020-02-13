@@ -2,7 +2,6 @@
 
 
 @section('milestones')
-
     <div class="container">
         <div class="row my-2">
             <div class="col-lg-8 order-lg-2">

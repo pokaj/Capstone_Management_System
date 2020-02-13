@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Project;
+use Illuminate\Support\Facades\DB;
+
 class FacultyController extends Controller
 {
     public function __construct()
@@ -57,6 +59,21 @@ class FacultyController extends Controller
         if (Auth::user()->category == 'faculty') {
 
             return view('milestones');
+        }
+    }
+
+    public function viewProject($id){
+        if(Auth::user()->category == 'faculty'){
+            $data['id'] = $id;
+
+            $users = DB::table('users')
+                ->join('project','project.project_user','=','users.userId')
+                ->where('project.project_Id', '=', $data['id'])
+                ->select('users.first_name','users.last_name', 'project.*')
+                ->get();
+
+//            return $users;
+            return view('viewProject')->with('users',$users);
         }
     }
 

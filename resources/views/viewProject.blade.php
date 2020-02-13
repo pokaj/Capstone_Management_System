@@ -6,8 +6,9 @@
         <div class="row my-2">
             <div class="col-lg-8 order-lg-2">
 
-                <h2 class="">{{$projectID->project_Id}}</h2>
-                <p class="lead"><strong class="text-black-50">Topic: </strong>{{$projectID->project_title}}</p>
+                @foreach($users as $user)
+                <h2 class="">{{$user->first_name}} {{$user->last_name}}</h2>
+                <p class="lead"><strong class="text-black-50">Topic: </strong>{{$user->project_title}}</p>
                 {{--                Beginning of navigation tab--}}
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -24,7 +25,8 @@
                     <div class="tab-pane active" id="description">
                         {{--                        Beginning of section for viewing project description--}}
                         <p>
-                            {{$projectID->project_desc}}
+                            {{$user->project_desc}}
+                            @endforeach
                         </p>
 
                     </div>

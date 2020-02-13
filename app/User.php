@@ -38,4 +38,10 @@ class User extends Authenticatable
     ];
 
     protected $primaryKey = 'userId';
+
+    public function projects(){
+
+        return $this->belongsTo(Project::class);
+    }
+
 }

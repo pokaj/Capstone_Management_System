@@ -20,6 +20,8 @@ Route::get('/profile', 'FacultyController@profile');
 Route::get('/students', 'FacultyController@students');
 Route::get('/topics','FacultyController@topics');
 Route::get('/milestones','FacultyController@milestones');
+Route::get('/topics/viewProject/{id}', ['uses' =>'FacultyController@viewProject' , 'as' => 'viewProject']);
+Route::post('/submit','ProjectsController@store');
 
 
 //Controller and routes for students
