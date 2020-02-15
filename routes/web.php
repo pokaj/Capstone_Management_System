@@ -14,17 +14,21 @@ Route::get('/', function () {
     return view('login');
 });
 
-//Controller and routes for Faculty
+//Routes for Faculty
 Route::get('/dashboard', 'FacultyController@index');
 Route::get('/profile', 'FacultyController@profile');
 Route::get('/students', 'FacultyController@students');
 Route::get('/topics','FacultyController@topics');
 Route::get('/milestones','FacultyController@milestones');
-Route::get('/topics/viewProject/{id}', ['uses' =>'FacultyController@viewProject' , 'as' => 'viewProject']);
+
+
+//Routes for Projects
+Route::get('/topics/viewProject/{id}', ['uses' =>'ProjectsController@go_to_project' , 'as' => 'viewProject']);
 Route::post('/submit','ProjectsController@store');
+Route::get('/show','ProjectsController@view_faculty_Projects');
 
 
-//Controller and routes for students
+//Routes for students
 Route::get('/studentDashboard','StudentController@index');
 Route::get('/studentProfile','StudentController@student_profile');
 Route::get('/studentTopics','StudentController@student_topics');

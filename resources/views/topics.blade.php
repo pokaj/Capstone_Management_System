@@ -95,56 +95,58 @@
                             </thead>
                             <tbody>
                             <tr>
-
-                                <td>Hospital Management System</td>
+                                    @foreach($faculty_projects as $faculty_project)
+                                <td>{{$faculty_project->project_title}}</td>
                                 <td>Peter Parker</td>
-                                <td>Medicine</td>
-                                <td>Applied</td>
+                                <td>{{$faculty_project->project_field}}</td>
+                                <td>{{$faculty_project->project_type}}</td>
 
                                 <td>
                                     <a href="" class="nav-link" data-toggle="modal" data-target="#edit_topic"><i class="fas fa-eye text-muted fa-lg"></i></a>
                                 </td>
                             </tr>
 
+                            <!-- beginning of modal -->
+
+                            <div class="modal fade" id="edit_topic">
+                                <form>
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <p><strong>Project Title: </strong></p>
+                                                <input class="form-control" value="{{$faculty_project->project_title}}">
+
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <p><strong>Project Field: </strong></p>
+                                                <input class="form-control" value="{{$faculty_project->project_field}}">
+
+                                                <p><strong>Project Type: </strong></p>
+                                                <input class="form-control" value="{{$faculty_project->project_type}}">
+
+                                                <p><strong>Project Description: </strong></p>
+                                                <textarea class="form-control" placeholder="{{$faculty_project->project_desc}}"></textarea>
+
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Update </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- End of Modal -->
+
+                            @endforeach
+
                             </tbody>
                         </table>
 
-                        <!-- beginning of modal -->
 
-                        <div class="modal fade" id="edit_topic">
-                            <form>
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <p><strong>Project Title: </strong></p>
-                                        <input class="form-control">
-
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-
-                                    <div class="modal-body">
-                                        <p><strong>Project Field: </strong></p>
-                                        <input class="form-control">
-
-                                        <p><strong>Project Type: </strong></p>
-                                        <input class="form-control">
-
-                                        <p><strong>Project Description: </strong></p>
-                                        <textarea class="form-control"></textarea>
-
-
-
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Update </button>
-
-                                    </div>
-                                </div>
-                            </div>
-                            </form>
-                        </div>
-                        <!-- End of Modal -->
                     </div>
 
                     {{--                    End of section for viewing and editing capstone topics--}}

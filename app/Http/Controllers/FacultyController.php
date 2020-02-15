@@ -61,21 +61,4 @@ class FacultyController extends Controller
             return view('milestones');
         }
     }
-
-    public function viewProject($id){
-        if(Auth::user()->category == 'faculty'){
-            $data['id'] = $id;
-
-            $users = DB::table('users')
-                ->join('project','project.project_user','=','users.userId')
-                ->where('project.project_Id', '=', $data['id'])
-                ->select('users.first_name','users.last_name', 'project.*')
-                ->get();
-
-//            return $users;
-            return view('viewProject')->with('users',$users);
-        }
-    }
-
-
 }

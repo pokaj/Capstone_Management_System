@@ -18,13 +18,22 @@ class ProjectsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
+        $facultyID = Auth::user()->userId;
+        if(Auth::user()->category == 'faculty'){
+            $faculty_projects = DB::table('users')
+                ->join('project','project.project_user','=','users.userId')
+                ->where('project.project_user','=',$facultyID)
+                ->select('users.first_name','users.last_name','project.*')
+                ->get();
+
+        }
         $users = DB::table('users')
             ->join('project','project.project_user','=','users.userId')
             ->select('users.first_name','users.last_name', 'project.*')
             ->get();
 
-        return view('topics')->with('users',$users);
-
+//        return view('topics')->with('users',$users);
+        return view('topics', compact('users','faculty_projects'));
     }
 
     /**
@@ -101,5 +110,36 @@ class ProjectsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function go_to_project($id)
+    {
+        if (Auth::user()->category == 'faculty') {
+            $data['id'] = $id;
+
+            $users = DB::table('users')
+                ->join('project', 'project.project_user', '=', 'users.userId')
+                ->where('project.project_Id', '=', $data['id'])
+                ->select('users.first_name', 'users.last_name', 'project.*')
+                ->get();
+
+            return view('viewProject')->with('users', $users);
+
+        }
+    }
+
+
+    public function view_faculty_Projects(){
+        $facultyID = Auth::user()->userId;
+        if(Auth::user()->category == 'faculty'){
+            $faculty_projects = DB::table('users')
+                ->join('project','project.project_user','=','users.userId')
+                ->where('project.project_user','=',$facultyID)
+                ->select('users.first_name','users.last_name','project.*')
+                ->get();
+
+            return $faculty_projects;
+        }
     }
 }
