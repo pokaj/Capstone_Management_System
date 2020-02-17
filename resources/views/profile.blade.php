@@ -40,7 +40,8 @@
                                                         <!--/row-->
                                                     </div>
                                                     <div class="tab-pane" id="edit">
-                                                        <form role="form">
+                                                        <form role="form" method="post" enctype="multipart/form-dataupload">
+                                                            @csrf
                                                             <div class="form-group row">
                                                                 <label class="col-lg-3 col-form-label form-control-label">First name</label>
                                                                 <div class="col-lg-9">
@@ -83,12 +84,10 @@
                                                                     <textarea class="form-control" type="text" value=""></textarea>
                                                                 </div>
                                                             </div>
-
                                                             <div class="form-group row">
                                                                 <label class="col-lg-3 col-form-label form-control-label"></label>
                                                                 <div class="col-lg-9">
-                                                                    <input type="reset" class="btn btn-secondary" value="Cancel">
-                                                                    <input type="button" class="btn btn-primary" value="Save Changes">
+                                                                    <button class="btn btn-primary">Save changes</button>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -102,6 +101,7 @@
                                                     <input type="file" id="file" class="custom-file-input">
                                                     <span class="custom-file-control">Choose file</span>
                                                 </label>
+                                                <button class="btn btn-dark">Change Image</button>
                                             </div>
                                         </div>
                                     </div>

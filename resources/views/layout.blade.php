@@ -32,23 +32,23 @@
                     </div>
 
                     <ul class="navbar-nav flex-column mt-4">
-                        <li class="nav-item"><a href="/dashboard" class="nav-link text-white p-3 mb-2 current">
+                        <li class="nav-item {{'dashboard' == request()->path() ? 'current' : ''}}"><a href="/dashboard" class="nav-link text-white p-3 mb-2 sidebar-link">
                                 <i class="fas fa-home text-white text-light fa-lg mr-3"></i>Dashboard</a>
                         </li>
 
-                        <li class="nav-item"><a href="/profile" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                        <li class="nav-item {{'profile' == request()->path() ? 'current' : ''}}"><a href="/profile" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-user text-white text-light fa-lg mr-3"></i>Profile</a>
                         </li>
 
-                        <li class="nav-item"><a href="/students" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                        <li class="nav-item {{'students' == request()->path() ? 'current' : ''}}"><a href="/students" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-users text-white text-light fa-lg mr-3"></i>Students</a>
                         </li>
 
-                        <li class="nav-item"><a href="/topics" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                        <li class="nav-item {{'topics' == request()->path() ? 'current' : ''}}"><a href="/topics" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Projects</a>
                         </li>
 
-                        <li class="nav-item"><a href="/milestones" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                        <li class="nav-item {{'milestones' == request()->path() ? 'current' : ''}}"><a href="/milestones" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-calendar-check text-white text-light fa-lg mr-3"></i>Milestones</a>
                         </li>
 

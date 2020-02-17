@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Project;
+use App\Faculty;
 use Illuminate\Support\Facades\DB;
 
 class FacultyController extends Controller
@@ -59,6 +60,19 @@ class FacultyController extends Controller
         if (Auth::user()->category == 'faculty') {
 
             return view('milestones');
+        }
+    }
+
+    public function viewFacultyInterests(){
+        if(Auth::user()->category == 'faculty'){
+            $faculty_interests = DB::table('users')
+                ->join('faculty','faculty.faculty_Id','=','users.userId')
+                ->where('faculty.faculty_Id','=', Auth::user()->userId)
+                ->select('users.first_name','users.last_name','faculty.*')
+                ->get();
+
+            return view('profile')->with('faculty_interests',$faculty_interests);
+
         }
     }
 }

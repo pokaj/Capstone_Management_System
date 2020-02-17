@@ -31,19 +31,19 @@
                     </div>
 
                     <ul class="navbar-nav flex-column mt-4">
-                        <li class="nav-item"><a href="/studentDashboard" class="nav-link text-white p-3 mb-2 current">
+                        <li class="nav-item  {{'studentDashboard' == request()->path() ? 'current' : ''}}"><a href="/studentDashboard" class="nav-link text-white p-3 mb-2 ">
                                 <i class="fas fa-home text-white text-light fa-lg mr-3"></i>Dashboard</a>
                         </li>
 
-                        <li class="nav-item"><a href="studentProfile" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                        <li class="nav-item  {{'studentProfile' == request()->path() ? 'current' : ''}}"><a href="studentProfile" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-user text-white text-light fa-lg mr-3"></i>Profile</a>
                         </li>
 
-                        <li class="nav-item"><a href="studentTopics" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                        <li class="nav-item  {{'studentTopics' == request()->path() ? 'current' : ''}}"><a href="studentTopics" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Topics</a>
                         </li>
 
-                        <li class="nav-item"><a href="studentMilestones" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                        <li class="nav-item  {{'studentMilestones' == request()->path() ? 'current' : ''}}"><a href="studentMilestones" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-calendar-check text-white text-light fa-lg mr-3"></i>Milestones</a>
                         </li>
 
