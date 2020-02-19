@@ -124,4 +124,12 @@ height:70px;
 width:230px;
 }
 
+.background_image{
+    background-image: url('../images/courtyard.jpg');
+    background-size: cover;
 
+}
+.card {
+    background-color: rgba(245, 245, 220, 0.7) !important;
+
+}

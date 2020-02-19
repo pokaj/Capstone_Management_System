@@ -26,6 +26,7 @@ Route::get('/milestones','FacultyController@milestones');
 Route::get('/topics/viewProject/{id}', ['uses' =>'ProjectsController@go_to_project' , 'as' => 'viewProject']);
 Route::post('/submit','ProjectsController@store');
 Route::get('/show','ProjectsController@view_faculty_Projects');
+Route::get('/register','RegisterController@genderDropDown');
 
 
 //Routes for students
@@ -44,8 +45,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth','faculty']], function() {
 
 });
-
-//Route::get('/projects/show/{projectId}', 'FacultyController@show')->name('show.project');
 
 
 

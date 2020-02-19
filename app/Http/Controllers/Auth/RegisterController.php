@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
 
 class RegisterController extends Controller
@@ -47,7 +46,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -55,11 +54,11 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'gender' => ['required','string','max:225'],
+            'gender' => ['required', 'string', 'max:225'],
             'username' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
-            'category' => ['required','string','max:255'],
-            'user_role' => ['required','integer','max:255'],
+            'category' => ['required', 'string', 'max:255'],
+            'user_role' => ['required', 'integer', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -68,12 +67,12 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\User
      */
     protected function create(array $data)
     {
-        return User::create([
+        $data = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'gender' => $data['gender'],
@@ -83,15 +82,19 @@ class RegisterController extends Controller
             'user_role' => $data['user_role'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-
-//            DB::transaction(function(){
-//
-//                DB::table('faculty')->insert(['faculty_Id' => 2]);
-//
-//            })
-
         ]);
+
+//        check if user is lecturer or student and simultaneously make an insert respectively
+        if ($data->category == 'faculty') {
+            DB::table('faculty')->insert([
+                'faculty_Id' => $data->userId,
+            ]);
+        } else {
+            DB::table('student')->insert([
+                'student_user_id' => $data->userId,
+            ]);
+        }
+        return $data;
+
     }
 }
-
-

@@ -41,10 +41,13 @@
 
                         <div class="form-group row">
                             <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
-
                             <div class="col-md-6">
-                                <input id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender" autofocus>
-
+{{--                                <input id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender" autofocus>--}}
+                                <select class="form-control" id="gender @error('gender') is-invalid @enderror" name="gender" value="{{old('gender')}}" required autocomplete="gender" autofocus>
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
                                 @error('gender')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -100,8 +103,11 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
 
                             <div class="col-md-6">
-                                <input id="category" type="text" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}" required autocomplete="category" autofocus>
-
+                                <select id="category" type="text" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}" required autocomplete="category" autofocus>
+                                    <option value="">Select a Category</option>
+                                    <option value="faculty">Faculty</option>
+                                    <option value="student">student</option>
+                                </select>
                                 @error('category')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -114,8 +120,11 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('User Role') }}</label>
 
                             <div class="col-md-6">
-                                <input id="user_role" type="number" class="form-control @error('user_role') is-invalid @enderror" name="user_role" value="{{ old('user_role') }}" required autocomplete="user_role" autofocus>
-
+                                <select id="user_role" type="number" class="form-control @error('user_role') is-invalid @enderror" name="user_role" value="{{ old('user_role') }}" required autocomplete="user_role" autofocus>
+                                   <option value="">Select user role</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
                                 @error('user_role')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
