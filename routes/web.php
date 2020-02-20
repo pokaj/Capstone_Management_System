@@ -20,6 +20,9 @@ Route::get('/profile', 'FacultyController@profile');
 Route::get('/students', 'FacultyController@students');
 Route::get('/topics','FacultyController@topics');
 Route::get('/milestones','FacultyController@milestones');
+Route::put('profile', 'FacultyController@update');
+Route::put('studentProfile', 'StudentController@update');
+
 
 
 //Routes for Projects
@@ -36,7 +39,8 @@ Route::get('/studentTopics','StudentController@student_topics');
 Route::get('/studentMilestones','StudentController@student_milestones');
 
 
-Route::resource('topics','ProjectsController');
+
+//Route::resource('topics','ProjectsController');
 
 Auth::routes();
 

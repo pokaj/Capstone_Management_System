@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -36,7 +38,10 @@ class StudentController extends Controller
 
         if(Auth::user()->category == 'student'){
 
-            return view('student_profile');
+            $majors = DB::table('major')->get();
+
+            return view('student_profile' ,compact('majors'));
+
         }
     }
 
@@ -48,7 +53,32 @@ class StudentController extends Controller
         }
     }
 
+    //    Function to update student information
+    public function update(Request $request){
+
+        $updatefaculty = User::where('userId',Auth::user()->userId)
+            ->update([
+                'first_name' => $request->input('fname'),
+                'last_name' => $request->input('lname'),
+                'username' => $request->input('username'),
+                'email' => $request->input('email'),
+                'phone' => $request->input('phone'),
 
 
+            ]);
+
+        DB::table('student')
+            ->where('student_user_id', Auth::user()->userId)
+            ->update(array(
+                'student_Id' => $request->input('id'),
+                'student_yeargroup' => $request->input('yearGroup'),
+                'student_major' => $request->input('major'),
+
+            ));
+
+        return redirect()->back()
+            ->with('message','Profile successfully updated')
+            ->with('$updatefaculty',$updatefaculty);
+    }
 
 }

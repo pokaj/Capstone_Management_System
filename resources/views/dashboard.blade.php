@@ -7,7 +7,7 @@
 
     <!-- Beginning of cards  -->
                         <div class="col-xl-3 col-sm-6 p-2 mt-3">
-                            <div class="card-dashboard card-common">
+                            <div class="card card-common">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
                                         <i class="fas fa-users fa-3x text-info"></i>
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="col-xl-3 col-sm-6 p-2 mt-3">
-                            <div class="card-dashboard card-common">
+                            <div class="card card-common">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
                                         <i class="fas fa-users fa-3x text-info"></i>
@@ -49,7 +49,7 @@
                         <div class="col-xl-6 mt-3">
 {{--                            <h4 class="text-muted mb-4">Recent Student Activities</h4>--}}
                             <div id="accordion">
-                                <div class="card-dashboard">
+                                <div class="card">
                                     <div class="card-header">
                                         <button class="btn btn-block bg-secondary text-light text-left" data-toggle="collapse" data-target="#collapseFirst">
                                             <img src="images/avatar.png" width="50" class="mr-3 rounded" alt="customer image">
@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card-dashboard">
+                                <div class="card">
                                     <div class="card-header">
                                         <button class="btn btn-block bg-secondary text-light text-left" data-toggle="collapse" data-target="#collapseOne">
                                             <img src="images/avatar.png" width="50" class="mr-3 rounded" alt="customer image">
