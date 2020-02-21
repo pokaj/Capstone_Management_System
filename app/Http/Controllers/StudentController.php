@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\User;
 use Auth;
+use App\Faculty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -30,7 +31,13 @@ class StudentController extends Controller
 
         if(Auth::user()->category == 'student'){
 
-            return view('student_topics');
+            $faculty = DB::table('faculty')->get();
+
+//            return $faculty;
+
+            return view('student_topics' ,compact('faculty'));
+
+//            return view('student_topics');
         }
     }
 

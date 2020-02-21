@@ -32,7 +32,6 @@ class ProjectsController extends Controller
             ->select('users.first_name','users.last_name', 'project.*')
             ->get();
 
-//        return view('topics')->with('users',$users);
         return view('topics', compact('users','faculty_projects'));
     }
 
@@ -54,7 +53,6 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        print_r($request->input());
         $project = new Project;
         $date = now();
         $project->project_user = Auth::user()->userId;
@@ -64,7 +62,10 @@ class ProjectsController extends Controller
         $project->project_type = $request->project_type;
         $project->project_desc = $request->project_description;
         $project->save();
-        return back();
+
+        return redirect()->back()
+            ->with('message','Project successfully added');
+
     }
 
     /**
@@ -117,7 +118,6 @@ class ProjectsController extends Controller
     {
         if (Auth::user()->category == 'faculty') {
             $data['id'] = $id;
-
             $users = DB::table('users')
                 ->join('project', 'project.project_user', '=', 'users.userId')
                 ->where('project.project_Id', '=', $data['id'])
@@ -125,7 +125,6 @@ class ProjectsController extends Controller
                 ->get();
 
             return view('viewProject')->with('users', $users);
-
         }
     }
 
@@ -138,8 +137,70 @@ class ProjectsController extends Controller
                 ->where('project.project_user','=',$facultyID)
                 ->select('users.first_name','users.last_name','project.*')
                 ->get();
-
             return $faculty_projects;
         }
     }
+
+    public function addProject(Request $request)
+    {
+        $project = new Project;
+        $date = now();
+        $project->project_user = Auth::user()->userId;
+        $project->project_date = $date;
+        $project->project_title = $request->project_title;
+        $project->project_type = $request->project_type;
+        $project->project_field = $request->project_field;
+        $project->project_desc = $request->project_desc;
+        $project->save();
+
+        return redirect()->back()
+            ->with('message','Project successfully created');
+    }
+
+
+    public function select_supervisor(Request $request){
+        DB::table('faculty_student')
+            ->insert(array(
+                'student_id' => Auth::user()->userId,
+                'faculty_Id' => $request->input('super_one'),
+            ));
+
+        DB::table('faculty_student')
+            ->insert(array(
+                'student_id' => Auth::user()->userId,
+                'faculty_Id' => $request->input('super_two'),
+            ));
+
+        DB::table('faculty_student')
+            ->insert(array(
+                'student_id' => Auth::user()->userId,
+                'faculty_Id' => $request->input('super_three'),
+            ));
+
+        return redirect()->back()
+            ->with('message','Preferred supervisors selected');
+    }
+
+    public function supervisor_requests()
+    {
+        $requests = DB::table('project')
+            ->join('faculty_student','faculty_Id','=',Auth::user()->userId)
+            ->get();
+
+        return $requests;
+    }
+//
+//    public function supervisor_requests(){
+//        if(Auth::user()->category == 'faculty'){
+//            $faculty_interests = DB::table('users')
+//                ->join('faculty','faculty.faculty_Id','=','users.userId')
+//                ->where('faculty.faculty_Id','=', Auth::user()->userId)
+//                ->select('users.first_name','users.last_name','faculty.*')
+//                ->get();
+//
+//            return $faculty_interests;
+//
+//        }
+//    }
+
 }

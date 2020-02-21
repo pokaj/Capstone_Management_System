@@ -18,10 +18,12 @@ Route::get('/', function () {
 Route::get('/dashboard', 'FacultyController@index');
 Route::get('/profile', 'FacultyController@profile');
 Route::get('/students', 'FacultyController@students');
-Route::get('/topics','FacultyController@topics');
+Route::get('/topics','ProjectsController@index');
 Route::get('/milestones','FacultyController@milestones');
 Route::put('profile', 'FacultyController@update');
 Route::put('studentProfile', 'StudentController@update');
+
+Route::get('supervisor_requests', 'ProjectsController@supervisor_requests');
 
 
 
@@ -30,6 +32,10 @@ Route::get('/topics/viewProject/{id}', ['uses' =>'ProjectsController@go_to_proje
 Route::post('/submit','ProjectsController@store');
 Route::get('/show','ProjectsController@view_faculty_Projects');
 Route::get('/register','RegisterController@genderDropDown');
+Route::post('studentTopics', 'ProjectsController@addProject');
+Route::post('studentTopics','ProjectsController@select_supervisor');
+
+
 
 
 //Routes for students
@@ -37,6 +43,8 @@ Route::get('/studentDashboard','StudentController@index');
 Route::get('/studentProfile','StudentController@student_profile');
 Route::get('/studentTopics','StudentController@student_topics');
 Route::get('/studentMilestones','StudentController@student_milestones');
+
+
 
 
 

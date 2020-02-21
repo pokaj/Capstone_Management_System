@@ -40,7 +40,7 @@
                         </li>
 
                         <li class="nav-item  {{'studentTopics' == request()->path() ? 'current' : ''}}"><a href="studentTopics" class="nav-link text-white p-3 mb-2 sidebar-link ">
-                                <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Topics</a>
+                                <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Topics/Supervisor</a>
                         </li>
 
                         <li class="nav-item  {{'studentMilestones' == request()->path() ? 'current' : ''}}"><a href="studentMilestones" class="nav-link text-white p-3 mb-2 sidebar-link ">
