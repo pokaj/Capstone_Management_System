@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\User;
 use Auth;
+use App\Project;
 use App\Faculty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,7 @@ class StudentController extends Controller
     public function index(){
         if(Auth::user()->category == 'student'){
 
+
             return view('student_dashboard');
         }
     }
@@ -31,13 +33,25 @@ class StudentController extends Controller
 
         if(Auth::user()->category == 'student'){
 
-            $faculty = DB::table('faculty')->get();
+//            $faculty = DB::table('faculty')->get();
 
-//            return $faculty;
+            $users = DB::table('project')
+                ->where('project_user', '=', Auth::user()->userId)
+                ->select('project.*')
+                ->get();
 
-            return view('student_topics' ,compact('faculty'));
+            $facultyProjects = DB::table('project')
+                ->join('faculty','faculty_id','=','project.project_user')
+                ->join('users','userId','=','faculty.faculty_id')
+                ->select('users.*','project.*')
+                ->get();
 
-//            return view('student_topics');
+            $facultyDropdown = DB::table('users')
+                ->join('faculty','faculty_Id','=','users.userId')
+                ->select('users.*')
+                ->get();
+
+            return view('student_topics' ,compact('users','facultyProjects','facultyDropdown'));
         }
     }
 
@@ -86,6 +100,11 @@ class StudentController extends Controller
         return redirect()->back()
             ->with('message','Profile successfully updated')
             ->with('$updatefaculty',$updatefaculty);
+    }
+
+    public function projectDetails(){
+        $details = Project::all();
+        return $details;
     }
 
 }

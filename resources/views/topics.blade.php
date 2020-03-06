@@ -12,10 +12,11 @@
                         <a href="" data-target="#my_topics" data-toggle="tab" class="nav-link active">My Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#student_topics" data-toggle="tab" class="nav-link">Student Projects</a>
+                        <a href="" data-target="#add_topic" data-toggle="tab" class="nav-link">Add Project</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#add_topic" data-toggle="tab" class="nav-link">Add Project</a>
+                        <a href="" data-target="#pending_topics" data-toggle="tab" class="nav-link">Pending Requests
+                            <span class="text-danger">({{$count}})</span></a>
                     </li>
                 </ul>
                 {{--                End of navigation tab--}}
@@ -50,14 +51,42 @@
                             <tr>
                                 @foreach($faculty_projects as $faculty_project)
                                     <td>{{$faculty_project->project_title}}</td>
-                                    <td>Peter Parker</td>
+                                    <td>-</td>
                                     <td>{{$faculty_project->project_field}}</td>
                                     <td>{{$faculty_project->project_type}}</td>
 
                                     <td>
-                                        <a href="" class="nav-link" data-toggle="modal" data-target="#edit_topic"><i class="fas fa-eye text-muted fa-lg"></i></a>
+                                        <a href="" class="nav-link" data-toggle="modal" data-target="#edit_topic"><i class="fas fa-eye text-muted "></i></a>
+                                    </td>
+                                    <td>
+                                        <a href="" class="nav-link" data-toggle="modal" data-target="#{{$faculty_project->project_Id}}"><i class="fas fa-trash-alt text-danger "></i></a>
                                     </td>
                             </tr>
+
+                            <!-- beginning of modal to delete project-->
+                            <div class="modal fade" id="{{$faculty_project->project_Id}}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <p class="modal-title font-weight-bold">Are you sure you want to delete this project?
+                                            </p><br>
+
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <div class="modal-body align-content-center">
+                                            {{--                                                <button type="button" class="btn btn-muted" data-dismiss="modal">cancel</button>--}}
+                                            <form method="post" action="{{route('deleteproject',$faculty_project->project_Id)}}">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn btn-danger">Delete</button>
+                                                {{--                                                <a href="{{route('deleteproject',$user->project_Id)}}" class="btn btn-danger">Delete</a>--}}
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of modal to delete project-->
 
                             <!-- beginning of modal -->
 
@@ -101,66 +130,6 @@
 
 
                     </div>
-
-                    {{--                    End of section for viewing and editing capstone topics--}}
-
-                    <div class="tab-pane" id="student_topics">
-                        {{--                        Beginning of section for viewing student topics--}}
-
-                        <h3 class="text-muted mb-3 mt-3">Student Projects</h3>
-
-                        <table class="table text-center table-dark table-hover">
-                            <thead>
-                            <tr class="text-muted">
-                                <th>Student Name</th>
-                                <th>Type</th>
-                                <th>Field</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($users as $user)
-                                <tr>
-                                    <td>{{$user->first_name}} {{$user->last_name}}</td>
-                                <td>{{$user->project_type}}</td>
-                                <td>{{$user->project_field}}</td>
-                                <td>
-                                    <a href="" class="nav-link" data-toggle="modal" data-target="#{{$user->project_user}}"><i class="fas fa-eye text-muted fa-lg"></i></a>
-                                </td>
-
-                            </tr>
-                                <!-- beginning of modal -->
-
-                                <div class="modal fade" id="{{$user->project_user}}">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <p class="modal-title font-weight-bold">
-                                                    {{$user->project_title}}
-                                                </p><br>
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                            <div class="modal-body">
-                                                {{$user->project_desc}}
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a href="{{route('viewProject',$user->project_Id)}}" class="btn btn-primary">View Project</a>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{--                    <!-- End of modal -->--}}
-                            @endforeach
-                            </tbody>
-                        </table>
-
-                    </div>
-                    {{--                    End of section for viewing student topics--}}
-
 
                     <div class="tab-pane" id="add_topic">
                         {{--                    Beginning of section for adding a new capstone topic--}}
@@ -211,6 +180,71 @@
                         </div>
                     </div>
                     {{--                    End of section for adding new capstone topic--}}
+
+                    {{--                        Beginning of section for pending student topics--}}
+
+                    <div class="tab-pane" id="pending_topics">
+
+                        <h3 class="text-muted mb-3 mt-3">Students Pending Approval</h3>
+                        <table class="table text-center table-dark table-hover">
+                            <thead>
+                            <tr class="text-muted">
+                                <th>Name</th>
+                                <th>Project Type</th>
+                                <th>Field</th>
+                                <th>Actions</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($studentProjects as $studentProject)
+                            <tr>
+                                <td>{{$studentProject->first_name}} {{$studentProject->last_name}}</td>
+                                <td>{{$studentProject->project_type}}</td>
+                                <td>{{$studentProject->project_field}}</td>
+                                <td>
+                                    <a href="" class="nav-link" data-toggle="modal" data-target="#{{$studentProject->project_Id}}"><i class="fas fa-eye text-muted fa-lg"></i></a>
+                                </td>
+                                <td><span class="badge badge-warning w-80 py-2">Pending</span></td>
+                            </tr>
+
+                            <!-- beginning of modal -->
+                            <div class="modal fade" id="{{$studentProject->project_Id}}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <p class="modal-title font-weight-bold">
+                                                {{$studentProject->project_title}}
+                                            </p><br>
+
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            {{$studentProject->project_desc}}
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <form action="{{route('acceptProject',$studentProject->project_Id)}}">
+                                                <button class="btn btn-success">Accept</button>
+                                            </form>
+                                            <span>
+                                                <form>
+                                                <a href="" class="btn btn-danger">Decline</a>
+                                                    </form>
+                                                </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of modal -->
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    {{--                    --}}{{--                    End of section for pending student topics--}}
+
                 </div>
             </div>
         </div>

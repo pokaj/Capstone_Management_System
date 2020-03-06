@@ -32,8 +32,14 @@ Route::get('/topics/viewProject/{id}', ['uses' =>'ProjectsController@go_to_proje
 Route::post('/submit','ProjectsController@store');
 Route::get('/show','ProjectsController@view_faculty_Projects');
 Route::get('/register','RegisterController@genderDropDown');
-Route::post('studentTopics', 'ProjectsController@addProject');
+Route::post('addproject', 'ProjectsController@addProject');
 Route::post('studentTopics','ProjectsController@select_supervisor');
+Route::post('studentTopics','ProjectsController@select_supervisor');
+Route::delete('deleteproject/{id}','ProjectsController@deleteproject')->name('deleteproject');
+Route::get('acceptProject/{id}',"ProjectsController@acceptProject")->name('acceptProject');
+
+
+//deleteproject
 
 
 
@@ -43,9 +49,8 @@ Route::get('/studentDashboard','StudentController@index');
 Route::get('/studentProfile','StudentController@student_profile');
 Route::get('/studentTopics','StudentController@student_topics');
 Route::get('/studentMilestones','StudentController@student_milestones');
-
-
-
+//only authenticated users can enter:
+//->middleware('auth')
 
 
 //Route::resource('topics','ProjectsController');
