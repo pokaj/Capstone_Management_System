@@ -75,12 +75,10 @@
                                         </div>
 
                                         <div class="modal-body align-content-center">
-                                            {{--                                                <button type="button" class="btn btn-muted" data-dismiss="modal">cancel</button>--}}
                                             <form method="post" action="{{route('deleteproject',$faculty_project->project_Id)}}">
                                                 @method('delete')
                                                 @csrf
                                                 <button class="btn btn-danger">Delete</button>
-                                                {{--                                                <a href="{{route('deleteproject',$user->project_Id)}}" class="btn btn-danger">Delete</a>--}}
                                             </form>
                                         </div>
                                     </div>

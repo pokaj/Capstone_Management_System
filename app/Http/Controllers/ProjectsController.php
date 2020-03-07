@@ -42,7 +42,6 @@ class ProjectsController extends Controller
             ->get();
         $count = count($studentProjects);
 
-
         return view('topics', compact('users', 'faculty_projects', 'studentProjects','count'));
     }
 
@@ -232,15 +231,29 @@ class ProjectsController extends Controller
     public function acceptProject($id){
         $projectDetails = Project::find($id);
         $capstone = new Casptone_Table;
-        $capstone->cp_supervisor = Auth::user()->userId;
-        $capstone->cp_student = $projectDetails->project_user;
+        $studentID = $projectDetails->project_user;
+        $facultyID = Auth::user()->userId;
+        $capstone->cp_supervisor = $facultyID;
+        $capstone->cp_student = $studentID;
         $capstone->cp_project = $id;
         $capstone->cp_startdate = now();
-        $capstone->save();
-//        $project->delete();
+
+//        DB::table('faculty_student')
+//
+//            ->where('faculty_Id','!=',$facultyID)
+//            ->delete();
+//dd($studentID);
+dd($facultyID);
+DB::table('faculty_student')
+    ->where('student_Id', '!=', $studentID)
+    ->where('faculty_Id','!=',$facultyID)
+    ->delete();
 
 
-        return $projectDetails;
+
+//        $capstone->save();
+//        return view('/students')->with('message','New student added!');
+//        return redirect()->back()->with('message','New student added!');
 
     }
 

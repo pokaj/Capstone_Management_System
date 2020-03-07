@@ -47,7 +47,14 @@ class FacultyController extends Controller
     {
         if (Auth::user()->category == 'faculty') {
 
-            return view('students');
+            $projectDetails = DB::table('capstone_table')
+                ->join('project','project_Id','=','cp_project')
+                ->join('users','userId','=','project_user')
+                ->where('cp_supervisor','=',Auth::user()->userId)
+                ->get();
+
+
+            return view('students',compact('projectDetails'));
         }
     }
 
