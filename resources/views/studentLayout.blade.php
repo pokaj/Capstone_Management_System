@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <title>Capstone Project </title>
+    <title>Capstone Management System </title>
 </head>
 <body>
 

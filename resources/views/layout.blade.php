@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/functionality.css">
 
-    <title>Capstone Project </title>
+    <title>Capstone Management System </title>
 </head>
 <body>
 
