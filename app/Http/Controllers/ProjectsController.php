@@ -34,12 +34,14 @@ class ProjectsController extends Controller
             ->select('users.first_name', 'users.last_name', 'project.*')
             ->get();
 
-//        code to show projects to faculty chosen by student
-        $studentProjects = DB::table('project')
-            ->join('faculty_student', 'student_Id', '=', 'project_user')
-            ->join('users','userId','=','student_Id')
-            ->where('faculty_Id', '=', Auth::user()->userId)
+        $studentProjects=  DB::table('Project')
+            ->join('users','userId','=','project_user')
+            ->join('faculty_student','faculty_student.project_Id','=','project.project_Id')
+//            ->where('project.project_user','=','faculty_student.student_Id')
+            ->where('faculty_Id','=',Auth::user()->userId)
+            ->where('status','=','picked')
             ->get();
+
         $count = count($studentProjects);
 
         return view('topics', compact('users', 'faculty_projects', 'studentProjects','count'));
@@ -175,18 +177,24 @@ class ProjectsController extends Controller
             ->insert(array(
                 'student_id' => Auth::user()->userId,
                 'faculty_Id' => $request->input('super_one'),
+                'project_Id' => $request->input('project'),
+                'status' => 'picked',
             ));
 
         DB::table('faculty_student')
             ->insert(array(
                 'student_id' => Auth::user()->userId,
                 'faculty_Id' => $request->input('super_two'),
+                'project_Id' => $request->input('project'),
+                'status' => 'picked',
             ));
 
         DB::table('faculty_student')
             ->insert(array(
                 'student_id' => Auth::user()->userId,
                 'faculty_Id' => $request->input('super_three'),
+                'project_Id' => $request->input('project'),
+                'status' => 'picked',
             ));
 
         return redirect()->back()
@@ -238,22 +246,24 @@ class ProjectsController extends Controller
         $capstone->cp_project = $id;
         $capstone->cp_startdate = now();
 
-//        DB::table('faculty_student')
-//
-//            ->where('faculty_Id','!=',$facultyID)
-//            ->delete();
-//dd($studentID);
-dd($facultyID);
-DB::table('faculty_student')
-    ->where('student_Id', '!=', $studentID)
-    ->where('faculty_Id','!=',$facultyID)
-    ->delete();
+        DB::table('faculty_student')
+            ->where('student_Id', $studentID)
+            ->where('faculty_Id',$facultyID)
+            ->where('project_Id', $projectDetails->project_Id)
+            ->update(array(
+                'status' => 'matched',
+            ));
 
+        DB::table('faculty_student')
+//            ->where('student_Id','!=',$studentID)
+            ->where('faculty_Id','!=',$facultyID)
+            ->update(array(
+                'status' => 'unmatched',
+            ));
 
-
-//        $capstone->save();
-//        return view('/students')->with('message','New student added!');
-//        return redirect()->back()->with('message','New student added!');
+        $capstone->save();
+////        return view('/students')->with('message','New student added!');
+        return redirect()->back()->with('message','New student added!');
 
     }
 

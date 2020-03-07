@@ -258,7 +258,23 @@
 
                                         <form role="form" method="post" action="{{url('studentTopics')}}">
                                             @csrf
+
+
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label class="bmd-label-floating">Select Project: </label>
+                                                        <select name="project" type="text" class="form-control">
+                                                            @foreach($users as $user)
+                                                                <option value="{{$user->project_Id}}">
+                                                                    {{$user->project_title}}
+                                                                </option>
+                                                            @endforeach
+
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             <div class="row">
+
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="bmd-label-floating">Preferred Supervisor 1: </label>
