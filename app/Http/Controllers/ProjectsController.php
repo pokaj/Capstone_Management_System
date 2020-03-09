@@ -44,9 +44,18 @@ class ProjectsController extends Controller
             ->where('status','=','picked')
             ->get();
 
-        $count = count($studentProjects);
+        $proposedCount = count($studentProjects);
 
-        return View('topics', compact('users', 'faculty_projects', 'studentProjects','count'));
+        $showapplied = DB::table('project')
+            ->join('users','userId','=','project_user')
+            ->join('pending_request','faculty_Id','=','project_user')
+            ->where('faculty_id','=',Auth::user()->userId)
+            ->get();
+
+        $pendingCount = count($showapplied);
+
+        return View('topics', compact('users', 'faculty_projects',
+            'studentProjects','proposedCount','showapplied','pendingCount'));
     }
 
     /**
@@ -275,12 +284,12 @@ class ProjectsController extends Controller
         $random =  User::find($facultyID);
         $random->notify(new AppliedForProject());
 
-        DB::table('faculty_student')
+        DB::table('pending_request')
             ->insert(array(
-                'student_id' => $studentID,
                 'faculty_Id' => $facultyID,
+                'student_Id' => $studentID,
                 'project_Id' => $id,
-                'status' => 'picked',
+                'status' => 'applied',
             ));
 
        return $find;

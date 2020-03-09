@@ -16,11 +16,11 @@
                     </li>
                     <li class="nav-item">
                         <a href="" data-target="#project_proposals" data-toggle="tab" class="nav-link">Project Proposals
-                            <span class="text-danger">({{$count}})</span></a>
+                            <span class="text-danger">({{$proposedCount}})</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="" data-target="#pending_projects" data-toggle="tab" class="nav-link">Pending Requests
-                            <span class="text-danger">({{$count}})</span></a>
+                            <span class="text-danger">({{$pendingCount}})</span></a>
                     </li>
 
                 </ul>
@@ -264,12 +264,15 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($showapplied as $appliedinfo)
                                 <tr>
-                                    <td>Kwame Ato Kwamina</td>
-                                    <td>Child Poverty Reduction</td>
-                                    <td><i class="fas fa-check"></i></td>
+                                    <td>{{$appliedinfo->first_name}}</td>
+                                    <td>{{$appliedinfo->project_title}}</td>
                                     <td>
-                                       <i class="fas fa-times text-muted fa-lg"></i>
+                                        <a href="####"><i class="fas fa-check text-success"></i></a>
+                                    </td>
+                                    <td>
+                                       <a href="####"><i class="fas fa-times text-danger"></i></a>
                                     </td>
                                 </tr>
 
@@ -303,6 +306,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                                 <!-- end of modal -->
                             </tbody>
                         </table>
