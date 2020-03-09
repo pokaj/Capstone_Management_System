@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Casptone_Table;
+use App\Notifications\AppliedForProject;
 use App\Student;
 use App\User;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Auth;
 use App\Project;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class ProjectsController extends Controller
 {
@@ -44,7 +46,7 @@ class ProjectsController extends Controller
 
         $count = count($studentProjects);
 
-        return view('topics', compact('users', 'faculty_projects', 'studentProjects','count'));
+        return View('topics', compact('users', 'faculty_projects', 'studentProjects','count'));
     }
 
     /**
@@ -129,10 +131,9 @@ class ProjectsController extends Controller
     public function go_to_project($id)
     {
         if (Auth::user()->category == 'faculty') {
-            $data['id'] = $id;
             $users = DB::table('users')
                 ->join('project', 'project.project_user', '=', 'users.userId')
-                ->where('project.project_Id', '=', $data['id'])
+                ->where('project.project_Id', '=', $id)
                 ->select('users.first_name', 'users.last_name', 'project.*')
                 ->get();
 
@@ -265,6 +266,24 @@ class ProjectsController extends Controller
 ////        return view('/students')->with('message','New student added!');
         return redirect()->back()->with('message','New student added!');
 
+    }
+
+    public function apply($id){
+        $find = Project::find($id);
+        $studentID = Auth::user()->userId;
+        $facultyID = $find->project_user;
+        $random =  User::find($facultyID);
+        $random->notify(new AppliedForProject());
+
+        DB::table('faculty_student')
+            ->insert(array(
+                'student_id' => $studentID,
+                'faculty_Id' => $facultyID,
+                'project_Id' => $id,
+                'status' => 'picked',
+            ));
+
+       return $find;
     }
 
 }

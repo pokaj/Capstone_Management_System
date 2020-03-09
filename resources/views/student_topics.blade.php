@@ -54,7 +54,7 @@
                                     <td>{{$user->project_title}}</td>
                                     <td>{{$user->project_type}}</td>
                                     <td>{{$user->project_field}}</td>
-                                    <td>-</td>
+                                    <td>{{$capSupers[0]->first_name}} {{$capSupers[0]->last_name}}</td>
                                 <td>
                                     <a href="" class="nav-link" data-toggle="modal" data-target="#view_project"><i class="fas fa-eye text-muted"></i></a>
                                 </td>
@@ -166,8 +166,12 @@
                                         </div>
 
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-success" data-dismiss="modal">Apply</button>
+                                            <form action="{{url('apply',$facultyProject->project_Id)}}">
+                                                <button class="btn btn-success">Apply</button>
+                                            </form>
+                                            <span>
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Ignore </button>
+                                                </span>
 
                                         </div>
                                     </div>

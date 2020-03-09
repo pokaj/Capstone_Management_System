@@ -28,7 +28,7 @@ Route::get('supervisor_requests', 'ProjectsController@supervisor_requests');
 
 
 //Routes for Projects
-Route::get('/topics/viewProject/{id}', ['uses' =>'ProjectsController@go_to_project' , 'as' => 'viewProject']);
+Route::get('/viewProject/{id}', ['uses' =>'ProjectsController@go_to_project' , 'as' => 'viewProject']);
 Route::post('/submit','ProjectsController@store');
 Route::get('/show','ProjectsController@view_faculty_Projects');
 Route::get('/register','RegisterController@genderDropDown');
@@ -36,7 +36,8 @@ Route::post('addproject', 'ProjectsController@addProject');
 Route::post('studentTopics','ProjectsController@select_supervisor');
 Route::post('studentTopics','ProjectsController@select_supervisor');
 Route::delete('deleteproject/{id}','ProjectsController@deleteproject')->name('deleteproject');
-Route::get('acceptProject/{id}',"ProjectsController@acceptProject")->name('acceptProject');
+Route::get('acceptProject/{id}','ProjectsController@acceptProject')->name('acceptProject');
+Route::get('apply/{id}','ProjectsController@apply')->name('apply');
 
 
 //deleteproject

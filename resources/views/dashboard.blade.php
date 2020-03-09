@@ -49,11 +49,14 @@
                         <div class="col-xl-6 mt-3">
 {{--                            <h4 class="text-muted mb-4">Recent Student Activities</h4>--}}
                             <div id="accordion">
+                                @foreach(Auth::user()->unreadNotifications as $notification)
+
                                 <div class="card">
                                     <div class="card-header">
                                         <button class="btn btn-block bg-secondary text-light text-left" data-toggle="collapse" data-target="#collapseFirst">
                                             <img src="images/avatar.png" width="50" class="mr-3 rounded" alt="customer image">
-                                            Akosua Somoah Just submitted Chapter 1.
+                                            @include('notification.'.Str::snake(class_basename($notification->type)))
+{{--                                            {{Str::snake(class_basename($notification->type))}}--}}
                                         </button>
                                     </div>
                                     <div class="collapse" id="collapseFirst" data-parent="#accordion">
@@ -64,22 +67,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="card">
-                                    <div class="card-header">
-                                        <button class="btn btn-block bg-secondary text-light text-left" data-toggle="collapse" data-target="#collapseOne">
-                                            <img src="images/avatar.png" width="50" class="mr-3 rounded" alt="customer image">
-                                            Munira Just submitted Chapter 2.
-                                        </button>
-                                    </div>
-                                    <div class="collapse" id="collapseOne" data-parent="#accordion">
-                                        <div class="card-body">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                            sed do eiusmod tempor incididunt ut labore et dolore magna
-                                            aliqua. Ut enim ad
-                                        </div>
-                                    </div>
-                                </div>
+                                    @endforeach
 
                             </div>
                         </div>

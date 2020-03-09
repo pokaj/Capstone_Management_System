@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Casptone_Table;
 use App\User;
 use Auth;
 use App\Project;
@@ -36,9 +37,11 @@ class StudentController extends Controller
 //            $faculty = DB::table('faculty')->get();
 
             $users = DB::table('project')
-                ->where('project_user', '=', Auth::user()->userId)
-                ->select('project.*')
+//                ->join('faculty_student','cp_project','=','project_Id')
+                ->where('project_user',  '=', Auth::user()->userId)
                 ->get();
+
+//            return $users;
 
             $facultyProjects = DB::table('project')
                 ->join('faculty','faculty_id','=','project.project_user')
@@ -46,12 +49,20 @@ class StudentController extends Controller
                 ->select('users.*','project.*')
                 ->get();
 
+
             $facultyDropdown = DB::table('users')
                 ->join('faculty','faculty_Id','=','users.userId')
                 ->select('users.*')
                 ->get();
 
-            return view('student_topics' ,compact('users','facultyProjects','facultyDropdown'));
+            $capSupers = DB::table('capstone_table')
+                ->join('users','userId','=','cp_supervisor')
+                ->select('first_name','last_name')
+//                ->where('')
+            ->get();
+//            return $capSupers;
+
+            return view('student_topics' ,compact('users','facultyProjects','facultyDropdown','capSupers'));
         }
     }
 

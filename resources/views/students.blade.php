@@ -33,7 +33,7 @@
                                             <td>{{$projectDetail->project_type}}</td>
                                             <td>{{$projectDetail->project_field}}</td>
                                             <td>
-                                                <a href=""><i class="fas fa-eye text-muted fa-lg"></i></a>
+                                                <a href="{{route('viewProject',$projectDetail->project_Id)}}"><i class="fas fa-eye text-muted fa-lg"></i></a>
                                             </td>
                                         </tr>
                                             @endforeach

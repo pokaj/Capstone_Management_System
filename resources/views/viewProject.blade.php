@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('viewProject')
-
     <div class="container">
         <div class="row my-2">
             <div class="col-lg-8 order-lg-2">
@@ -15,7 +14,10 @@
                         <a href="" data-target="#description" data-toggle="tab" class="nav-link active">Project Description</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#deliverables" data-toggle="tab" class="nav-link">Deliverables</a>
+                        <a href="" data-target="#showdeliverables" data-toggle="tab" class="nav-link">Deliverables</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" data-target="#adddeliverables" data-toggle="tab" class="nav-link">Add New Deliverable</a>
                     </li>
                 </ul>
                 {{--                End of navigation tab--}}
@@ -31,7 +33,7 @@
 
                     </div>
                     {{--                    End of section for viewing project description--}}
-                    <div class="tab-pane" id="deliverables">
+                    <div class="tab-pane" id="showdeliverables">
                         {{--                        Beginning of section for viewing deliverables--}}
 
                         <table class="table table-striped bg-light text-center">

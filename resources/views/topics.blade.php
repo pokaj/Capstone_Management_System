@@ -15,9 +15,14 @@
                         <a href="" data-target="#add_topic" data-toggle="tab" class="nav-link">Add Project</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#pending_topics" data-toggle="tab" class="nav-link">Pending Requests
+                        <a href="" data-target="#project_proposals" data-toggle="tab" class="nav-link">Project Proposals
                             <span class="text-danger">({{$count}})</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a href="" data-target="#pending_projects" data-toggle="tab" class="nav-link">Pending Requests
+                            <span class="text-danger">({{$count}})</span></a>
+                    </li>
+
                 </ul>
                 {{--                End of navigation tab--}}
 
@@ -179,11 +184,11 @@
                     </div>
                     {{--                    End of section for adding new capstone topic--}}
 
-                    {{--                        Beginning of section for pending student topics--}}
+                    {{--                        Beginning of section for projects proposed by students--}}
 
-                    <div class="tab-pane" id="pending_topics">
+                    <div class="tab-pane" id="project_proposals">
 
-                        <h3 class="text-muted mb-3 mt-3">Students Pending Approval</h3>
+                        <h3 class="text-muted mb-3 mt-3">Projects proposed by students</h3>
                         <table class="table text-center table-dark table-hover">
                             <thead>
                             <tr class="text-muted">
@@ -241,7 +246,69 @@
                             </tbody>
                         </table>
                     </div>
-                    {{--                    --}}{{--                    End of section for pending student topics--}}
+                    {{--                    --}}{{--                    End of section for projects proposed by students--}}
+
+
+                    {{--                        Beginning of section for pending student projects--}}
+
+                    <div class="tab-pane" id="pending_projects">
+
+                        <h3 class="text-muted mb-3 mt-3">Students awaiting approval</h3>
+                        <table class="table text-center table-dark table-hover">
+                            <thead>
+                            <tr class="text-muted">
+                                <th>Name</th>
+                                <th>Project </th>
+                                <th>Accept</th>
+                                <th>Decline</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Kwame Ato Kwamina</td>
+                                    <td>Child Poverty Reduction</td>
+                                    <td><i class="fas fa-check"></i></td>
+                                    <td>
+                                       <i class="fas fa-times text-muted fa-lg"></i>
+                                    </td>
+                                </tr>
+
+                                <!-- beginning of modal -->
+                                <div class="modal fade" id="">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <p class="modal-title font-weight-bold">
+{{--                                                head here--}}
+                                                </p><br>
+
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+
+                                            <div class="modal-body">
+{{--                                       body here--}}
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <form action="">
+                                                    <button class="btn btn-success">Accept</button>
+                                                </form>
+                                                <span>
+                                                <form>
+                                                <a href="" class="btn btn-danger">Decline</a>
+                                                    </form>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end of modal -->
+                            </tbody>
+                        </table>
+                    </div>
+                    {{--                    --}}{{--                    End of section for pending student projects--}}
+
 
                 </div>
             </div>
