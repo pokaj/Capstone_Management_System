@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Casptone_Table;
 use App\Notifications\AppliedForProject;
+use App\Pending_Request;
 use App\Student;
 use App\User;
 use Illuminate\Http\Request;
@@ -46,10 +47,12 @@ class ProjectsController extends Controller
 
         $proposedCount = count($studentProjects);
 
-        $showapplied = DB::table('project')
-            ->join('users','userId','=','project_user')
-            ->join('pending_request','faculty_Id','=','project_user')
-            ->where('faculty_id','=',Auth::user()->userId)
+        $showapplied = DB::table('pending_request')
+            ->join('users','userId','=','student_Id')
+            ->join('project','project.project_Id','=','pending_request.project_Id')
+            ->where('pending_request.faculty_id','=',Auth::user()->userId)
+            ->where('pending_request.status','=','pending')
+            ->select('users.*','project.*')
             ->get();
 
         $pendingCount = count($showapplied);
@@ -136,15 +139,19 @@ class ProjectsController extends Controller
         //
     }
 
-
+//review this
     public function go_to_project($id)
     {
         if (Auth::user()->category == 'faculty') {
-            $users = DB::table('users')
-                ->join('project', 'project.project_user', '=', 'users.userId')
-                ->where('project.project_Id', '=', $id)
-                ->select('users.first_name', 'users.last_name', 'project.*')
+            $users = DB::table('capstone_table')
+                ->join('users', 'userId', '=', 'cp_student')
+                ->join('project','project_Id','=','cp_project')
+//                ->select('users.first_name', 'users.last_name', 'project.*')
                 ->get();
+
+
+
+//            return $users;
 
             return view('viewProject')->with('users', $users);
         }
@@ -256,10 +263,12 @@ class ProjectsController extends Controller
         $capstone->cp_project = $id;
         $capstone->cp_startdate = now();
 
+//        return $projectDetails;
+
         DB::table('faculty_student')
             ->where('student_Id', $studentID)
             ->where('faculty_Id',$facultyID)
-            ->where('project_Id', $projectDetails->project_Id)
+            ->where('project_Id', $id)
             ->update(array(
                 'status' => 'matched',
             ));
@@ -289,10 +298,37 @@ class ProjectsController extends Controller
                 'faculty_Id' => $facultyID,
                 'student_Id' => $studentID,
                 'project_Id' => $id,
-                'status' => 'applied',
+                'status' => 'pending',
             ));
 
-       return $find;
+       return redirect()->back()->with('message','You have just applied for a project!');
+    }
+
+    public function acceptProposal($project_ID,$student_ID){
+
+        DB::table('capstone_table')
+            ->insert(array(
+                'cp_supervisor' => Auth::user()->userId,
+                'cp_Student' => $student_ID,
+                'cp_project' => $project_ID,
+                'cp_startdate' => now(),
+            ));
+
+        DB::table('pending_request')
+            ->where('faculty_Id', Auth::user()->userId)
+            ->where('student_Id',$student_ID)
+            ->where('project_Id', $project_ID)
+            ->update(array(
+                'status' => 'accepted',
+            ));
+
+        DB::table('pending_request')
+            ->where('student_Id','!=',$student_ID)
+            ->update(array(
+                'status' => 'declined',
+            ));
+
+        return redirect()->back()->with('message','New student added!');
     }
 
 }

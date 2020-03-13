@@ -49,12 +49,15 @@
                             </thead>
                             <tbody>
                             <tr>
+
                             @foreach($users as $user)
                                 <tr>
                                     <td>{{$user->project_title}}</td>
                                     <td>{{$user->project_type}}</td>
                                     <td>{{$user->project_field}}</td>
-                                    <td>{{$capSupers[0]->first_name}} {{$capSupers[0]->last_name}}</td>
+                                    @foreach($capSupers as $capSuper)
+                                    <td>{{$capSuper->first_name}} {{$capSuper->last_name}}</td>
+                                    @endforeach
                                 <td>
                                     <a href="" class="nav-link" data-toggle="modal" data-target="#view_project"><i class="fas fa-eye text-muted"></i></a>
                                 </td>

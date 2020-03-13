@@ -252,7 +252,6 @@
                     {{--                        Beginning of section for pending student projects--}}
 
                     <div class="tab-pane" id="pending_projects">
-
                         <h3 class="text-muted mb-3 mt-3">Students awaiting approval</h3>
                         <table class="table text-center table-dark table-hover">
                             <thead>
@@ -266,10 +265,13 @@
                             <tbody>
                             @foreach($showapplied as $appliedinfo)
                                 <tr>
-                                    <td>{{$appliedinfo->first_name}}</td>
+                                    <td>{{$appliedinfo->first_name}} {{$appliedinfo->last_name}}</td>
                                     <td>{{$appliedinfo->project_title}}</td>
                                     <td>
-                                        <a href="####"><i class="fas fa-check text-success"></i></a>
+                                        <form>
+                                       <a href="{{route('acceptProposal',['project_ID'=>$appliedinfo->project_Id, 'student_ID' => $appliedinfo->userId])}}"> <i class="fas fa-check text-success"></i></a>
+{{--                                            <a class="btn btn-success" href="{{route('post.show',['id'=>$post->id,'name'=>$post->title])}}">Show</a>--}}
+                                        </form>
                                     </td>
                                     <td>
                                        <a href="####"><i class="fas fa-times text-danger"></i></a>
@@ -312,7 +314,6 @@
                         </table>
                     </div>
                     {{--                    --}}{{--                    End of section for pending student projects--}}
-
 
                 </div>
             </div>
