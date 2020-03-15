@@ -32,7 +32,6 @@ Route::get('viewProject/{id}','ProjectsController@go_to_project')->name('viewPro
 Route::post('/submit','ProjectsController@store');
 Route::get('/show','ProjectsController@view_faculty_Projects');
 Route::get('/register','RegisterController@genderDropDown');
-Route::post('addproject', 'ProjectsController@addProject');
 Route::post('studentTopics','ProjectsController@select_supervisor');
 Route::post('studentTopics','ProjectsController@select_supervisor');
 Route::delete('deleteproject/{id}','ProjectsController@deleteproject')->name('deleteproject');

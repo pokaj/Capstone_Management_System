@@ -22,10 +22,12 @@
                         <a href="" data-target="#my_topics" data-toggle="tab" class="nav-link active">My Topic</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#available_topics" data-toggle="tab" class="nav-link">Available Topics</a>
+                        <a href="" data-target="#available_topics" data-toggle="tab" class="nav-link">Available Topics @if($count > 0)<span class="text-danger">[{{$count}}]</span>@endif</a>
+
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#propose_topic" data-toggle="tab" class="nav-link">Propose Topic</a>
+                        <a href="" data-target="#propose_topic" data-toggle="tab" class="nav-link">Propose Topic @if($usersProjects > 0)<span class="text-danger">[{{$usersProjects}}]</span> @endif</a>
+
                     </li>
                     <li class="nav-item">
                         <a href="" data-target="#select_supervisor" data-toggle="tab" class="nav-link">Select Supervisor</a>
@@ -50,83 +52,22 @@
                             <tbody>
                             <tr>
 
-                            @foreach($users as $user)
+                            @foreach($approvedProjects as $approvedProject)
                                 <tr>
-                                    <td>{{$user->project_title}}</td>
-                                    <td>{{$user->project_type}}</td>
-                                    <td>{{$user->project_field}}</td>
-                                    @foreach($capSupers as $capSuper)
-                                    <td>{{$capSuper->first_name}} {{$capSuper->last_name}}</td>
-                                    @endforeach
+                                    <td>{{$approvedProject->project_title}}</td>
+                                    <td>{{$approvedProject->project_type}}</td>
+                                    <td>{{$approvedProject->project_field}}</td>
+                                    <td>{{$approvedProject->first_name}} {{$approvedProject->last_name}}</td>
+
                                 <td>
-                                    <a href="" class="nav-link" data-toggle="modal" data-target="#view_project"><i class="fas fa-eye text-muted"></i></a>
-                                </td>
-                                    <td>
-                                        <a href="" class="nav-link" data-toggle="modal" data-target="#{{$user->project_Id}}"><i class="fas fa-trash-alt text-danger "></i></a>
+                                    <a href="" class="nav-link" data-toggle="modal" data-target="####"><i class="fas fa-eye text-muted"></i></a>
                                 </td>
                             </tr>
-
-                                <!-- beginning of modal to delete project-->
-                                <div class="modal fade" id="{{$user->project_Id}}">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <p class="modal-title font-weight-bold">Are you sure you want to delete this project?
-                                                </p><br>
-
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-
-                                            <div class="modal-body align-content-center">
-{{--                                                <button type="button" class="btn btn-muted" data-dismiss="modal">cancel</button>--}}
-                                                <form method="post" action="{{route('deleteproject',$user->project_Id)}}">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button class="btn btn-danger">Delete</button>
-{{--                                                <a href="{{route('deleteproject',$user->project_Id)}}" class="btn btn-danger">Delete</a>--}}
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end of modal to delete project-->
                                 @endforeach
                             </tbody>
                         </table>
-
-
-
-                        <!-- beginning of modal -->
-                        <div class="modal fade" id="view_project">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <p class="modal-title font-weight-bold">Ticketing and seat selection system to support activities
-                                            at the SilverBird Cinemas
-                                        </p><br>
-
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-
-                                    <div class="modal-body">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                                        anim id est laboru.
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" data-dismiss="modal">Apply</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Ignore </button>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                        <!-- end of modal -->
+
                     {{--                    End of section for student topics--}}
 
 
@@ -193,13 +134,109 @@
                     <div class="tab-pane" id="propose_topic">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card  mt-3">
+                                @if($usersProjects > 0)
+                                <h3 class="text-muted mb-3">Your proposed topics</h3>
+                                <table class="table text-center table-dark table-hover">
+                                    <thead>
+                                    <tr class="text-muted">
+                                        <th>Project Title</th>
+                                        <th>Project Type</th>
+                                        <th>Field</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+
+                                    @foreach($users as $user)
+                                        <tr>
+                                            <td>{{$user->project_title}}</td>
+                                            <td>{{$user->project_type}}</td>
+                                            <td>{{$user->project_field}}</td>
+                                            <td class="text-danger">Unapproved</td>
+
+                                            <td>
+                                                <a href="" class="nav-link" data-toggle="modal" data-target="#{{$user->project_Id}}"><i class="fas fa-eye text-muted"></i></a>
+                                            </td>
+                                            <td>
+                                                <a href="" class="nav-link" data-toggle="modal" data-target="#delete"><i class="fas fa-trash-alt text-danger "></i></a>
+                                            </td>
+                                        </tr>
+
+                                        <!-- beginning of modal for viewing and editing project details-->
+
+                                        <div class="modal fade" id="{{$user->project_Id}}">
+                                            <form>
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <p><strong>Project Title: </strong></p>
+                                                            <input class="form-control" value="{{$user->project_title}}">
+
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <p><strong>Project Field: </strong></p>
+                                                            <input class="form-control" value="{{$user->project_field}}">
+
+                                                            <p><strong>Project Type: </strong></p>
+                                                            <input class="form-control" value="{{$user->project_type}}">
+
+                                                            <p><strong>Project Description: </strong></p>
+                                                            <textarea class="form-control" placeholder="{{$user->project_desc}}"></textarea>
+
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Update </button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- End of Modal -->
+
+
+                                        <!-- beginning of modal to delete project-->
+                                        <div class="modal fade" id="delete">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <p class="modal-title font-weight-bold">Are you sure you want to delete this project?
+                                                        </p><br>
+
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+
+                                                    <div class="modal-body align-content-center">
+                                                        {{--                                                <button type="button" class="btn btn-muted" data-dismiss="modal">cancel</button>--}}
+                                                        <form method="post" action="{{route('deleteproject',$user->project_Id)}}">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button class="btn btn-danger">Delete</button>
+                                                            {{--                                                <a href="{{route('deleteproject',$user->project_Id)}}" class="btn btn-danger">Delete</a>--}}
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end of modal to delete project-->
+
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                @endif
+
+                                <div class="card  mt-5">
                                     <div class="card-header card-header-primary">
                                         <h4 class="card-title">Propose a Topic</h4>
 
                                     </div>
                                     <div class="card-body">
-                                        <form role="form" method="post" action="{{url('addproject')}}">
+                                        <form role="form" method="post" action="submit">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-md-5">
@@ -212,7 +249,7 @@
                                                     <div class="form-group">
                                                         <label class="bmd-label-floating">Project Type: </label>
                                                         <select name="project_type" type="text" class="form-control">
-                                                            <option value="uncertain">uncertain</option>
+                                                            <option value="uncertain">Uncertain</option>
                                                             <option value="thesis">Thesis</option>
                                                             <option value="applied">Applied</option>
                                                             {{--                                                            <option value="entrepreneurship">Entrepreneurship</option>--}}
@@ -234,12 +271,12 @@
                                                         <label>Project Description: </label>
                                                         <div class="form-group">
                                                             <label class="bmd-label-floating"> </label>
-                                                            <textarea name="project_desc" class="form-control" rows="5" required></textarea>
+                                                            <textarea name="project_description" class="form-control" rows="5" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary">Confirm</button>
+                                            <button type="submit" class="btn btn-primary pull-right">Confirm</button>
                                         </form>
                                     </div>
                                 </div>

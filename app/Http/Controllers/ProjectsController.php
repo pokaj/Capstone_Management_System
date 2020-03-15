@@ -38,11 +38,10 @@ class ProjectsController extends Controller
             ->get();
 
         $studentProjects=  DB::table('Project')
-            ->join('users','userId','=','project_user')
             ->join('faculty_student','faculty_student.project_Id','=','project.project_Id')
-//            ->where('project.project_user','=','faculty_student.student_Id')
-            ->where('faculty_Id','=',Auth::user()->userId)
-            ->where('status','=','picked')
+            ->join('users','userId','=','faculty_student.student_Id')
+            ->where('faculty_student.faculty_Id','=',Auth::user()->userId)
+            ->where('project.status','=','pending')
             ->get();
 
         $proposedCount = count($studentProjects);
@@ -87,6 +86,7 @@ class ProjectsController extends Controller
         $project->project_field = $request->project_field;
         $project->project_type = $request->project_type;
         $project->project_desc = $request->project_description;
+        $project->status = 'pending';
         $project->save();
 
         return redirect()->back()
@@ -171,23 +171,6 @@ class ProjectsController extends Controller
         }
     }
 
-    public function addProject(Request $request)
-    {
-        $project = new Project;
-        $date = now();
-        $project->project_user = Auth::user()->userId;
-        $project->project_date = $date;
-        $project->project_title = $request->project_title;
-        $project->project_type = $request->project_type;
-        $project->project_field = $request->project_field;
-        $project->project_desc = $request->project_desc;
-        $project->save();
-
-        return redirect()->back()
-            ->with('message', 'Project created successfully');
-    }
-
-
     public function select_supervisor(Request $request)
     {
         DB::table('faculty_student')
@@ -263,8 +246,6 @@ class ProjectsController extends Controller
         $capstone->cp_project = $id;
         $capstone->cp_startdate = now();
 
-//        return $projectDetails;
-
         DB::table('faculty_student')
             ->where('student_Id', $studentID)
             ->where('faculty_Id',$facultyID)
@@ -274,14 +255,21 @@ class ProjectsController extends Controller
             ));
 
         DB::table('faculty_student')
-//            ->where('student_Id','!=',$studentID)
+            ->where('project_Id','=',$id)
             ->where('faculty_Id','!=',$facultyID)
             ->update(array(
                 'status' => 'unmatched',
             ));
 
+
+        DB::table('project')
+            ->where('project_Id','=',$id)
+            ->update(array(
+                'status' => 'taken'
+            ));
+
+
         $capstone->save();
-////        return view('/students')->with('message','New student added!');
         return redirect()->back()->with('message','New student added!');
 
     }
@@ -323,11 +311,17 @@ class ProjectsController extends Controller
             ));
 
         DB::table('pending_request')
-            ->where('student_Id','!=',$student_ID)
+            ->where('project_Id', '=', $project_ID)
+            ->where('student_Id', '!=', $student_ID)
             ->update(array(
-                'status' => 'declined',
+                'status' => 'declined'
             ));
 
+        DB::table('project')
+            ->where('project_Id','=',$project_ID)
+            ->update(array(
+                'status' => 'taken'
+            ));
         return redirect()->back()->with('message','New student added!');
     }
 

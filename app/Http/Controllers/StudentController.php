@@ -34,18 +34,15 @@ class StudentController extends Controller
 
         if(Auth::user()->category == 'student'){
 
-//            $faculty = DB::table('faculty')->get();
-
             $users = DB::table('project')
-//                ->join('faculty_student','cp_project','=','project_Id')
                 ->where('project_user',  '=', Auth::user()->userId)
+                ->where('status','=','pending')
                 ->get();
-
-//            return $users;
 
             $facultyProjects = DB::table('project')
                 ->join('faculty','faculty_id','=','project.project_user')
                 ->join('users','userId','=','faculty.faculty_id')
+                ->where('status','!=','taken')
                 ->select('users.*','project.*')
                 ->get();
 
@@ -55,14 +52,17 @@ class StudentController extends Controller
                 ->select('users.*')
                 ->get();
 
-            $capSupers = DB::table('capstone_table')
+            $approvedProjects = DB::table('capstone_table')
+                ->join('project','project_Id','=','cp_project')
                 ->join('users','userId','=','cp_supervisor')
-                ->select('first_name','last_name')
-//                ->where('')
-            ->get();
-//            return $capSupers;
+                ->where('cp_student','=',Auth::user()->userId)
+                ->get();
 
-            return view('student_topics' ,compact('users','facultyProjects','facultyDropdown','capSupers'));
+            $count = count($facultyProjects);
+            $usersProjects = count($users);
+
+            return view('student_topics' ,compact('users','facultyProjects','facultyDropdown',
+                'approvedProjects','count','usersProjects'));
         }
     }
 
