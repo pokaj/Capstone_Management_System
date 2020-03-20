@@ -76,6 +76,8 @@ class ProjectsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+
+//    Function for both students and faculty members to create projects
     public function store(Request $request)
     {
         $project = new Project;
@@ -139,25 +141,20 @@ class ProjectsController extends Controller
         //
     }
 
-//review this
+// Function for faculty members to visit projects of students they supervise.
     public function go_to_project($id)
     {
         if (Auth::user()->category == 'faculty') {
-            $users = DB::table('capstone_table')
-                ->join('users', 'userId', '=', 'cp_student')
-                ->join('project','project_Id','=','cp_project')
-//                ->select('users.first_name', 'users.last_name', 'project.*')
+            $users = DB::table('project')
+                ->join('users', 'userId', '=','project_user')
+                ->where('project_Id','=',$id)
                 ->get();
-
-
-
-//            return $users;
 
             return view('viewProject')->with('users', $users);
         }
     }
 
-//review this
+// Function for students to view projects proposed by faculty members
     public function view_faculty_Projects()
     {
         $facultyID = Auth::user()->userId;
@@ -171,6 +168,7 @@ class ProjectsController extends Controller
         }
     }
 
+//    Function for students to select their preferred supervisors.
     public function select_supervisor(Request $request)
     {
         DB::table('faculty_student')
@@ -209,21 +207,8 @@ class ProjectsController extends Controller
 
         return $requests;
     }
-//
-//    public function supervisor_requests(){
-//        if(Auth::user()->category == 'faculty'){
-//            $faculty_interests = DB::table('users')
-//                ->join('faculty','faculty.faculty_Id','=','users.userId')
-//                ->where('faculty.faculty_Id','=', Auth::user()->userId)
-//                ->select('users.first_name','users.last_name','faculty.*')
-//                ->get();
-//
-//            return $faculty_interests;
-//
-//        }
-//    }
 
-
+//   Function for both students and faculty members to delete their projects
     public function deleteproject($id)
     {
         $project = Project::find($id);
@@ -236,6 +221,7 @@ class ProjectsController extends Controller
         }
     }
 
+//    Function for faculty members to accept the supervisory role when chosen by students.
     public function acceptProject($id){
         $projectDetails = Project::find($id);
         $capstone = new Casptone_Table;
@@ -274,6 +260,7 @@ class ProjectsController extends Controller
 
     }
 
+//    Function for students to apply for projects proposed by faculty members.
     public function apply($id){
         $find = Project::find($id);
         $studentID = Auth::user()->userId;
@@ -292,6 +279,7 @@ class ProjectsController extends Controller
        return redirect()->back()->with('message','You have just applied for a project!');
     }
 
+//    Function for faculty member to accept a student to work on his proposed topic
     public function acceptProposal($project_ID,$student_ID){
 
         DB::table('capstone_table')

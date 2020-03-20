@@ -7,7 +7,8 @@
 
                 @foreach($users as $user)
                 <h2 class="">{{$user->first_name}} {{$user->last_name}}</h2>
-                <p class="lead"><strong class="text-black-50">Topic: </strong>{{$user->project_title}}</p>
+                    <strong>Topic:</strong> <span class="text-black-50">{{$user->project_title}}</span>
+                <p class="text-capitalize"> {{$user->project_type}}</p>
                 {{--                Beginning of navigation tab--}}
                 <ul class="nav nav-tabs">
                     <li class="nav-item">

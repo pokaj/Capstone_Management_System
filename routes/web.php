@@ -14,6 +14,7 @@ Route::get('/', function () {
     return view('login');
 });
 
+
 //Routes for Faculty
 Route::get('/dashboard', 'FacultyController@index');
 Route::get('/profile', 'FacultyController@profile');
@@ -28,7 +29,7 @@ Route::get('supervisor_requests', 'ProjectsController@supervisor_requests');
 
 
 //Routes for Projects
-Route::get('viewProject/{id}','ProjectsController@go_to_project')->name('viewProject');
+Route::get('project{id}','ProjectsController@go_to_project')->name('viewProject'); //REVIEW
 Route::post('/submit','ProjectsController@store');
 Route::get('/show','ProjectsController@view_faculty_Projects');
 Route::get('/register','RegisterController@genderDropDown');
