@@ -199,6 +199,7 @@ class ProjectsController extends Controller
             ->with('message', 'Preferred supervisors selected');
     }
 
+//    REVIEW
     public function supervisor_requests()
     {
         $requests = DB::table('project')

@@ -25,7 +25,37 @@ class FacultyController extends Controller
     {
         if (Auth::user()->category == 'faculty') {
 
-            return view('dashboard');
+
+            $studentProjects=  DB::table('Project')
+                ->join('faculty_student','faculty_student.project_Id','=','project.project_Id')
+                ->join('users','userId','=','faculty_student.student_Id')
+                ->where('faculty_student.faculty_Id','=',Auth::user()->userId)
+                ->where('project.status','=','pending')
+                ->get();
+
+            $showapplied = DB::table('pending_request')
+                ->join('users','userId','=','student_Id')
+                ->join('project','project.project_Id','=','pending_request.project_Id')
+                ->where('pending_request.faculty_id','=',Auth::user()->userId)
+                ->where('pending_request.status','=','pending')
+                ->select('users.*','project.*')
+                ->get();
+
+            $projectDetails = DB::table('capstone_table')
+                ->join('users','userId','=','cp_student')
+                ->join('project','project_Id','=','cp_project')
+                ->where('cp_supervisor','=',Auth::user()->userId)
+                ->get();
+
+            $totalSupervisedStudents = count($projectDetails);
+
+
+            $pendingCount = count($showapplied);
+            $proposedCount = count($studentProjects);
+            $totalPending = $pendingCount + $proposedCount ;
+
+
+            return view('dashboard', compact('totalPending','totalSupervisedStudents','projectDetails'));
         }
         return view('student_dashboard');;
     }
@@ -36,6 +66,7 @@ class FacultyController extends Controller
         if (Auth::user()->category == 'faculty') {
 
             $depts = DB::table('department')->get();
+
 
             return view('profile' ,compact('depts'));
         }
@@ -53,7 +84,7 @@ class FacultyController extends Controller
                 ->where('cp_supervisor','=',Auth::user()->userId)
                 ->get();
 
-//            return $projectDetails;
+            $count = count($projectDetails);
 
             return view('students',compact('projectDetails'));
         }
