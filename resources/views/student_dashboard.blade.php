@@ -11,9 +11,13 @@
                 </div>
             @endif
         </div>
-
-
-    <h3 class="text-muted">Applied Project </h3> <p>Developing a web-application to aid businesses collect feedback from customers.</p>
+    @if($count = 0)
+        <h6></h6>
+        @else
+    @foreach($approvedProjects as $approvedProject)
+    <span class="text-muted text-capitalize h2">{{$approvedProject->project_type}} : </span> <span class="h5">{{$approvedProject->project_title}}</span>
+        @endforeach
+        @endif
         <!-- Progress Bar starts her | List of tasks as well  -->
         <section>
             <div class="container-fliud">

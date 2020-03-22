@@ -25,8 +25,15 @@ class StudentController extends Controller
     public function index(){
         if(Auth::user()->category == 'student'){
 
+            $approvedProjects = DB::table('capstone_table')
+                ->join('project','project_Id','=','cp_project')
+                ->where('cp_student','=',Auth::user()->userId)
+                ->select('project_title','project_type')
+                ->get();
 
-            return view('student_dashboard');
+            $count = count($approvedProjects);
+
+            return view('student_dashboard',compact('approvedProjects','count'));
         }
     }
 

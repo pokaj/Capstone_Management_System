@@ -47,7 +47,7 @@
 
     <div class="col-xl-6 col-12 mb-4 mb-xl-0 mt-5">
         <div class="bg-dark text-white p-4 rounded">
-            <h4 class="mb-5">Individual Progress</h4>
+            <h4 class="mb-5">Student Progress</h4>
             @foreach($projectDetails as $projectDetail)
             <div>
                 <h6 class="mb-3">{{$projectDetail->first_name}} {{$projectDetail->last_name}} </h6>

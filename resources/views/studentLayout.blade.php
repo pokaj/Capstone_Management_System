@@ -166,8 +166,7 @@
                 </ul>
             </div>
             <div class="col-lg-6 text-center">
-                <p> &copy; 2020 Copyright. Made with <i class="fas fa-heart"></i>
-                    by <span class="text-success">Philip Owusu-Afriyie</span></p>
+                <p> &copy; 2020 Copyright. <span class="text-danger">Ashesi University</span></p>
             </div>
 
         </div>
