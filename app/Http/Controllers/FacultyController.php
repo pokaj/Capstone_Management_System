@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\Department;
 use App\Project;
 use App\Faculty;
 use Illuminate\Support\Facades\DB;
@@ -138,10 +139,9 @@ class FacultyController extends Controller
                     'faculty_interests' => $request->input('interests')
                 ));
 
-
             return redirect()->back()
-                ->with('message','Profile successfully updated')
-                ->with('$updatefaculty',$updatefaculty);
+                ->with('message','Profile successfully updated');
         }
+
 
 }

@@ -35,9 +35,7 @@
                                                             <div class="col-md-8">
                                                                 <p><i class="fa fa-user" aria-hidden="true"></i>  {{Auth::user()->first_name}} {{Auth::user()->last_name}}</p>
                                                                 <p><i class="fa fa-envelope" aria-hidden="true"></i>  {{Auth::user()->email}} </p>
-                                                                <p><i class="fa fa-phone" aria-hidden="true"></i> 0{{Auth::user()->phone}} </p>
-
-
+                                                                <p><i class="fa fa-phone" aria-hidden="true"></i> {{Auth::user()->phone}} </p>
                                                                 <h4>Interests</h4>
                                                                 <p>
                                                                     Indie music, skiing and hiking. I love the great outdoors.

@@ -6,27 +6,31 @@
             <div class="col-lg-8 order-lg-2">
 
                 @foreach($users as $user)
-                <h2 class="">{{$user->first_name}} {{$user->last_name}}</h2>
-                    <strong>Topic:</strong> <span class="text-black-50">{{$user->project_title}}</span>
-                <p class="text-capitalize"> {{$user->project_type}}</p>
+                <h2>{{$user->first_name}} {{$user->last_name}}</h2>
+                   <p> <span>Student ID: {{$user->student_Id}}</span></p>
+                    <strong class="text-capitalize">{{$user->project_type}}: </strong> <span class="text-black-50">{{$user->project_title}}</span>
+
                 {{--                Beginning of navigation tab--}}
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabs mt-3">
                     <li class="nav-item">
                         <a href="" data-target="#description" data-toggle="tab" class="nav-link active">Project Description</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#showdeliverables" data-toggle="tab" class="nav-link">Deliverables</a>
+                        <a href="" data-target="#pastMeeting" data-toggle="tab" class="nav-link">Past Meeting</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#adddeliverables" data-toggle="tab" class="nav-link">Add New Deliverable</a>
+                        <a href="" data-target="#currentMeeting" data-toggle="tab" class="nav-link">Current Meeting</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" data-target="#nextMeeting" data-toggle="tab" class="nav-link">Next Meeting</a>
                     </li>
                 </ul>
                 {{--                End of navigation tab--}}
 
                 <div class="tab-content py-4">
 
+                    {{--                        Beginning of section for viewing project description--}}
                     <div class="tab-pane active" id="description">
-                        {{--                        Beginning of section for viewing project description--}}
                         <p>
                             {{$user->project_desc}}
                             @endforeach
@@ -34,16 +38,15 @@
 
                     </div>
                     {{--                    End of section for viewing project description--}}
-                    <div class="tab-pane" id="showdeliverables">
-                        {{--                        Beginning of section for viewing deliverables--}}
+                    <div class="tab-pane" id="pastMeeting">
+                        {{--                        Beginning of section for viewing past meetings--}}
 
                         <table class="table table-striped bg-light text-center">
                             <thead class="thead-dark">
                             <tr class="text-muted">
-                                <th>Title</th>
-                                <th>Due Date</th>
-                                <th>Date Submitted</th>
-                                <th>Actions</th>
+                                <th>Date</th>
+                                <th>Deliverables</th>
+                                <th>Details</th>
                             </tr>
                             </thead>
 
@@ -52,32 +55,49 @@
                                 <td>References</td>
                                 <td>20/05/19</td>
                                 <td>26/05/19</td>
-                                <td>
-                                    <a href=""><i class="fas fa-download"></i></a>
-                                </td>
                             </tr>
-                            <tr>
 
-                                <td>Annotated Bibliography</td>
-                                <td>04/06/19</td>
-                                <td>10/06/19</td>
-                                <td>
-                                    <a href=""><i class="fas fa-download"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>Chapter One - Introduction</td>
-                                <td>20/06/19</td>
-                                <td>23/06/19</td>
-                                <td>
-                                    <a href=""><i class="fas fa-download"></i></a>
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
                     {{--                    End of section for viewing deliverables--}}
+
+
+                        {{--                    Beginning of section for making changes to current meeting--}}
+                    <div class="tab-pane" id="currentMeeting">
+
+                        <div class="card">
+
+                            <div class="card-body">
+                                <form action="submit" method="post">
+                                    @csrf
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Title: </label>
+                                            <input type="text" class="form-control" name="title" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Project Field: </label>
+                                            <input type="text" class="form-control" name="project_field" required>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {{--                    End of section for making changes to current meeting--}}
+
+
+
+                    {{--                    Beginning of section for settings next meeting--}}
+                    <div class="tab-pane" id="nextMeeting">
+
+                        <p> SHEEP </p>
+                    </div>
+                    {{--                    End of section for settings next meeting--}}
                 </div>
             </div>
         </div>

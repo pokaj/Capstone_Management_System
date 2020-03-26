@@ -23,9 +23,7 @@ Route::get('/topics','ProjectsController@index');
 Route::get('/milestones','FacultyController@milestones');
 Route::put('profile', 'FacultyController@update');
 Route::put('studentProfile', 'StudentController@update');
-
 Route::get('supervisor_requests', 'ProjectsController@supervisor_requests');
-
 
 
 //Routes for Projects
@@ -52,7 +50,7 @@ Route::get('/studentProfile','StudentController@student_profile');
 Route::get('/studentTopics','StudentController@student_topics');
 Route::get('/studentMilestones','StudentController@student_milestones');
 //only authenticated users can enter:
-//->middleware('auth')
+//->middleware('auth');
 
 
 //Route::resource('topics','ProjectsController');

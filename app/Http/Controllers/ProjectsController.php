@@ -146,9 +146,12 @@ class ProjectsController extends Controller
     {
         if (Auth::user()->category == 'faculty') {
             $users = DB::table('project')
-                ->join('users', 'userId', '=','project_user')
+                ->join('capstone_table','cp_project','=','project_Id')
+                ->join('users','userId','=','cp_student')
+                ->join('student','student_user_id','=','capstone_table.cp_student')
                 ->where('project_Id','=',$id)
                 ->get();
+
 
             return view('viewProject')->with('users', $users);
         }

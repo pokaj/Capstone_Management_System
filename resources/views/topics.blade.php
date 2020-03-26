@@ -16,11 +16,11 @@
                     </li>
                     <li class="nav-item">
                         <a href="" data-target="#project_proposals" data-toggle="tab" class="nav-link">Project Proposals
-                            <span class="text-danger">({{$proposedCount}})</span></a>
+                            <span class="text-danger">[{{$proposedCount}}]</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="" data-target="#pending_projects" data-toggle="tab" class="nav-link">Pending Requests
-                            <span class="text-danger">({{$pendingCount}})</span></a>
+                            <span class="text-danger">[{{$pendingCount}}]</span></a>
                     </li>
 
                 </ul>
