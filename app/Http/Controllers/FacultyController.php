@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\Meeting;
 use App\Department;
 use App\Project;
 use App\Faculty;
@@ -141,6 +142,32 @@ class FacultyController extends Controller
 
             return redirect()->back()
                 ->with('message','Profile successfully updated');
+        }
+
+        public function createMeeting(Request $request){
+
+
+            $meeting = new Meeting;
+            $meeting->mt_date = now();
+            $meeting->mt_project = $request->projectID;
+            $meeting->mt_supervisor = Auth::user()->userId;
+            $meeting->mt_student = $request->studentID;
+            $meeting->save();
+
+            DB::table('person_meeting')
+                ->insert(array(
+                    'mt_id' => $meeting->mt_id,
+                    'mt_date' => now(),
+                    'mt_venue' => $request->venue,
+                    'mt_objective' => $request->currentObj,
+                    'mt_challenges' => $request->problems,
+                    'mt_sumofprogress' => $request->progress,
+                    'mt_objnxtperiod' => $request->nextObj,
+                    'mt_nextDate' => $request->nextDate
+                ));
+
+            return redirect()->back()
+                ->with('message','Meeting closed!');
         }
 
 

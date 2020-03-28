@@ -129,6 +129,6 @@ width:230px;
     background-size: cover;
 
 }
-/*.card {*/
-/*    background-color: rgba(245, 245, 220, 0.7) !important;*/
-/*}*/
+#formWidth{
+    width: 550px;
+}

@@ -13,6 +13,7 @@ use App\Project;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use function MongoDB\BSON\toJSON;
 
 class ProjectsController extends Controller
 {
@@ -149,11 +150,25 @@ class ProjectsController extends Controller
                 ->join('capstone_table','cp_project','=','project_Id')
                 ->join('users','userId','=','cp_student')
                 ->join('student','student_user_id','=','capstone_table.cp_student')
+                ->join('major','major_Id','=','student.student_major')
                 ->where('project_Id','=',$id)
                 ->get();
 
+            $meetingInfo = DB::table('meetings')
+                ->join('person_meeting','person_meeting.mt_id','=','meetings.mt_id')
+                ->where('mt_supervisor','=', Auth::user()->userId)
+                ->where('mt_project','=',$id)
+                ->orderBy('person_meeting.mt_id', 'DESC')
+                ->get();
 
-            return view('viewProject')->with('users', $users);
+            $last = DB::table('person_meeting')
+                ->join('meetings','person_meeting.mt_id','=','meetings.mt_id')
+                ->where('mt_supervisor','=', Auth::user()->userId)
+                ->where('mt_project','=',$id)
+                ->orderBy('person_meeting.mt_id', 'DESC')->first();
+
+
+            return view('viewProject', compact('users','meetingInfo','last'));
         }
     }
 

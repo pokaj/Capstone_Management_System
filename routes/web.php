@@ -24,6 +24,7 @@ Route::get('/milestones','FacultyController@milestones');
 Route::put('profile', 'FacultyController@update');
 Route::put('studentProfile', 'StudentController@update');
 Route::get('supervisor_requests', 'ProjectsController@supervisor_requests');
+Route::post('createMeeting','FacultyController@createMeeting')->name('createMeeting');
 
 
 //Routes for Projects
