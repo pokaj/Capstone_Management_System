@@ -31,14 +31,16 @@ class LoginController extends Controller
 
 //    protected $redirectTo = RouteServiceProvider::HOME;
         protected function redirectTo(){
-            if(Auth::user()->category == 'faculty'){
+            if(Auth::user()->user_role == 1){
 
-                return 'dashboard';
+                return 'super_dashboard';
+
+            }elseif(Auth::user()->user_role == 2){
+
+                return '/dashboard';
 
             }else{
-
                 return '/studentDashboard';
-
             }
         }
     /**

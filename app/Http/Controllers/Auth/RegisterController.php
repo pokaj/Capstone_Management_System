@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +32,13 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+//    protected $redirectTo = RouteServiceProvider::HOME;
+    protected function redirectTo(){
+
+            return '/studentDashboard';
+
+        }
+
 
     /**
      * Create a new controller instance.
@@ -57,8 +64,6 @@ class RegisterController extends Controller
             'gender' => ['required', 'string', 'max:225'],
             'username' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
-            'category' => ['required', 'string', 'max:255'],
-            'user_role' => ['required', 'integer', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -78,22 +83,20 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'username' => $data['username'],
             'phone' => $data['phone'],
-            'category' => $data['category'],
-            'user_role' => $data['user_role'],
+            'category' => 'student',
+            'user_role' => 3,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
-//        check if user is lecturer or student and simultaneously make an insert respectively
-        if ($data->category == 'faculty') {
-            DB::table('faculty')->insert([
-                'faculty_Id' => $data->userId,
-            ]);
-        } else {
+        /**
+         *  populate sutdent table with student ID
+         */
+
             DB::table('student')->insert([
                 'student_user_id' => $data->userId,
             ]);
-        }
+
         return $data;
 
     }

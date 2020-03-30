@@ -176,11 +176,9 @@ class FacultyController extends Controller
                 ->where('mt_id','=',$request->get('inputVal'))
                 ->get();
 
-           return response()->json([
-               'success'=> true,
-               'data' => $meetingInformation
-           ]);
-        }
+        return ['success' => true, 'data' => $meetingInformation];
+
+    }
 
 
 }

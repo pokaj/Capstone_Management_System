@@ -14,8 +14,10 @@ Route::get('/', function () {
     return view('login');
 });
 
+/*
+ * Routes for Faculty
+ */
 
-//Routes for Faculty
 Route::get('/dashboard', 'FacultyController@index');
 Route::get('/profile', 'FacultyController@profile');
 Route::get('/students', 'FacultyController@students');
@@ -25,9 +27,11 @@ Route::put('profile', 'FacultyController@update');
 Route::put('studentProfile', 'StudentController@update');
 Route::get('supervisor_requests', 'ProjectsController@supervisor_requests');
 Route::post('createMeeting','FacultyController@createMeeting')->name('createMeeting');
-Route::post('/meet', 'FacultyController@searchMeeting')->name('searchMeeting');
+Route::post('/meetingDetails', 'FacultyController@searchMeeting')->name('searchMeeting');
 
-//Routes for Projects
+/*
+ * Routes for Projects
+ */
 Route::get('project{id}','ProjectsController@go_to_project')->name('viewProject'); //REVIEW
 Route::post('/submit','ProjectsController@store');
 Route::get('/show','ProjectsController@view_faculty_Projects');
@@ -39,19 +43,22 @@ Route::get('acceptProject/{id}','ProjectsController@acceptProject')->name('accep
 Route::get('apply/{id}','ProjectsController@apply')->name('apply');
 Route::get('acceptProposal/{project_ID}/{student_ID}','ProjectsController@acceptProposal')->name('acceptProposal');
 
-
-//deleteproject
-
-
-
-
-//Routes for students
+/*
+ * Routes for students
+ */
 Route::get('/studentDashboard','StudentController@index');
 Route::get('/studentProfile','StudentController@student_profile');
 Route::get('/studentTopics','StudentController@student_topics');
 Route::get('/studentMilestones','StudentController@student_milestones');
-//only authenticated users can enter:
-//->middleware('auth');
+
+/*
+ * Routes for cs_supervisor
+ */
+Route::get('/super_dashboard','coordinatorController@index');
+Route::get('/addFaculty','coordinatorController@addFaculty');
+Route::post('/newFaculty','coordinatorController@newFaculty')->name('newFaculty');
+
+
 
 
 //Route::resource('topics','ProjectsController');

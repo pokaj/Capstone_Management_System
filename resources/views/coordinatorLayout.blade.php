@@ -25,32 +25,32 @@
 
                 <!-- sidebar begins here-->
                 <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
-                    <a href="/dashboard" class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">Dashboard</a>
+                    <a href="/super_dashboard" class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">Dashboard</a>
                     <div class="bottom-border pb-3">
                         <img src="images/avatar.png" width="40" class="rounded-circle mr-3">
                         <a href="/profile" class="text-white"> {{Auth::user()->username}}</a>
                     </div>
 
                     <ul class="navbar-nav flex-column mt-4">
-                        <li class="nav-item {{'dashboard' == request()->path() ? 'current' : ''}}"><a href="/dashboard" class="nav-link text-white p-3 mb-2 sidebar-link">
+                        <li class="nav-item {{'super_dashboard' == request()->path() ? 'current' : ''}}"><a href="/super_dashboard" class="nav-link text-white p-3 mb-2 sidebar-link">
                                 <i class="fas fa-home text-white text-light fa-lg mr-3"></i>Dashboard</a>
                         </li>
 
-                        <li class="nav-item {{'profile' == request()->path() ? 'current' : ''}}"><a href="/profile" class="nav-link text-white p-3 mb-2 sidebar-link ">
-                                <i class="fas fa-user text-white text-light fa-lg mr-3"></i>Profile</a>
+                        <li class="nav-item {{'addFaculty' == request()->path() ? 'current' : ''}}"><a href="/addFaculty" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                                <i class="fas fa-user text-white text-light fa-lg mr-3"></i>Add Faculty</a>
                         </li>
 
-                        <li class="nav-item {{'students' == request()->path() ? 'current' : ''}}"><a href="/students" class="nav-link text-white p-3 mb-2 sidebar-link ">
-                                <i class="fas fa-users text-white text-light fa-lg mr-3"></i>Students</a>
-                        </li>
+{{--                        <li class="nav-item {{'students' == request()->path() ? 'current' : ''}}"><a href="/students" class="nav-link text-white p-3 mb-2 sidebar-link ">--}}
+{{--                                <i class="fas fa-users text-white text-light fa-lg mr-3"></i>Students</a>--}}
+{{--                        </li>--}}
 
-                        <li class="nav-item {{'topics' == request()->path() ? 'current' : ''}}"><a href="/topics" class="nav-link text-white p-3 mb-2 sidebar-link ">
-                                <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Projects</a>
-                        </li>
+{{--                        <li class="nav-item {{'topics' == request()->path() ? 'current' : ''}}"><a href="/topics" class="nav-link text-white p-3 mb-2 sidebar-link ">--}}
+{{--                                <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Projects</a>--}}
+{{--                        </li>--}}
 
-                        <li class="nav-item {{'milestones' == request()->path() ? 'current' : ''}}"><a href="/milestones" class="nav-link text-white p-3 mb-2 sidebar-link ">
-                                <i class="fas fa-calendar-check text-white text-light fa-lg mr-3"></i>Milestones</a>
-                        </li>
+{{--                        <li class="nav-item {{'milestones' == request()->path() ? 'current' : ''}}"><a href="/milestones" class="nav-link text-white p-3 mb-2 sidebar-link ">--}}
+{{--                                <i class="fas fa-calendar-check text-white text-light fa-lg mr-3"></i>Milestones</a>--}}
+{{--                        </li>--}}
 
                     </ul>
 
@@ -74,9 +74,9 @@
                         </div>
                         <div class="col-md-3">
                             <ul class="navbar-nav">
-{{--                                <li class="nav-item icon-parent">--}}
-{{--                                    <a href="" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a>--}}
-{{--                                </li>--}}
+                                {{--                                <li class="nav-item icon-parent">--}}
+                                {{--                                    <a href="" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a>--}}
+                                {{--                                </li>--}}
                                 <li class="nav-item icon-parent">
                                     <a href="" class="nav-link "><i class="fas fa-bell text-danger"></i>
                                         <span class="badge text-danger">{{count(Auth::user()->unreadNotifications)}}</span></a>
@@ -138,13 +138,11 @@
     <div class="container-fluid">
         <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
             <div class="row pt-5 mt-md-3 mb-5">
+
                 @yield('content')
-                @yield('profile')
-                @yield('students')
-                @yield('topics')
-                @yield('milestones')
-                @yield('viewProject')
-                @yield('super_dash')
+                @yield('addFaculty')
+
+
             </div>
         </div>
     </div>

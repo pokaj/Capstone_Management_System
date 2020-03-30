@@ -120,9 +120,5 @@ class StudentController extends Controller
             ->with('$updatefaculty',$updatefaculty);
     }
 
-//    public function projectDetails(){
-//        $details = Project::all();
-//        return $details;
-//    }
 
 }

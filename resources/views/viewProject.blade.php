@@ -5,11 +5,13 @@
         <div class="row my-2">
             <div class="col-lg-8 order-lg-2">
 
+                <div class="ml-3">
                 @foreach($users as $user)
                 <h2>{{$user->first_name}} {{$user->last_name}}</h2>
                    <p> <span>Student ID: {{$user->student_Id}}</span></p>
                     <p><span>Major: {{$user->major_name}}</span></p>
                     <strong class="text-capitalize">{{$user->project_type}}: </strong> <span class="text-black-50">{{$user->project_title}}</span>
+                </div>
 
                     {{--                Success Message--}}
                     @if(session()->has('message'))
@@ -20,7 +22,7 @@
                     @endif
 
                 {{--                Beginning of navigation tab--}}
-                <ul class="nav nav-tabs mt-3">
+                <ul class="nav nav-tabs mt-3 ml-2">
                     <li class="nav-item">
                         <a href="" data-target="#description" data-toggle="tab" class="nav-link active">Project Description</a>
                     </li>
@@ -40,7 +42,7 @@
 
                     {{--                        Beginning of section for viewing project description--}}
                     <div class="tab-pane active" id="description">
-                        <p>
+                        <p class="ml-3">
                             {{$user->project_desc}}
                             @endforeach
                         </p>
@@ -72,9 +74,26 @@
                             <button type="submit" class="btn btn-primary ml-3" >Search</button>
                         </form>
 
-                        <p id="here">Content comes here</p>
+                        <div class="card mt-4 ml-3">
+                            <div class="card-body">
+                                        <div>
+                                            <label class="text-capitalize text-danger h5">Meeting Objectives:</label>
+                                            <p id="objectives"></p>
 
+                                            <label class="text-capitalize text-danger h5">Meeting Challenges:</label>
+                                            <p id="challenges"></p>
 
+                                            <label class="text-capitalize text-danger h5">Progress Summary:</label>
+                                            <p id="summary"></p>
+
+                                            <label class="text-capitalize text-danger h5">Next meeting objectives:</label>
+                                            <p id="nextObjectives"></p>
+
+                                            <label class="text-capitalize text-danger h5">Next meeting date & time:</label>
+                                            <p id="nextDate"></p>
+                                        </div>
+                            </div>
+                        </div>
                     </div>
                     {{--                    End of section for viewing deliverables--}}
 
