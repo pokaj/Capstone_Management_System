@@ -25,7 +25,7 @@ Route::put('profile', 'FacultyController@update');
 Route::put('studentProfile', 'StudentController@update');
 Route::get('supervisor_requests', 'ProjectsController@supervisor_requests');
 Route::post('createMeeting','FacultyController@createMeeting')->name('createMeeting');
-
+Route::post('/meet', 'FacultyController@searchMeeting')->name('searchMeeting');
 
 //Routes for Projects
 Route::get('project{id}','ProjectsController@go_to_project')->name('viewProject'); //REVIEW

@@ -132,3 +132,8 @@ width:230px;
 #formWidth{
     width: 550px;
 }
+
+.center {
+    padding: 70px 0;
+    text-align: center;
+}

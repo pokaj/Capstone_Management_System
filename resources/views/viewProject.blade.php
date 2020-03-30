@@ -52,28 +52,27 @@
                         {{--                        Beginning of section for viewing past meetings--}}
 
                     <div class="tab-pane" id="pastMeeting">
+                        <form method="POST" id="meetingDetails">
+                            @csrf
 
-                    <table class="table table-striped bg-light text-center">
-                            <thead class="thead-dark">
-                            <tr class="text-muted">
 
-                                <th>Date</th>
-                                <th>Deliverables</th>
-                                <th>Details</th>
-                            </tr>
-                            </thead>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Select date to view details </label>
+                                    <select id="meetingID" name="meetingID" type="text" class="form-control">
+                                        @foreach($meetingInfo as $info)
+                                        <option value="{{$info->mt_id}}">
+                                                {{date("M jS, Y", strtotime($info->mt_date))}}
+                                            </option>
+                                        @endforeach
 
-                            <tbody>
-                            <tr>
-                                @foreach($meetingInfo as $info)
-                                <td>{{date("M jS, Y", strtotime($info->mt_date))}}</td>
-                                <td>{{$info->mt_objective}} </td>
-                                <td>{{$info->mt_sumofprogress}}</td>
-                            </tr>
-                            @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary ml-3" >Search</button>
+                        </form>
 
-                            </tbody>
-                        </table>
+                        <p id="here">Content comes here</p>
 
 
                     </div>
@@ -121,17 +120,11 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="bmd-label-floating">Date of next meeting: </label>
-                                            <input type="date" class="form-control" name="nextDate" required></input>
+                                            <label class="bmd-label-floating">Next meeting date & time: </label>
+                                            <input type="datetime-local" class="form-control" name="nextDate" required></input>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">Venue: </label>
-                                            <input type="text" class="form-control" name="venue" required></input>
-                                        </div>
-                                    </div>
 
                                     <a href="" class="btn btn-danger ml-3" data-toggle="modal" data-target="#{{$projectInfo->project_Id}}">Close Meeting</a>
 
@@ -173,10 +166,13 @@
                         <div class="card-body">
                             <form>
                                 @csrf
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="form-group">
-                                        <span class="bmd-label-floating">Next Meeting Date:</span>
-                                        <span class="text-danger">{{date("M jS, Y", strtotime($last->mt_nextDate))}}</span>
+                                        <p class="bmd-label-floating">Next Meeting Date & Time:</p>
+
+                                        <input class="form-control text-danger" value="   @if(count($meetingInfo) > 0) {{date("M jS, Y H:i A", strtotime($last->mt_nextDate))}}   @endif">
+
+
                                         <button class="btn btn-primary mt-2">Send Reminder</button>
                                     </div>
 

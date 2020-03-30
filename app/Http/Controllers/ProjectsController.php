@@ -167,7 +167,6 @@ class ProjectsController extends Controller
                 ->where('mt_project','=',$id)
                 ->orderBy('person_meeting.mt_id', 'DESC')->first();
 
-
             return view('viewProject', compact('users','meetingInfo','last'));
         }
     }

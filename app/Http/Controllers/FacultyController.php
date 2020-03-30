@@ -158,16 +158,28 @@ class FacultyController extends Controller
                 ->insert(array(
                     'mt_id' => $meeting->mt_id,
                     'mt_date' => now(),
-                    'mt_venue' => $request->venue,
                     'mt_objective' => $request->currentObj,
                     'mt_challenges' => $request->problems,
                     'mt_sumofprogress' => $request->progress,
                     'mt_objnxtperiod' => $request->nextObj,
-                    'mt_nextDate' => $request->nextDate
+                    'mt_nextDate' => $request->nextDate,
                 ));
 
             return redirect()->back()
                 ->with('message','Meeting closed!');
+        }
+
+
+    public function searchMeeting(Request $request){
+
+        $meetingInformation = DB::table('person_meeting')
+                ->where('mt_id','=',$request->get('inputVal'))
+                ->get();
+
+           return response()->json([
+               'success'=> true,
+               'data' => $meetingInformation
+           ]);
         }
 
 
