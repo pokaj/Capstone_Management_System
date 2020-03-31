@@ -4,7 +4,6 @@
 
 {{--Section for the user to edit his or her information--}}
 
-                    <div class="content">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
@@ -109,17 +108,16 @@
 
 
                                             </div>
-                                            <div class="col-lg-4 order-lg-1 text-center">
-                                                <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+{{--                                            <div class="col-lg-4 order-lg-1 text-center">--}}
+{{--                                                <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">--}}
 
 
-                                            </div>
+{{--                                            </div>--}}
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-                    </div>
 
 @endsection

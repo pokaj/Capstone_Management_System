@@ -77,10 +77,10 @@
 {{--                                <li class="nav-item icon-parent">--}}
 {{--                                    <a href="" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a>--}}
 {{--                                </li>--}}
-                                <li class="nav-item icon-parent">
-                                    <a href="" class="nav-link "><i class="fas fa-bell text-danger"></i>
-                                        <span class="badge text-danger">{{count(Auth::user()->unreadNotifications)}}</span></a>
-                                </li>
+{{--                                <li class="nav-item icon-parent">--}}
+{{--                                    <a href="" class="nav-link "><i class="fas fa-bell text-danger"></i>--}}
+{{--                                        <span class="badge text-danger">{{count(Auth::user()->unreadNotifications)}}</span></a>--}}
+{{--                                </li>--}}
                                 <li class="nav-item ml-md-auto mt-2">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                     <a class="text-danger" href="{{ route('logout') }}"

@@ -28,7 +28,7 @@
                     <a href="/super_dashboard" class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">Dashboard</a>
                     <div class="bottom-border pb-3">
                         <img src="images/avatar.png" width="40" class="rounded-circle mr-3">
-                        <a href="/profile" class="text-white"> {{Auth::user()->username}}</a>
+                        <a href="/super_profile" class="text-white"> {{Auth::user()->username}}</a>
                     </div>
 
                     <ul class="navbar-nav flex-column mt-4">
@@ -40,17 +40,17 @@
                                 <i class="fas fa-user text-white text-light fa-lg mr-3"></i>Add Faculty</a>
                         </li>
 
-{{--                        <li class="nav-item {{'students' == request()->path() ? 'current' : ''}}"><a href="/students" class="nav-link text-white p-3 mb-2 sidebar-link ">--}}
-{{--                                <i class="fas fa-users text-white text-light fa-lg mr-3"></i>Students</a>--}}
-{{--                        </li>--}}
-
-{{--                        <li class="nav-item {{'topics' == request()->path() ? 'current' : ''}}"><a href="/topics" class="nav-link text-white p-3 mb-2 sidebar-link ">--}}
-{{--                                <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Projects</a>--}}
-{{--                        </li>--}}
-
-{{--                        <li class="nav-item {{'milestones' == request()->path() ? 'current' : ''}}"><a href="/milestones" class="nav-link text-white p-3 mb-2 sidebar-link ">--}}
-{{--                                <i class="fas fa-calendar-check text-white text-light fa-lg mr-3"></i>Milestones</a>--}}
-{{--                        </li>--}}
+                           <li class="nav-item {{'super_profile' == request()->path() ? 'current' : ''}}"><a href="/super_profile" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                                    <i class="fas fa-users text-white text-light fa-lg mr-3"></i>Profile</a>
+                            </li>
+<!---->
+<!--{{--                        <li class="nav-item {{'topics' == request()->path() ? 'current' : ''}}"><a href="/topics" class="nav-link text-white p-3 mb-2 sidebar-link ">--}}-->
+<!--{{--                                <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Projects</a>--}}-->
+<!--{{--                        </li>--}}-->
+<!---->
+<!--{{--                        <li class="nav-item {{'milestones' == request()->path() ? 'current' : ''}}"><a href="/milestones" class="nav-link text-white p-3 mb-2 sidebar-link ">--}}-->
+<!--{{--                                <i class="fas fa-calendar-check text-white text-light fa-lg mr-3"></i>Milestones</a>--}}-->
+<!--{{--                        </li>--}}-->
 
                     </ul>
 
@@ -141,6 +141,7 @@
 
                 @yield('content')
                 @yield('addFaculty')
+                @yield('super_profile')
 
 
             </div>

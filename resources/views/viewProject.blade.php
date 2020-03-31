@@ -147,7 +147,7 @@
 
                                     <a href="" class="btn btn-danger ml-3" data-toggle="modal" data-target="#{{$projectInfo->project_Id}}">Close Meeting</a>
 
-                                    <!-- beginning of modal to delete project-->
+                                    <!-- modal to confirm closure of meeting-->
                                     <div class="modal fade" id="{{$projectInfo->project_Id}}">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -169,7 +169,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- end of modal to delete project-->
+                                    <!-- end of modal to confirm closure of meeting--->
 
                                 </form>
                                 @endforeach

@@ -1,13 +1,13 @@
-@extends('studentLayout')
+@extends('super_layout')
 
-@section('student_profile')
+@section('super_profile')
+
 
     {{--Section for the user to edit his or her information--}}
 
 
 
 
-{{--    <div class="content">--}}
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -31,23 +31,23 @@
                                         </div>
                                     @endif
                                     <div class="tab-pane active" id="profile">
-                                            <h4 class="mb-3">User Profile</h4>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <p><i class="fa fa-user" aria-hidden="true"></i>  {{Auth::user()->first_name}} {{Auth::user()->last_name}}</p>
-                                                        <p><i class="fa fa-address-card" aria-hidden="true"></i> 63032020</p>
-                                                        <p><i class="fa fa-envelope" aria-hidden="true"></i>  {{Auth::user()->email}} </p>
-                                                        <p><i class="fa fa-phone" aria-hidden="true"></i> {{Auth::user()->phone}} </p>
+                                        <h4 class="mb-3">User Profile</h4>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <p><i class="fa fa-user" aria-hidden="true"></i>  {{Auth::user()->first_name}} {{Auth::user()->last_name}}</p>
+                                                <p><i class="fa fa-envelope" aria-hidden="true"></i>  {{Auth::user()->email}} </p>
+                                                <p><i class="fa fa-phone" aria-hidden="true"></i> {{Auth::user()->phone}} </p>
 
 
-                                            <h4>Interests</h4>
-                                            <p>
-                                                Indie music, skiing and hiking. I love the great outdoors.
-                                            </p>
+                                                <h4>Interests</h4>
+                                                <p>
+                                                    Indie music, skiing and hiking. I love the great outdoors.
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    </div>
                                     <!--/row-->
+
                                     <div class="tab-pane" id="edit">
                                         <form role="form" method="post" enctype="multipart/form-dataupload" action="{{url('studentProfile')}}">
                                             @csrf
@@ -62,18 +62,6 @@
                                                 <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                                                 <div class="col-lg-9">
                                                     <input name="lname" class="form-control" type="text" value="{{Auth::user()->last_name}}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-lg-3 col-form-label form-control-label">ID Number</label>
-                                                <div class="col-lg-9">
-                                                    <input name="id" class="form-control" type="number" value="">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-lg-3 col-form-label form-control-label">Year Group</label>
-                                                <div class="col-lg-9">
-                                                    <input name="yearGroup" class="form-control" type="number" value="">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -96,15 +84,6 @@
                                                 </div>
 
 
-                                                <label class="col-lg-3 col-form-label form-control-label">Major</label>
-                                                <div class="col-lg-9">
-
-                                                    <select name="major" class="form-control" type="text" value="">
-                                                        @foreach($majors as $major)
-                                                            <option value="{{$major->major_Id}}">{{$major->major_name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
                                             </div>
 
 
@@ -119,14 +98,15 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-{{--    </div>--}}
 
 
 
-    @endsection
+
+@endsection

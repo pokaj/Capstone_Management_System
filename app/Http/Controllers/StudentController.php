@@ -84,11 +84,30 @@ class StudentController extends Controller
         }
     }
 
-    public function student_milestones(){
+    public function myProject(){
 
         if(Auth::user()->category == 'student'){
 
-            return view('student_milestones');
+            $projectDetails = DB::table('capstone_table')
+                ->join('users','userId','=','cp_supervisor')
+                ->join('project','project_Id','=','cp_project')
+                ->where('cp_student','=',Auth::user()->userId)
+                ->get();
+
+            $meetingInfo = DB::table('meetings')
+                ->join('person_meeting','person_meeting.mt_id','=','meetings.mt_id')
+                ->where('mt_student','=', Auth::user()->userId)
+                ->orderBy('person_meeting.mt_id', 'DESC')
+                ->get();
+
+            $nextMeeting = DB::table('meetings')
+                ->join('person_meeting','person_meeting.mt_id','=','meetings.mt_id')
+                ->where('mt_student','=', Auth::user()->userId)
+                ->orderBy('person_meeting.mt_id', 'DESC')
+                ->first();
+
+            return view('myProject',compact('projectDetails','meetingInfo','nextMeeting'));
+
         }
     }
 
@@ -119,6 +138,18 @@ class StudentController extends Controller
             ->with('message','Profile successfully updated')
             ->with('$updatefaculty',$updatefaculty);
     }
+
+
+//    public function searchMeeting(Request $request){
+//
+//        $meetingInformation = DB::table('person_meeting')
+//            ->where('mt_id','=',$request->get('inputVal'))
+//            ->get();
+//
+//        return ['success' => true, 'data' => $meetingInformation];
+//
+//    }
+
 
 
 }

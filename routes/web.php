@@ -49,7 +49,7 @@ Route::get('acceptProposal/{project_ID}/{student_ID}','ProjectsController@accept
 Route::get('/studentDashboard','StudentController@index');
 Route::get('/studentProfile','StudentController@student_profile');
 Route::get('/studentTopics','StudentController@student_topics');
-Route::get('/studentMilestones','StudentController@student_milestones');
+Route::get('/myProject','StudentController@myProject');
 
 /*
  * Routes for cs_supervisor
@@ -57,6 +57,8 @@ Route::get('/studentMilestones','StudentController@student_milestones');
 Route::get('/super_dashboard','coordinatorController@index');
 Route::get('/addFaculty','coordinatorController@addFaculty');
 Route::post('/newFaculty','coordinatorController@newFaculty')->name('newFaculty');
+Route::get('/super_profile','coordinatorController@profile');
+
 
 
 

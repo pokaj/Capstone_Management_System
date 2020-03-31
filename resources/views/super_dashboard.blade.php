@@ -1,4 +1,4 @@
-@extends('coordinatorLayout')
+@extends('super_layout')
 
 @section('content')
 

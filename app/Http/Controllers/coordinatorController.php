@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Faculty;
 use Illuminate\Http\Request;
 use App\Auth;
 use App\User;
@@ -12,14 +13,12 @@ class coordinatorController extends Controller
 {
     public function index(){
 
-        $faculty = DB::table('users')
-            ->where('user_role','=',2)
+        $faculty = DB::table('faculty')
             ->get();
 
         $facultyCount = count($faculty);
 
-        $students = DB::table('users')
-            ->where('user_role','=',3)
+        $students = DB::table('student')
             ->get();
 
         $studentCount = count($students);
@@ -33,21 +32,27 @@ class coordinatorController extends Controller
         return view('addFaculty');
     }
 
+    public function profile(){
+        return view('super_profile');
+    }
+
     public function newFaculty(Request $request){
         $user = new User;
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->gender = $request->gender;
+        $user->first_name = $request->fname;
+        $user->last_name = $request->lname;
         $user->email = $request->email;
         $user->category = 'faculty';
         $user->user_role = 2;
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
-
         $user->save();
 
+        $faculty = new Faculty;
+        $faculty->faculty_Id = $user->userId;
+        $faculty->save();
+
         return redirect()->back()
-            ->with('message','Faculty member profile created');
+            ->with('message','Faculty member added');
 
 
 

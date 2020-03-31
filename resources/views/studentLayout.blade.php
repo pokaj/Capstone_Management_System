@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="title icon" href="images/title-img png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
@@ -35,17 +36,18 @@
                                 <i class="fas fa-home text-white text-light fa-lg mr-3"></i>Dashboard</a>
                         </li>
 
-                        <li class="nav-item  {{'studentProfile' == request()->path() ? 'current' : ''}}"><a href="studentProfile" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                        <li class="nav-item  {{'studentProfile' == request()->path() ? 'current' : ''}}"><a href="/studentProfile" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-user text-white text-light fa-lg mr-3"></i>Profile</a>
                         </li>
 
-                        <li class="nav-item  {{'studentTopics' == request()->path() ? 'current' : ''}}"><a href="studentTopics" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                        <li class="nav-item  {{'studentTopics' == request()->path() ? 'current' : ''}}"><a href="/studentTopics" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Topics/Supervisor</a>
                         </li>
-
-                        <li class="nav-item  {{'studentMilestones' == request()->path() ? 'current' : ''}}"><a href="studentMilestones" class="nav-link text-white p-3 mb-2 sidebar-link ">
-                                <i class="fas fa-calendar-check text-white text-light fa-lg mr-3"></i>Milestones</a>
+                        @if(1 < 2)
+                        <li class="nav-item  {{'myProject' == request()->path() ? 'current' : ''}}"><a href="/myProject" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                                <i class="fas fa-tasks text-white text-light fa-lg mr-3 "></i>My Project</a>
                         </li>
+                            @endif
 
                     </ul>
 
@@ -135,7 +137,7 @@
                 @yield('student_content')
                 @yield('student_profile')
                 @yield('student_topics')
-                @yield('student_milestones')
+                @yield('myProject')
 {{--                @yield('milestones')--}}
             </div>
         </div>
@@ -180,6 +182,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
