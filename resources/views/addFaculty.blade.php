@@ -20,37 +20,48 @@
                                     </div>
                                 @endif
 
-                                    <form role="form" method="post" action="{{route('newFaculty')}}">
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+
+
+                                    <form method="POST" action="{{route('newFaculty')}}">
                                         @csrf
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">First name: </label>
                                             <div class="col-lg-9">
-                                                <input name="fname" class="form-control" type="text" required>
+                                                <input name="fname" id="fname" class="form-control" type="text" value="{{old('fname')}}" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">Last name: </label>
                                             <div class="col-lg-9">
-                                                <input name="lname" class="form-control" type="text">
+                                                <input name="lname" id="lname" class="form-control" type="text" value="{{old('lname')}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">Email: </label>
                                             <div class="col-lg-9">
-                                                <input name="email" class="form-control" type="email" required>
+                                                <input name="email" id="email" class="form-control" type="email" value="{{old('email')}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">Username: </label>
                                             <div class="col-lg-9">
-                                                <input name="username" class="form-control" type="text" required>
+                                                <input name="username" id="username" class="form-control" type="text" value="{{old('username')}}" required>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">Password: </label>
                                             <div class="col-lg-9">
-                                                <input name="password" class="form-control" type="password" required>
+                                                <input name="password" id="password" class="form-control" type="password" required>
                                                 <br>
                                             </div>
 
@@ -61,7 +72,7 @@
                                         <div class="form-group row ">
                                             <label class="col-lg-3 col-form-label form-control-label"></label>
                                             <div class="col-lg-9">
-                                                <button class="btn btn-primary text-capitalize">add faculty</button>
+                                                <button class="btn btn-primary text-capitalize" >add faculty</button>
 
                                             </div>
                                         </div>

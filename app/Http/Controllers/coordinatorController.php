@@ -37,14 +37,31 @@ class coordinatorController extends Controller
     }
 
     public function newFaculty(Request $request){
+
+
+        $validatedData = $request->validate([
+            'fname' => 'required|alpha|max:255',
+            'lname' => 'required|alpha|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'username' => 'required|max:255|unique:users',
+            'password' => 'required',
+
+        ],
+            [
+                'fname.required'=>'The first name field is empty',
+                'fname.alpha' => 'Only Text is allowed for the first name',
+                'lname.required'=>'The Last name field is empty',
+                'lname.alpha' => 'Only Text is allowed for the Last name'
+            ]);
+
         $user = new User;
-        $user->first_name = $request->fname;
-        $user->last_name = $request->lname;
-        $user->email = $request->email;
+        $user->first_name = $validatedData['fname'];
+        $user->last_name =  $validatedData['lname'];
+        $user->email =  $validatedData['email'];
         $user->category = 'faculty';
         $user->user_role = 2;
-        $user->username = $request->username;
-        $user->password = Hash::make($request->password);
+        $user->username =  $validatedData['username'];
+        $user->password = Hash::make($validatedData['password']);
         $user->save();
 
         $faculty = new Faculty;
@@ -52,7 +69,7 @@ class coordinatorController extends Controller
         $faculty->save();
 
         return redirect()->back()
-            ->with('message','Faculty member added');
+            ->with('message','Few faculty member added');
 
 
 
