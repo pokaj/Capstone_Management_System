@@ -77,9 +77,21 @@ class StudentController extends Controller
 
         if(Auth::user()->category == 'student'){
 
-            $majors = DB::table('major')->get();
+            $studentData = DB::table('users')
+                ->join('student','student_user_id','=','userId')
+                ->join('major','major_Id','=','student_major')
+                ->where('userId','=',Auth::user()->userId)
+                ->get();
 
-            return view('student_profile' ,compact('majors'));
+            $dummydata = DB::table('users')
+                ->join('student','student_user_id','=','userId')
+                ->where('userId','=',Auth::user()->userId)
+                ->get();
+
+            $majorDropdown = DB::table('major')
+                ->get();
+
+            return view('student_profile' ,compact('studentData','majorDropdown','dummydata'));
 
         }
     }
@@ -125,6 +137,7 @@ class StudentController extends Controller
 
             ]);
 
+
         DB::table('student')
             ->where('student_user_id', Auth::user()->userId)
             ->update(array(
@@ -140,15 +153,29 @@ class StudentController extends Controller
     }
 
 
-//    public function searchMeeting(Request $request){
-//
-//        $meetingInformation = DB::table('person_meeting')
-//            ->where('mt_id','=',$request->get('inputVal'))
-//            ->get();
-//
-//        return ['success' => true, 'data' => $meetingInformation];
-//
-//    }
+    public function complete(Request $request){
+
+        $validatedData = $request->validate([
+            'student_Id' => 'required|max:255|unique:student',
+        ],
+            [
+                'student_Id.unique'=>'The student ID you entered belongs to another student',
+            ]);
+
+
+        DB::table('student')
+            ->where('student_user_id', Auth::user()->userId)
+            ->update(array(
+                'student_Id' => $validatedData['student_Id'],
+                'student_yeargroup' => $request->input('yearGroup'),
+                'student_major' => $request->input('major'),
+
+            ));
+
+        return redirect()->back()
+            ->with('message','Profile Completed');
+
+    }
 
 
 

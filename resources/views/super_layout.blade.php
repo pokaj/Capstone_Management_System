@@ -43,14 +43,10 @@
                            <li class="nav-item {{'super_profile' == request()->path() ? 'current' : ''}}"><a href="/super_profile" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                     <i class="fas fa-users text-white text-light fa-lg mr-3"></i>Profile</a>
                             </li>
-<!---->
-<!--{{--                        <li class="nav-item {{'topics' == request()->path() ? 'current' : ''}}"><a href="/topics" class="nav-link text-white p-3 mb-2 sidebar-link ">--}}-->
-<!--{{--                                <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Projects</a>--}}-->
-<!--{{--                        </li>--}}-->
-<!---->
-<!--{{--                        <li class="nav-item {{'milestones' == request()->path() ? 'current' : ''}}"><a href="/milestones" class="nav-link text-white p-3 mb-2 sidebar-link ">--}}-->
-<!--{{--                                <i class="fas fa-calendar-check text-white text-light fa-lg mr-3"></i>Milestones</a>--}}-->
-<!--{{--                        </li>--}}-->
+
+                        <li class="nav-item {{'manage_faculty' == request()->path() ? 'current' : ''}}"><a href="/manage_faculty" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                                <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Manage Faculty</a>
+                        </li>
 
                     </ul>
 
@@ -74,9 +70,7 @@
                         </div>
                         <div class="col-md-3">
                             <ul class="navbar-nav">
-                                {{--                                <li class="nav-item icon-parent">--}}
-                                {{--                                    <a href="" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a>--}}
-                                {{--                                </li>--}}
+
                                 <li class="nav-item icon-parent">
                                     <a href="" class="nav-link "><i class="fas fa-bell text-danger"></i>
                                         <span class="badge text-danger">{{count(Auth::user()->unreadNotifications)}}</span></a>
@@ -142,7 +136,7 @@
                 @yield('content')
                 @yield('addFaculty')
                 @yield('super_profile')
-
+                @yield('manage_faculty')
 
             </div>
         </div>

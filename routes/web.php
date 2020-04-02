@@ -24,7 +24,7 @@ Route::get('/students', 'FacultyController@students');
 Route::get('/topics','ProjectsController@index');
 Route::get('/milestones','FacultyController@milestones');
 Route::put('profile', 'FacultyController@update');
-Route::put('studentProfile', 'StudentController@update');
+Route::put('studentProfile', 'StudentController@update')->name('update');
 Route::get('supervisor_requests', 'ProjectsController@supervisor_requests');
 Route::post('createMeeting','FacultyController@createMeeting')->name('createMeeting');
 Route::post('/meetingDetails', 'FacultyController@searchMeeting')->name('searchMeeting');
@@ -35,8 +35,8 @@ Route::post('/meetingDetails', 'FacultyController@searchMeeting')->name('searchM
 Route::get('project{id}','ProjectsController@go_to_project')->name('viewProject'); //REVIEW
 Route::post('/submit','ProjectsController@store');
 Route::get('/show','ProjectsController@view_faculty_Projects');
-Route::get('/register','RegisterController@genderDropDown');
 Route::post('studentTopics','ProjectsController@select_supervisor');
+Route::put('completeProfile', 'StudentController@complete')->name('complete');
 Route::post('studentTopics','ProjectsController@select_supervisor');
 Route::delete('deleteproject/{id}','ProjectsController@deleteproject')->name('deleteproject');
 Route::get('acceptProject/{id}','ProjectsController@acceptProject')->name('acceptProject');
@@ -58,6 +58,9 @@ Route::get('/super_dashboard','coordinatorController@index');
 Route::get('/addFaculty','coordinatorController@addFaculty');
 Route::post('/newFaculty','coordinatorController@newFaculty')->name('newFaculty');
 Route::get('/super_profile','coordinatorController@profile');
+Route::get('/manage_faculty','coordinatorController@manage_faculty');
+
+
 
 
 

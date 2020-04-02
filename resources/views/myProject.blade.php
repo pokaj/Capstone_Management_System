@@ -98,11 +98,13 @@
                                     <div class="">
                                         <div class="form-group">
                                             <label class="bmd-label-floating text-danger text-capitalize h5">next meeting date & time:</label><br>
+                                            @if(count($meetingInfo) > 0)
                                                 <span>{{date("M jS, Y H:i A", strtotime($nextMeeting->mt_nextDate))}} </span>
                                             <br><br>
 
                                             <p class="text-capitalize text-danger h5">Objectives for next meeting: </p>
                                             <span>{{$nextMeeting->mt_objnxtperiod}}</span>
+                                                @endif
 
 
 

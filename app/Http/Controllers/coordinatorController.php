@@ -13,19 +13,15 @@ class coordinatorController extends Controller
 {
     public function index(){
 
-        $faculty = DB::table('faculty')
-            ->get();
+        $faculty = DB::table('faculty')->get();
+        $students = DB::table('student')->get();
+        $capstone = DB::table('capstone_table')->get();
 
         $facultyCount = count($faculty);
-
-        $students = DB::table('student')
-            ->get();
-
         $studentCount = count($students);
+        $capstoneCount = count($capstone);
 
-        return view('super_dashboard',compact('facultyCount','studentCount'));
-
-
+        return view('super_dashboard',compact('facultyCount','studentCount','capstoneCount'));
     }
 
     public function addFaculty(){
@@ -48,9 +44,9 @@ class coordinatorController extends Controller
 
         ],
             [
-                'fname.required'=>'The first name field is empty',
+                'fname.required'=>'The first name field is required',
                 'fname.alpha' => 'Only Text is allowed for the first name',
-                'lname.required'=>'The Last name field is empty',
+                'lname.required'=>'The Last name field is required',
                 'lname.alpha' => 'Only Text is allowed for the Last name'
             ]);
 
@@ -71,8 +67,11 @@ class coordinatorController extends Controller
         return redirect()->back()
             ->with('message','Few faculty member added');
 
-
-
-
     }
+
+    public function manage_faculty(){
+
+        return view('manageFaculty');
+    }
+
 }
