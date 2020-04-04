@@ -55,10 +55,33 @@ $('#search').on('keyup',function (){
         url:'/searchFaculty',
         data:{search:value},
         success:function(data){
-            console.log(data);
             $('tbody').html(data);
+
         }
     })
 });
 
+function run(id) {
+    let tab = "<table class='table table-hover'><thead class='thead-dark'><tr><th>Student ID</th><th>Name</th><th>Project Type</th><th>Project Title</th></tr></thead>";
+    $.ajax({
+        type: 'get',
+        url: '/details',
+        data: {facultyID:id},
+        success: function (data) {
+            if (data.success === true) {
+                let ans = data['data'];
+                    for(var here = 0; here < ans.length; here++) {
+                        tab += '<tr>';
+                        tab += '<td>' + ans[here]['student_Id'];
+                        tab += '<td>' + ans[here]['first_name'] + ' ' + ans[here]['last_name'];
+                        tab += '<td>' + ans[here]['project_type'];
+                        tab += '<td>' + ans[here]['project_title'];
+                        tab += '</tr>';
+                    }
+                document.getElementById('content').innerHTML = tab;
+
+            }
+            },
+    });
+}
 

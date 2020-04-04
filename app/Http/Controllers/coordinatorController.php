@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Faculty;
+use App\Project;
 use Illuminate\Http\Request;
 use App\Auth;
 use App\User;
@@ -82,10 +83,10 @@ class coordinatorController extends Controller
             $faculty_data = DB::table('users')
                 ->join('faculty','faculty_Id','=','userId')
                 ->join('department','department_Id','=','faculty_dept')
-//                ->join('capstone_table','cp_supervisor','=','userId')
                 ->where('users.first_name','LIKE','%'.$request->get('search').'%')
                 ->orWhere('users.last_name','LIKE','%'.$request->get('search').'%')
                 ->get();
+
 
             if($faculty_data){
                 foreach ($faculty_data as $faculty){
@@ -93,11 +94,27 @@ class coordinatorController extends Controller
                                 '<td>'. $faculty->first_name.' '.' '.$faculty->last_name.'</td>'.
                                 '<td>'.$faculty->department_name.'</td>'.
                                 '<td>'.$faculty->email.'</td>'.
-                                '</td>';
+                                '<td><a href=""  class="nav-link" data-toggle="modal" data-target='."#viewFaculty".' onclick='."run($faculty->userId)".'><i class="fas fa-eye text-muted"></i></a></td>'.
+                        '</tr>';
                 }
                 return Response($output);
 
             }
+
+    }
+
+    public function details(Request $request){
+        $id = $request->get('facultyID');
+
+        $capstone_details = DB::table('users')
+            ->join('student','student_user_id','=','userId')
+            ->join('capstone_table','cp_student','=','userId')
+            ->join('project','project_Id','=','cp_project')
+            ->where('cp_supervisor','=',$id)
+            ->get();
+
+        return ['success' => true, 'data' => $capstone_details];
     }
 
 }
+

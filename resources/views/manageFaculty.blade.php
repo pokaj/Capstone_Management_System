@@ -32,20 +32,20 @@
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label form-control-label">Faculty name: </label>
                                         <div class="col-lg-9">
-                                            <input placeholder="Search . . ." name="search" id="search" class="form-control" type="text" value="{{old('name')}}" >
+                                            <input placeholder="Type faculty name . . ." name="search" id="search" class="form-control" type="text" value="{{old('name')}}">
                                         </div>
                                     </div>
                                     <p></p>
                                     <div class="form-group row ">
                                         <label class="col-lg-3 col-form-label form-control-label"></label>
                                     </div>
-
                                     <table class="table table-striped bg-light text-center mt-5 col-lg-4">
                                         <thead class="thead-dark">
                                         <tr class="text-muted">
                                             <th>Name</th>
                                             <th>Department</th>
                                             <th>E-mail</th>
+                                            <th>View</th>
                                         </tr>
                                         </thead>
                                         <div id="hidden">
@@ -54,12 +54,29 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
+                                                <td></td>
+
+                                                <!-- beginning of modal to view details -->
+                                                <div class="modal fade " id="viewFaculty">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <p class="modal-title font-weight-bold">Student Information
+                                                                </p><br>
+
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            </div>
+
+                                                            <div class="modal-body align-content-center" id="content">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end of modal to view details -->
                                             </tr>
                                         </tbody>
                                         </div>
                                     </table>
-
-
                             </div>
                         </div>
                     </div>
