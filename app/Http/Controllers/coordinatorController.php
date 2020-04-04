@@ -25,7 +25,9 @@ class coordinatorController extends Controller
     }
 
     public function addFaculty(){
-        return view('addFaculty');
+
+        $dept = DB::table('department')->get();
+        return view('addFaculty',compact('dept'));
     }
 
     public function profile(){
@@ -62,6 +64,7 @@ class coordinatorController extends Controller
 
         $faculty = new Faculty;
         $faculty->faculty_Id = $user->userId;
+        $faculty->faculty_dept = $request->dept;
         $faculty->save();
 
         return redirect()->back()
@@ -72,6 +75,29 @@ class coordinatorController extends Controller
     public function manage_faculty(){
 
         return view('manageFaculty');
+    }
+
+    public function searchFaculty(Request $request){
+            $output = "";
+            $faculty_data = DB::table('users')
+                ->join('faculty','faculty_Id','=','userId')
+                ->join('department','department_Id','=','faculty_dept')
+//                ->join('capstone_table','cp_supervisor','=','userId')
+                ->where('users.first_name','LIKE','%'.$request->get('search').'%')
+                ->orWhere('users.last_name','LIKE','%'.$request->get('search').'%')
+                ->get();
+
+            if($faculty_data){
+                foreach ($faculty_data as $faculty){
+                    $output.= '<tr>'.
+                                '<td>'. $faculty->first_name.' '.' '.$faculty->last_name.'</td>'.
+                                '<td>'.$faculty->department_name.'</td>'.
+                                '<td>'.$faculty->email.'</td>'.
+                                '</td>';
+                }
+                return Response($output);
+
+            }
     }
 
 }

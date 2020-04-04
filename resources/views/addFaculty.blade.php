@@ -46,6 +46,17 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Department: </label>
+                                            <div class="col-lg-9">
+                                                    <select name="dept" id="dept" class="form-control" required>
+                                                        <option id="" class="form-control">Select Department</option>
+                                                        @foreach($dept as $department)
+                                                            <option value="{{$department->department_Id}}">{{$department->department_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">Email: </label>
                                             <div class="col-lg-9">
                                                 <input name="email" id="email" class="form-control" type="email" value="{{old('email')}}" required>

@@ -3,7 +3,6 @@
 @section('manage_faculty')
 
     {{--Section for the cs_coordinator to add new faculty member--}}
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -30,33 +29,43 @@
                                     </div>
                                 @endif
 
-
-                                <form method="" action="">
-                                    @csrf
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label form-control-label">Faculty name: </label>
                                         <div class="col-lg-9">
-                                            <input name="name" id="name" class="form-control" type="text" value="{{old('name')}}" >
+                                            <input placeholder="Search . . ." name="search" id="search" class="form-control" type="text" value="{{old('name')}}" >
                                         </div>
                                     </div>
-
-
+                                    <p></p>
                                     <div class="form-group row ">
                                         <label class="col-lg-3 col-form-label form-control-label"></label>
-                                        <div class="col-lg-9">
-                                            <button class="btn btn-primary text-capitalize" >Search</button>
-
-                                        </div>
                                     </div>
-                                </form>
+
+                                    <table class="table table-striped bg-light text-center mt-5 col-lg-4">
+                                        <thead class="thead-dark">
+                                        <tr class="text-muted">
+                                            <th>Name</th>
+                                            <th>Department</th>
+                                            <th>E-mail</th>
+                                        </tr>
+                                        </thead>
+                                        <div id="hidden">
+                                        <tbody id="tbody">
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                        </div>
+                                    </table>
+
+
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
     </div>
 
 

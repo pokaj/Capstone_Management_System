@@ -59,6 +59,8 @@ Route::get('/addFaculty','coordinatorController@addFaculty');
 Route::post('/newFaculty','coordinatorController@newFaculty')->name('newFaculty');
 Route::get('/super_profile','coordinatorController@profile');
 Route::get('/manage_faculty','coordinatorController@manage_faculty');
+Route::get('/searchFaculty','coordinatorController@searchFaculty');
+
 
 
 
