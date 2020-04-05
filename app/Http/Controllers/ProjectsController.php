@@ -328,6 +328,11 @@ class ProjectsController extends Controller
             ->update(array(
                 'status' => 'taken'
             ));
+
+        DB::table('faculty')
+            ->where('faculty_Id','=',Auth::user()->userId)
+            ->increment('number_of_students', 1);
+
         return redirect()->back()->with('message','New student added!');
     }
 

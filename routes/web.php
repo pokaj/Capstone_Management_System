@@ -28,6 +28,8 @@ Route::put('studentProfile', 'StudentController@update')->name('update');
 Route::get('supervisor_requests', 'ProjectsController@supervisor_requests');
 Route::post('createMeeting','FacultyController@createMeeting')->name('createMeeting');
 Route::post('/meetingDetails', 'FacultyController@searchMeeting')->name('searchMeeting');
+Route::get('/feedback', 'FacultyController@feedback')->name('feedback');
+
 
 /*
  * Routes for Projects
@@ -50,6 +52,8 @@ Route::get('/studentDashboard','StudentController@index');
 Route::get('/studentProfile','StudentController@student_profile');
 Route::get('/studentTopics','StudentController@student_topics');
 Route::get('/myProject','StudentController@myProject');
+Route::get('/viewFaculty','StudentController@viewFaculty');
+
 
 /*
  * Routes for cs_supervisor
@@ -61,6 +65,8 @@ Route::get('/super_profile','coordinatorController@profile');
 Route::get('/manage_faculty','coordinatorController@manage_faculty');
 Route::get('/searchFaculty','coordinatorController@searchFaculty');
 Route::get('/details','coordinatorController@details');
+Route::post('/limit','coordinatorController@limit');
+
 
 
 

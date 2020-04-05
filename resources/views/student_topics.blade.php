@@ -60,7 +60,7 @@
                                     <td>{{$approvedProject->first_name}} {{$approvedProject->last_name}}</td>
 
                                 <td>
-                                    <a href="" class="nav-link" data-toggle="modal" data-target="####"><i class="fas fa-eye text-muted"></i></a>
+                                    <a href="/myProject" class="nav-link" ><i class="fas fa-eye text-muted"></i></a>
                                 </td>
                             </tr>
                                 @endforeach
@@ -293,6 +293,47 @@
                     <div class="tab-pane" id="select_supervisor">
                         <div class="row">
                             <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Faculty name: </label>
+                                    <div class="col-lg-9">
+                                        <input placeholder="Type faculty name . . ." name="find" id="find" class="form-control" type="text" value="{{old('find')}}">
+                                    </div>
+
+                                </div>
+                                <table class="table table-striped bg-light text-center mt-5 col-lg-4">
+                                    <thead class="thead-dark">
+                                    <tr class="text-muted">
+                                        <th>Name</th>
+                                        <th>Department</th>
+                                    </tr>
+                                    </thead>
+                                    <div id="hidden">
+                                        <tbody id="tbody">
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+
+                                            <!-- beginning of modal to view details -->
+                                            <div class="modal fade " id="viewFaculty">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <p class="modal-title font-weight-bold">Student Information
+                                                            </p><br>
+
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+
+                                                        <div class="modal-body align-content-center" id="content">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end of modal to view details -->
+                                        </tr>
+                                        </tbody>
+                                    </div>
+                                </table>
                                 <div class="card  mt-3">
                                     <div class="card-header card-header-primary">
                                         <h4 class="card-title">Select Preferred Supervisor</h4>
@@ -323,6 +364,7 @@
                                                     <div class="form-group">
                                                         <label class="bmd-label-floating">Preferred Supervisor 1: </label>
                                                         <select name="super_one" type="text" class="form-control">
+                                                            <option>Select First Faculty</option>
                                                             @foreach($facultyDropdown as $dropdown)
                                                             <option value="{{$dropdown->userId}}">
                                                                 {{$dropdown->first_name}} {{$dropdown->last_name}}
@@ -338,6 +380,7 @@
                                                     <div class="form-group">
                                                         <label class="bmd-label-floating">Preferred Supervisor 2: </label>
                                                         <select name="super_two" type="text" class="form-control">
+                                                            <option>Select Second Faculty</option>
                                                             @foreach($facultyDropdown as $dropdown)
                                                                 <option value="{{$dropdown->userId}}">
                                                                     {{$dropdown->first_name}} {{$dropdown->last_name}}
@@ -352,6 +395,7 @@
                                                     <div class="form-group">
                                                         <label class="bmd-label-floating">Preferred Supervisor 3: </label>
                                                         <select name="super_three" type="text" class="form-control">
+                                                            <option>Select Third Faculty</option>
                                                             @foreach($facultyDropdown as $dropdown)
                                                                 <option value="{{$dropdown->userId}}">
                                                                     {{$dropdown->first_name}} {{$dropdown->last_name}}

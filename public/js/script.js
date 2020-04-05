@@ -49,6 +49,10 @@ $("#meetingDets").submit(function (e) {
 
 
 $('#search').on('keyup',function (){
+    if($('#search').val()===""){
+        $('#tbody').html("");
+        return;
+    }
     value = $(this).val();
     $.ajax({
         type:'get',
@@ -84,4 +88,57 @@ function run(id) {
             },
     });
 }
+
+
+$('#find').on('keyup',function (){
+    if($('#find').val()===""){
+        $('#tbody').html("");
+        return;
+    }
+    value = $(this).val();
+    $.ajax({
+        type:'get',
+        url:'/viewFaculty',
+        data:{search:value},
+        success:function(data){
+            $('tbody').html(data);
+            console.log(data);
+
+        }
+    })
+});
+
+
+$("#limit").submit(function (e) {
+    e.preventDefault();
+    let value = document.getElementById("limit_number").value;
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '/limit',
+        data: {limit:value},
+        success: function (data) {
+            if (data.success === true) {
+                console.log(data);
+                Swal.fire(
+                    "Great",
+                    "Limit on number of students changed to " + value,
+                    "success"
+                );
+
+            }else{
+                Swal.fire(
+                    "Sorry",
+                    "Student number limit not effected!",
+                    "error"
+                );
+            }
+        },
+    });
+});
+
 

@@ -180,5 +180,9 @@ class FacultyController extends Controller
 
     }
 
+    public function feedback(){
+        return view('feedback');
+    }
+
 
 }

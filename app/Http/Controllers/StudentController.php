@@ -54,16 +54,17 @@ class StudentController extends Controller
                 ->get();
 
 
-            $facultyDropdown = DB::table('users')
-                ->join('faculty','faculty_Id','=','users.userId')
-                ->select('users.*')
-                ->get();
+            $facultyDropdown = DB::select( DB::raw("SELECT * FROM users,faculty,department WHERE
+                        users.userId = faculty.faculty_Id AND faculty.faculty_dept = department.department_Id AND
+                        faculty.number_of_students < department.student_limit"));
+
 
             $approvedProjects = DB::table('capstone_table')
                 ->join('project','project_Id','=','cp_project')
                 ->join('users','userId','=','cp_supervisor')
                 ->where('cp_student','=',Auth::user()->userId)
                 ->get();
+
 
             $count = count($facultyProjects);
             $usersProjects = count($users);
@@ -176,6 +177,34 @@ class StudentController extends Controller
             ->with('message','Profile Completed');
 
     }
+
+
+    public function viewFaculty(Request $request){
+        $name = $request->get('search');
+        $output = "";
+
+        $facultyDropdown = DB::table('users')
+            ->join('faculty','faculty_Id','=','users.userId')
+            ->join('department','department_Id','=','faculty_dept')
+            ->where('users.first_name','LIKE','%'.$name.'%')
+            ->orWhere('users.last_name','LIKE','%'.$name.'%')
+            ->get();
+
+        if($facultyDropdown){
+            foreach ($facultyDropdown as $faculty){
+                $output.= '<tr>'.
+                    '<td>'. $faculty->first_name.' '.' '.$faculty->last_name.'</td>'.
+                    '<td>'.$faculty->department_name.'</td>'.
+                    '</tr>';
+            }
+            return Response($output);
+
+        }
+
+//        return ['success' => true, 'data' => $facultyDropdown];
+    }
+
+
 
 
 

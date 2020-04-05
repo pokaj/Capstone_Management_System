@@ -60,28 +60,28 @@
 
 
 
-        <div id="accordion" class="mt-5">
-            @foreach(Auth::user()->unreadNotifications as $notification)
+{{--        <div id="accordion" class="mt-5">--}}
+{{--            @foreach(Auth::user()->unreadNotifications as $notification)--}}
 
-                <div class="card">
-                    <div class="card-header">
-                        <button class="btn btn-block bg-secondary text-light text-left" data-toggle="collapse" data-target="#collapseFirst">
-                            <img src="images/avatar.png" width="50" class="mr-3 rounded" alt="customer image">
-                            @include('notification.'.Str::snake(class_basename($notification->type)))
-                            {{--                                            {{Str::snake(class_basename($notification->type))}}--}}
-                        </button>
-                    </div>
-                    <div class="collapse" id="collapseFirst" data-parent="#accordion">
-                        <div class="card-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+{{--                <div class="card">--}}
+{{--                    <div class="card-header">--}}
+{{--                        <button class="btn btn-block bg-secondary text-light text-left" data-toggle="collapse" data-target="#collapseFirst">--}}
+{{--                            <img src="images/avatar.png" width="50" class="mr-3 rounded" alt="customer image">--}}
+{{--                            @include('notification.'.Str::snake(class_basename($notification->type)))--}}
+{{--                            --}}{{--                                            {{Str::snake(class_basename($notification->type))}}--}}
+{{--                        </button>--}}
+{{--                    </div>--}}
+{{--                    <div class="collapse" id="collapseFirst" data-parent="#accordion">--}}
+{{--                        <div class="card-body">--}}
+{{--                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,--}}
+{{--                            sed do eiusmod tempor incididunt ut labore et dolore magna--}}
+{{--                            aliqua. Ut enim ad--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            @endforeach--}}
 
-        </div>
+{{--        </div>--}}
     </div>
 
     {{--    End of student notifications--}}

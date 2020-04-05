@@ -66,6 +66,7 @@ class coordinatorController extends Controller
         $faculty = new Faculty;
         $faculty->faculty_Id = $user->userId;
         $faculty->faculty_dept = $request->dept;
+        $faculty->number_of_students = 0;
         $faculty->save();
 
         return redirect()->back()
@@ -87,13 +88,12 @@ class coordinatorController extends Controller
                 ->orWhere('users.last_name','LIKE','%'.$request->get('search').'%')
                 ->get();
 
-
             if($faculty_data){
                 foreach ($faculty_data as $faculty){
                     $output.= '<tr>'.
                                 '<td>'. $faculty->first_name.' '.' '.$faculty->last_name.'</td>'.
                                 '<td>'.$faculty->department_name.'</td>'.
-                                '<td>'.$faculty->email.'</td>'.
+                                '<td>'.$faculty->number_of_students.'</td>'.
                                 '<td><a href=""  class="nav-link" data-toggle="modal" data-target='."#viewFaculty".' onclick='."run($faculty->userId)".'><i class="fas fa-eye text-muted"></i></a></td>'.
                         '</tr>';
                 }
@@ -114,6 +114,16 @@ class coordinatorController extends Controller
             ->get();
 
         return ['success' => true, 'data' => $capstone_details];
+    }
+
+    public function limit(Request $request){
+        $limit = $request->post('limit');
+
+        $update = DB::table('department')->update(array('student_limit' => $limit));
+
+        return ['success' => true, 'data' => $update];
+
+
     }
 
 }

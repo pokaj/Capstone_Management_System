@@ -52,6 +52,11 @@
                                 <i class="fas fa-calendar-check text-white text-light fa-lg mr-3"></i>Milestones</a>
                         </li>
 
+                        <li class="nav-item {{'feedback' == request()->path() ? 'current' : ''}}"><a href="/feedback" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                                <i class="fas fa-comment text-white text-light fa-lg mr-3"></i>Provide Feedback</a>
+                        </li>
+
+
                     </ul>
 
                 </div>
@@ -144,7 +149,7 @@
                 @yield('topics')
                 @yield('milestones')
                 @yield('viewProject')
-                @yield('super_dash')
+                @yield('feedback')
             </div>
         </div>
     </div>

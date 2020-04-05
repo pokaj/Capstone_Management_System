@@ -100,10 +100,10 @@
                                                         <p><i class="fa fa-phone" aria-hidden="true"></i> {{Auth::user()->phone}} </p>
 
 
-                                            <h4>Interests</h4>
-                                            <p>
-                                                Indie music, skiing and hiking. I love the great outdoors.
-                                            </p>
+{{--                                            <h4>Interests</h4>--}}
+{{--                                            <p>--}}
+{{--                                                Indie music, skiing and hiking. I love the great outdoors.--}}
+{{--                                            </p>--}}
                                         </div>
                                     </div>
                                     </div>

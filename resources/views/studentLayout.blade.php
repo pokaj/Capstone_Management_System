@@ -43,11 +43,10 @@
                         <li class="nav-item  {{'studentTopics' == request()->path() ? 'current' : ''}}"><a href="/studentTopics" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Topics/Supervisor</a>
                         </li>
-                        @if(1 < 2)
                         <li class="nav-item  {{'myProject' == request()->path() ? 'current' : ''}}"><a href="/myProject" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-tasks text-white text-light fa-lg mr-3 "></i>My Project</a>
                         </li>
-                            @endif
+
 
                     </ul>
 
