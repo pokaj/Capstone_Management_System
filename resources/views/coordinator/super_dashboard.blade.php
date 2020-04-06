@@ -1,4 +1,4 @@
-@extends('super_layout')
+@extends('layouts.super_layout')
 
 @section('content')
 
@@ -43,6 +43,7 @@
             </div>
         </div>
     </div>
+</div>
 
 
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -26,8 +25,8 @@ class HomeController extends Controller
     {
         if(Auth::user()->category == 'faculty'){
 
-            return view('dashboard');
+            return view('faculty/faculty_dashboard');
         }
-        return view('student_dashboard');
+        return view('student/student_dashboard');
     }
 }

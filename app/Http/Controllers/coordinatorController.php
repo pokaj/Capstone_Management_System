@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Faculty;
-use App\Project;
 use Illuminate\Http\Request;
 use App\Auth;
 use App\User;
@@ -22,17 +21,17 @@ class coordinatorController extends Controller
         $studentCount = count($students);
         $capstoneCount = count($capstone);
 
-        return view('super_dashboard',compact('facultyCount','studentCount','capstoneCount'));
+        return view('coordinator/super_dashboard',compact('facultyCount','studentCount','capstoneCount'));
     }
 
     public function addFaculty(){
 
         $dept = DB::table('department')->get();
-        return view('addFaculty',compact('dept'));
+        return view('coordinator/addFaculty',compact('dept'));
     }
 
     public function profile(){
-        return view('super_profile');
+        return view('coordinator/super_profile');
     }
 
     public function newFaculty(Request $request){
@@ -76,7 +75,7 @@ class coordinatorController extends Controller
 
     public function manage_faculty(){
 
-        return view('manageFaculty');
+        return view('coordinator/manageFaculty');
     }
 
     public function searchFaculty(Request $request){

@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('layouts.faculty_layout')
 
-@section('content')
+@section('hello')
     <!-- beginning of modal -->
 
     <div class="modal fade" id="sign-out">
@@ -73,6 +73,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 
     <!-- End of cards  -->
@@ -109,6 +110,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </section>
 
 

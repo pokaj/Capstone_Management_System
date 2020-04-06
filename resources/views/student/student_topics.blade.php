@@ -1,4 +1,4 @@
-@extends('studentLayout')
+@extends('layouts.studentLayout')
 
 @section('student_topics')
 

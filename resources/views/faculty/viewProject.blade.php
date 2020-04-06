@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.faculty_layout')
 
 @section('viewProject')
     <div class="container">
@@ -140,7 +140,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Next meeting date & time: </label>
-                                            <input type="datetime-local" class="form-control" name="nextDate" required></input>
+                                            <input type="datetime-local" class="form-control" name="nextDate" required/>
                                         </div>
                                     </div>
 
@@ -187,7 +187,7 @@
                                 @csrf
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <p class="bmd-label-floating">Next Meeting Date & Time:</p>
+                                        <label class="bmd-label-floating">Next Meeting Date & Time:</label>
 
                                         <input class="form-control text-danger" value="   @if(count($meetingInfo) > 0) {{date("M jS, Y H:i A", strtotime($last->mt_nextDate))}}   @endif">
 

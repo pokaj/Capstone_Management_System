@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.faculty_layout')
 
 @section('topics')
 

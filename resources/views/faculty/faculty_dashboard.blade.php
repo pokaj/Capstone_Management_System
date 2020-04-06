@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.faculty_layout')
 
 @section('content')
 
@@ -33,6 +33,7 @@
                                 </div>
                             </div>
                         </div>
+
 
 
     <!-- End of cards  -->

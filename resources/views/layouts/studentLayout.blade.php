@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="title icon" href="images/title-img png">
+    <link rel="title icon" href="images/title-img.png">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" crossorigin="anonymous"></script>
@@ -27,8 +27,8 @@
                 <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
                     <a href="/studentDashboard" class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">Dashboard</a>
                     <div class="bottom-border pb-3">
-                        <img src="images/avatar.png" width="40" class="rounded-circle mr-3">
-                        <a href="/studentDashboard" class="text-white">{{Auth::user()->username}}</a>
+                        <img src="images/avatar.png" alt="avatar" width="40" class="rounded-circle mr-3">
+                        <a href="/studentProfile" class="text-white">{{Auth::user()->username}}</a>
                     </div>
 
                     <ul class="navbar-nav flex-column mt-4">
@@ -70,12 +70,12 @@
                         </div>
                         <div class="col-md-3">
                             <ul class="navbar-nav">
-                                <li class="nav-item icon-parent">
-                                    <a href="" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a>
-                                </li>
-                                <li class="nav-item icon-parent">
-                                    <a href="" class="nav-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a>
-                                </li>
+{{--                                <li class="nav-item icon-parent">--}}
+{{--                                    <a href="" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item icon-parent">--}}
+{{--                                    <a href="" class="nav-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a>--}}
+{{--                                </li>--}}
                                 <li class="nav-item ml-md-auto mt-2">
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                         <a class="text-danger" href="{{ route('logout') }}"
@@ -102,31 +102,6 @@
 </nav>
 
 <!-- end of nav-bar -->
-
-<!-- beginning of modal -->
-
-<div class="modal fade" id="sign-out">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"> Want to leave?</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <div class="modal-body">
-                Press Logout to leave.
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">stay</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Logout </button>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- end of modal -->
 
 {{--Page layout arrangement --}}
 <section>

@@ -1,4 +1,4 @@
-@extends('super_layout')
+@extends('layouts.super_layout')
 
 @section('manage_faculty')
 

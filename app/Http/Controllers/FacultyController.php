@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Meeting;
-use App\Department;
-use App\Project;
-use App\Faculty;
+
 use Illuminate\Support\Facades\DB;
 
 class FacultyController extends Controller
@@ -57,9 +55,11 @@ class FacultyController extends Controller
             $totalPending = $pendingCount + $proposedCount ;
 
 
-            return view('dashboard', compact('totalPending','totalSupervisedStudents','projectDetails'));
+
+
+            return view('faculty/faculty_dashboard', compact('totalPending','totalSupervisedStudents','projectDetails'));
         }
-        return view('student_dashboard');;
+        return view('student/student_dashboard');;
     }
 
 
@@ -70,7 +70,7 @@ class FacultyController extends Controller
             $depts = DB::table('department')->get();
 
 
-            return view('profile' ,compact('depts'));
+            return view('faculty/faculty_profile' ,compact('depts'));
         }
         return view('student_profile');
     }
@@ -78,35 +78,26 @@ class FacultyController extends Controller
 
     public function students()
     {
-        if (Auth::user()->category == 'faculty') {
-
             $projectDetails = DB::table('capstone_table')
                 ->join('users','userId','=','cp_student')
                 ->join('project','project_Id','=','cp_project')
                 ->where('cp_supervisor','=',Auth::user()->userId)
                 ->get();
 
-            $count = count($projectDetails);
-
-            return view('students',compact('projectDetails'));
+            return view('faculty/students',compact('projectDetails'));
         }
-    }
 
     public function topics()
     {
-        if (Auth::user()->category == 'faculty') {
-
-            return view('topics');
+            return view('faculty/topics');
         }
-    }
+
 
     public function milestones()
     {
-        if (Auth::user()->category == 'faculty') {
-
-            return view('milestones');
+            return view('faculty/milestones');
         }
-    }
+
 
 //    public function viewFacultyInterests(){
 //        if(Auth::user()->category == 'faculty'){
@@ -124,7 +115,8 @@ class FacultyController extends Controller
 //    Function to update faculty information
         public function update(Request $request){
 
-            $updatefaculty = User::where('userId',Auth::user()->userId)
+           DB::table('users')
+            ->where('userId','=',Auth::user()->userId)
                 ->update([
                     'first_name' => $request->input('fname'),
                     'last_name' => $request->input('lname'),
@@ -134,7 +126,7 @@ class FacultyController extends Controller
                 ]);
 
             DB::table('faculty')
-                ->where('faculty_Id', Auth::user()->userId)
+                ->where('faculty_Id','=', Auth::user()->userId)
                 ->update(array(
                     'faculty_dept' => $request->input('department'),
                     'faculty_interests' => $request->input('interests')
@@ -181,7 +173,7 @@ class FacultyController extends Controller
     }
 
     public function feedback(){
-        return view('feedback');
+        return view('faculty/feedback');
     }
 
 

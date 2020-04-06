@@ -1,12 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Casptone_Table;
 use App\User;
-use Auth;
-use App\Project;
-use App\Faculty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
@@ -23,8 +20,6 @@ class StudentController extends Controller
      */
 
     public function index(){
-        if(Auth::user()->category == 'student'){
-
             $approvedProjects = DB::table('capstone_table')
                 ->join('project','project_Id','=','cp_project')
                 ->where('cp_student','=',Auth::user()->userId)
@@ -33,13 +28,11 @@ class StudentController extends Controller
 
             $count = count($approvedProjects);
 
-            return view('student_dashboard',compact('approvedProjects','count'));
+            return view('student/student_dashboard',compact('approvedProjects','count'));
         }
-    }
+
 
     public function student_topics(){
-
-        if(Auth::user()->category == 'student'){
 
             $users = DB::table('project')
                 ->where('project_user',  '=', Auth::user()->userId)
@@ -69,14 +62,12 @@ class StudentController extends Controller
             $count = count($facultyProjects);
             $usersProjects = count($users);
 
-            return view('student_topics' ,compact('users','facultyProjects','facultyDropdown',
+            return view('student/student_topics' ,compact('users','facultyProjects','facultyDropdown',
                 'approvedProjects','count','usersProjects'));
         }
-    }
+
 
     public function student_profile(){
-
-        if(Auth::user()->category == 'student'){
 
             $studentData = DB::table('users')
                 ->join('student','student_user_id','=','userId')
@@ -92,14 +83,12 @@ class StudentController extends Controller
             $majorDropdown = DB::table('major')
                 ->get();
 
-            return view('student_profile' ,compact('studentData','majorDropdown','dummydata'));
+            return view('student/student_profile' ,compact('studentData','majorDropdown','dummydata'));
 
         }
-    }
+
 
     public function myProject(){
-
-        if(Auth::user()->category == 'student'){
 
             $projectDetails = DB::table('capstone_table')
                 ->join('users','userId','=','cp_supervisor')
@@ -119,15 +108,16 @@ class StudentController extends Controller
                 ->orderBy('person_meeting.mt_id', 'DESC')
                 ->first();
 
-            return view('myProject',compact('projectDetails','meetingInfo','nextMeeting'));
+            return view('student/myProject',compact('projectDetails','meetingInfo','nextMeeting'));
 
         }
-    }
+
 
     //    Function to update student information
     public function update(Request $request){
 
-        $updatefaculty = User::where('userId',Auth::user()->userId)
+        $updatefaculty = DB::table('users')
+        ->where('userId','=',Auth::user()->userId)
             ->update([
                 'first_name' => $request->input('fname'),
                 'last_name' => $request->input('lname'),
@@ -200,8 +190,6 @@ class StudentController extends Controller
             return Response($output);
 
         }
-
-//        return ['success' => true, 'data' => $facultyDropdown];
     }
 
 

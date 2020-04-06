@@ -4,16 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Casptone_Table;
 use App\Notifications\AppliedForProject;
-use App\Pending_Request;
-use App\Student;
 use App\User;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Project;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-use Illuminate\Support\Str;
-use function MongoDB\BSON\toJSON;
 
 class ProjectsController extends Controller
 {
@@ -57,7 +52,7 @@ class ProjectsController extends Controller
 
         $pendingCount = count($showapplied);
 
-        return View('topics', compact('users', 'faculty_projects',
+        return View('faculty/topics', compact('users', 'faculty_projects',
             'studentProjects','proposedCount','showapplied','pendingCount'));
     }
 
@@ -145,8 +140,7 @@ class ProjectsController extends Controller
 // Function for faculty members to visit projects of students they supervise.
     public function go_to_project($id)
     {
-        if (Auth::user()->category == 'faculty') {
-            $users = DB::table('project')
+        $users = DB::table('project')
                 ->join('capstone_table','cp_project','=','project_Id')
                 ->join('users','userId','=','cp_student')
                 ->join('student','student_user_id','=','capstone_table.cp_student')
@@ -167,15 +161,14 @@ class ProjectsController extends Controller
                 ->where('mt_project','=',$id)
                 ->orderBy('person_meeting.mt_id', 'DESC')->first();
 
-            return view('viewProject', compact('users','meetingInfo','last'));
+            return view('faculty/viewProject', compact('users','meetingInfo','last'));
         }
-    }
+
 
 // Function for students to view projects proposed by faculty members
     public function view_faculty_Projects()
     {
         $facultyID = Auth::user()->userId;
-        if (Auth::user()->category == 'faculty') {
             $faculty_projects = DB::table('users')
                 ->join('project', 'project.project_user', '=', 'users.userId')
                 ->where('project.project_user', '=', $facultyID)
@@ -183,7 +176,7 @@ class ProjectsController extends Controller
                 ->get();
             return $faculty_projects;
         }
-    }
+
 
 //    Function for students to select their preferred supervisors.
     public function select_supervisor(Request $request)
