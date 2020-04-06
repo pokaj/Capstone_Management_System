@@ -348,7 +348,7 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label class="bmd-label-floating">Select Project: </label>
-                                                        <select name="project" type="text" class="form-control">
+                                                        <select name="project" type="text" class="form-control" >
                                                             @foreach($users as $user)
                                                                 <option value="{{$user->project_Id}}">
                                                                     {{$user->project_title}}

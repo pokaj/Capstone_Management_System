@@ -23,6 +23,7 @@
                             <span class="text-danger">[{{$pendingCount}}]</span></a>
                     </li>
 
+
                 </ul>
                 {{--                End of navigation tab--}}
 
@@ -312,6 +313,11 @@
                                 <!-- end of modal -->
                             </tbody>
                         </table>
+
+                        <label>These students chose you but dont have projects yet: </label>
+                        @foreach($select as $selected)
+                           <p> {{$selected->first_name}} {{$selected->last_name}}</p>
+                            @endforeach
                     </div>
                     {{--                    --}}{{--                    End of section for pending student projects--}}
 

@@ -84,6 +84,7 @@ class FacultyController extends Controller
                 ->where('cp_supervisor','=',Auth::user()->userId)
                 ->get();
 
+
             return view('faculty/students',compact('projectDetails'));
         }
 
@@ -97,20 +98,6 @@ class FacultyController extends Controller
     {
             return view('faculty/milestones');
         }
-
-
-//    public function viewFacultyInterests(){
-//        if(Auth::user()->category == 'faculty'){
-//            $faculty_interests = DB::table('users')
-//                ->join('faculty','faculty.faculty_Id','=','users.userId')
-//                ->where('faculty.faculty_Id','=', Auth::user()->userId)
-//                ->select('users.first_name','users.last_name','faculty.*')
-//                ->get();
-//
-//            return view('profile')->with('faculty_interests',$faculty_interests);
-//
-//        }
-//    }
 
 //    Function to update faculty information
         public function update(Request $request){

@@ -50,10 +50,16 @@ class ProjectsController extends Controller
             ->select('users.*','project.*')
             ->get();
 
+        $select = DB::table('users')
+            ->join('faculty_student','student_Id','=','userId')
+            ->where('faculty_Id','=',Auth::user()->userId)
+            ->where('status','=','picked')
+             ->get();
+
         $pendingCount = count($showapplied);
 
         return View('faculty/topics', compact('users', 'faculty_projects',
-            'studentProjects','proposedCount','showapplied','pendingCount'));
+            'studentProjects','proposedCount','showapplied','pendingCount','select'));
     }
 
     /**

@@ -88,8 +88,9 @@
                                             <h4 class="mb-3">User Profile</h4>
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <p><i class="fa fa-user" aria-hidden="true"></i>  {{Auth::user()->first_name}} {{Auth::user()->last_name}}</p>
-                                            <p><i class="fa fa-envelope" aria-hidden="true"></i>  {{Auth::user()->email}} </p>
+
+                                            <p><i class="fa fa-user" aria-hidden="true"></i> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</p>
+                                            <p ><i class="fa fa-envelope" aria-hidden="true"></i>  {{Auth::user()->email}} </p>
                                         @foreach($studentData as $user)
                                                 @if($user->student_major != null)
                                                     <p><i class="fa fa-address-card" aria-hidden="true"></i> {{$user->student_Id}}</p>
@@ -109,19 +110,19 @@
                                     </div>
                                     <!--/row-->
                                     <div class="tab-pane" id="edit">
-                                        <form role="form" method="post" enctype="multipart/form-dataupload" action="{{route('update')}}">
+                                        <form method="post" id="edit_profile" action="{{route('update')}}">
                                             @csrf
                                             <input name="_method" type="hidden" value="PUT">
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">First name</label>
                                                 <div class="col-lg-9">
-                                                    <input name="fname" class="form-control" type="text" value="{{Auth::user()->first_name}}">
+                                                    <input name="fname" id="fname" class="form-control" type="text" value="{{Auth::user()->first_name}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                                                 <div class="col-lg-9">
-                                                    <input name="lname" class="form-control" type="text" value="{{Auth::user()->last_name}}">
+                                                    <input name="lname" id="lname" class="form-control" type="text" value="{{Auth::user()->last_name}}">
                                                 </div>
                                             </div>
 
@@ -129,7 +130,7 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">ID Number</label>
                                                 <div class="col-lg-9">
-                                                    <input name="id" class="form-control" type="number" value="{{$ID->student_Id}}">
+                                                    <input name="id" id="id"class="form-control" type="number" value="{{$ID->student_Id}}">
                                                 </div>
                                             </div>
                                             @endforeach
@@ -138,7 +139,7 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Year Group</label>
                                                 <div class="col-lg-9">
-                                                    <input name="yearGroup" class="form-control" type="number" value="{{$yearGroup->student_yeargroup}}">
+                                                    <input name="yearGroup" id="yearGroup" class="form-control" type="number" value="{{$yearGroup->student_yeargroup}}">
                                                 </div>
                                             </div>
                                             @endforeach
@@ -146,19 +147,19 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Username</label>
                                                 <div class="col-lg-9">
-                                                    <input name="username" class="form-control" type="text" value="{{Auth::user()->username}}">
+                                                    <input name="username" id="username" class="form-control" type="text" value="{{Auth::user()->username}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                                 <div class="col-lg-9">
-                                                    <input name="email" class="form-control" type="email" value="{{Auth::user()->email}}">
+                                                    <input name="email" id="email" class="form-control" type="email" value="{{Auth::user()->email}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Phone</label>
                                                 <div class="col-lg-9">
-                                                    <input name="phone" class="form-control" type="number" value="{{Auth::user()->phone}}">
+                                                    <input name="phone" id="phone" class="form-control" type="number" value="{{Auth::user()->phone}}">
                                                     <br>
                                                 </div>
 
@@ -166,7 +167,7 @@
                                                 <label class="col-lg-3 col-form-label form-control-label">Major</label>
                                                 <div class="col-lg-9">
 
-                                                    <select name="major" class="form-control" type="text" value="">
+                                                    <select name="major" id="major" class="form-control" type="text" value="">
                                                         @foreach($studentData as $major)
                                                             @if($major->student_major != null)
                                                             <option value="{{$major->major_Id}}">{{$major->major_name}}</option>
@@ -181,7 +182,6 @@
                                                 <label class="col-lg-3 col-form-label form-control-label"></label>
                                                 <div class="col-lg-9">
                                                     <button class="btn btn-primary">Save changes</button>
-
                                                 </div>
                                             </div>
                                         </form>

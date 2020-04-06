@@ -140,7 +140,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Next meeting date & time: </label>
-                                            <input type="datetime-local" class="form-control" name="nextDate" required/>
+                                            <input type="date" class="form-control" name="nextDate" required/>
                                         </div>
                                     </div>
 
@@ -189,7 +189,7 @@
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Next Meeting Date & Time:</label>
 
-                                        <input class="form-control text-danger" value="   @if(count($meetingInfo) > 0) {{date("M jS, Y H:i A", strtotime($last->mt_nextDate))}}   @endif">
+                                        <input class="form-control text-danger" value=" @if(count($meetingInfo) > 0) {{date("M jS, Y H:i A", strtotime($last->mt_nextDate))}}   @endif">
 
 
                                         <button class="btn btn-primary mt-2">Send Reminder</button>

@@ -35,13 +35,15 @@
                                 <i class="fas fa-home text-white text-light fa-lg mr-3"></i>Dashboard</a>
                         </li>
 
+
+                        <li class="nav-item {{'super_profile' == request()->path() ? 'current' : ''}}"><a href="/super_profile" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                                <i class="fas fa-users text-white text-light fa-lg mr-3"></i>Profile</a>
+                        </li>
+
+
                         <li class="nav-item {{'addFaculty' == request()->path() ? 'current' : ''}}"><a href="/addFaculty" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-user text-white text-light fa-lg mr-3"></i>Add Faculty</a>
                         </li>
-
-                           <li class="nav-item {{'super_profile' == request()->path() ? 'current' : ''}}"><a href="/super_profile" class="nav-link text-white p-3 mb-2 sidebar-link ">
-                                    <i class="fas fa-users text-white text-light fa-lg mr-3"></i>Profile</a>
-                            </li>
 
                         <li class="nav-item {{'manage_faculty' == request()->path() ? 'current' : ''}}"><a href="/manage_faculty" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Manage Faculty</a>
