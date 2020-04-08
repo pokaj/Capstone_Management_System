@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Faculty;
 use App\Project;
 use Illuminate\Http\Request;
-use App\Auth;
+//use App\Auth;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class coordinatorController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         $faculty = DB::table('faculty')->get();
         $students = DB::table('student')->get();
@@ -22,22 +24,23 @@ class coordinatorController extends Controller
         $studentCount = count($students);
         $capstoneCount = count($capstone);
 
-        return view('coordinator/super_dashboard',compact('facultyCount','studentCount','capstoneCount'));
+        return view('coordinator/super_dashboard', compact('facultyCount', 'studentCount', 'capstoneCount'));
     }
 
-    public function addFaculty(){
+    public function addFaculty()
+    {
 
         $dept = DB::table('department')->get();
-        return view('coordinator/addFaculty',compact('dept'));
+        return view('coordinator/addFaculty', compact('dept'));
     }
 
-    public function profile(){
+    public function profile()
+    {
         return view('coordinator/super_profile');
     }
 
-    public function newFaculty(Request $request){
-
-
+    public function newFaculty(Request $request)
+    {
         $validatedData = $request->validate([
             'fname' => 'required|alpha|max:255',
             'lname' => 'required|alpha|max:255',
@@ -47,19 +50,19 @@ class coordinatorController extends Controller
 
         ],
             [
-                'fname.required'=>'The first name field is required',
+                'fname.required' => 'The first name field is required',
                 'fname.alpha' => 'Only Text is allowed for the first name',
-                'lname.required'=>'The Last name field is required',
+                'lname.required' => 'The Last name field is required',
                 'lname.alpha' => 'Only Text is allowed for the Last name'
             ]);
 
         $user = new User;
         $user->first_name = $validatedData['fname'];
-        $user->last_name =  $validatedData['lname'];
-        $user->email =  $validatedData['email'];
+        $user->last_name = $validatedData['lname'];
+        $user->email = $validatedData['email'];
         $user->category = 'faculty';
         $user->user_role = 2;
-        $user->username =  $validatedData['username'];
+        $user->username = $validatedData['username'];
         $user->password = Hash::make($validatedData['password']);
         $user->save();
 
@@ -70,9 +73,11 @@ class coordinatorController extends Controller
         $faculty->save();
 
         return redirect()->back()
-            ->with('message','Few faculty member added');
-
+            ->with('message', 'New faculty member added');
     }
+
+
+
 
     public function manage_faculty(){
 

@@ -83,6 +83,7 @@ class ProjectsController extends Controller
     public function store(Request $request)
     {
         $project = new Project;
+
         $date = now();
         $project->project_user = Auth::user()->userId;
         $project->project_date = $date;

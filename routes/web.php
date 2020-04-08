@@ -59,7 +59,7 @@ Route::get('/viewFaculty','StudentController@viewFaculty');
  * Routes for cs_supervisor
  */
 Route::get('/super_dashboard','coordinatorController@index');
-Route::get('/addFaculty','coordinatorController@addFaculty');
+Route::get('/addFaculty','coordinatorController@addFaculty')->name('addFaculty');
 Route::post('/newFaculty','coordinatorController@newFaculty')->name('newFaculty');
 Route::get('/super_profile','coordinatorController@profile');
 Route::get('/manage_faculty','coordinatorController@manage_faculty');

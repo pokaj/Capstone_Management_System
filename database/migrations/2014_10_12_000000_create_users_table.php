@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('userId');
+            $table->integer('userId');
             $table->string('first_name');
             $table->string('last_name');
             $table->enum('gender',['Male','Female']);
