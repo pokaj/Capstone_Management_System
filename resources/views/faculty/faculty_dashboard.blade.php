@@ -45,20 +45,29 @@
 
 
     <!-- Progress Bar starts her | List of tasks as well  -->
+    @if($totalSupervisedStudents > 0)
 
     <div class="col-xl-6 col-12 mb-4 mb-xl-0 mt-5">
         <div class="bg-dark text-white p-4 rounded">
             <h4 class="mb-5">Student Progress</h4>
             @foreach($projectDetails as $projectDetail)
-            <div>
-                <h6 class="mb-3">{{$projectDetail->first_name}} {{$projectDetail->last_name}} </h6>
-                <div class="progress mb-4" style="height:15px">
-                    <div class="progress-bar progress-bar-striped font-weight-bold bg-success" style="width: 5%; ">5%</div>
-                </div>
+                &nbsp;
+                <div>
+                <a href="{{route('viewProject',$projectDetail->project_Id)}}"><h6 class="mb-3 text-white">{{$projectDetail->first_name}} {{$projectDetail->last_name}} </h6></a>
+                <div class="contain ml-0">
+                    <div class="bar-container">
+                        <div class="bar" id="bar"></div>
+{{--                        <button class="btn" type="button" id="button">+10</button>--}}
+
+
+                    </div>
+                    <div>
+                    </div></div>
+
             </div>
                 @endforeach
         </div>
-
+        @endif
 
 
 {{--        <div id="accordion" class="mt-5">--}}
@@ -69,7 +78,7 @@
 {{--                        <button class="btn btn-block bg-secondary text-light text-left" data-toggle="collapse" data-target="#collapseFirst">--}}
 {{--                            <img src="images/avatar.png" width="50" class="mr-3 rounded" alt="customer image">--}}
 {{--                            @include('notification.'.Str::snake(class_basename($notification->type)))--}}
-{{--                            --}}{{--                                            {{Str::snake(class_basename($notification->type))}}--}}
+{{--                                                                        {{Str::snake(class_basename($notification->type))}}--}}
 {{--                        </button>--}}
 {{--                    </div>--}}
 {{--                    <div class="collapse" id="collapseFirst" data-parent="#accordion">--}}

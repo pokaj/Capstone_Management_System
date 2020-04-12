@@ -2,6 +2,7 @@
 body{
 	font-family: 'Montserrat', sans-serif;
 	background-color: #eee;
+    height: 100%;
 }
 
 /* navigation bar styling starts here */
@@ -136,4 +137,57 @@ width:230px;
 .center {
     padding: 70px 0;
     text-align: center;
+}
+
+.footer{
+    margin-top: 40%;
+}
+
+
+.contain {
+    background: #fafafa;
+    height: 10px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+.text {
+    margin: 2em auto;
+}
+#bar-contain {
+    background: #f0f0f0;
+    height: 10px;
+    width: 100%;
+    border-radius: 10px;
+}
+.bar {
+    background: #00F260;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #0575E6, #00F260);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #0575E6, #00F260); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 10px;
+    width: 0%;
+    border-radius: 10px;
+    transition: width 400ms;
+}
+#button {
+    outline: none;
+    margin: 2em auto;
+    border: none;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    padding: 1em;
+    background: #11998e;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+    box-shadow: 0 10px 10px 0 rgba(0,0,0,0.30);
+    cursor: pointer;
+    transition: transform 400ms;
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    text-align: center;
+}
+#button:hover {
+    transform: translateY(-10px);
 }

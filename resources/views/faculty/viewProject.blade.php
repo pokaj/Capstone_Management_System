@@ -140,7 +140,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Next meeting date & time: </label>
-                                            <input type="date" class="form-control" name="nextDate" required/>
+                                            <input type="datetime-local" class="form-control" name="nextDate" required/>
                                         </div>
                                     </div>
 

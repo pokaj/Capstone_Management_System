@@ -149,7 +149,7 @@
 
 
 <!-- Footer starts here -->
-<footer class="container-fluid bg-light ">
+<footer class="footer container-fluid bg-light ">
     <div class="row"></div>
     <div class="row col-xl-10 col-lg-9 col-md-8 ml-auto">
         <div class="row border-top pt-3">

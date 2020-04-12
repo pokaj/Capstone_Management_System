@@ -26,9 +26,16 @@ class StudentController extends Controller
                 ->select('project_title','project_type')
                 ->get();
 
+            $meetingDetails = DB::table('meetings')
+                ->join('person_meeting','meetings.mt_id','=','person_meeting.mt_id')
+                ->where('mt_student','=',Auth::user()->userId)
+                ->orderBy('person_meeting.mt_id', 'DESC')
+                ->first();
+//            ->get();
+
             $count = count($approvedProjects);
 
-            return view('student/student_dashboard',compact('approvedProjects','count'));
+            return view('student/student_dashboard',compact('approvedProjects','meetingDetails','count'));
         }
 
 
@@ -147,7 +154,7 @@ class StudentController extends Controller
     public function complete(Request $request){
 
         $validatedData = $request->validate([
-            'student_Id' => 'required|max:255|unique:student',
+            'student_Id' => 'required|max:8|unique:student',
         ],
             [
                 'student_Id.unique'=>'The student ID you entered belongs to another student',

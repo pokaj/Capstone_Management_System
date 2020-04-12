@@ -11,79 +11,32 @@
                 </div>
             @endif
         </div>
-    @if($count = 0)
-        <h6></h6>
-        @else
+
+    @if($approvedProjects)
     @foreach($approvedProjects as $approvedProject)
-    <span class="text-muted text-capitalize h2">{{$approvedProject->project_type}} : </span> <span class="h5">{{$approvedProject->project_title}}</span>
+    <span class="text-muted text-capitalize h3">{{$approvedProject->project_type}} : </span> <span class="">{{$approvedProject->project_title}}</span>
         @endforeach
         @endif
-        <!-- Progress Bar starts her | List of tasks as well  -->
-        <section>
-            <div class="container-fliud">
-                <div class="row">
+        <h4 class="text-muted mt-5">Up coming tasks</h4>
+        @if($meetingDetails)
+        <div class="row">
                         <div class="row mb-4 align-items-center">
-
-                                <div class="col-xl6 col-12 ">
-                                    <h4 class="text-muted p-3 mb-3 ">UP Coming Tasks</h4>
+                                <div class="col-xl6 col-12 ml-3">
                                     <div class="container-fluid bg-white">
                                         <div class="row py-3 mb-4 task-border align-items-center">
-                                            <div class="col-1">
-                                                <input type="checkbox" >
-                                            </div>
-                                            <div class="col-sm-9 col-8">
-                                                This is supposed to be some kind of random test for testing.
-                                                <p class="text-danger">24th February 2020</p>
+
+                                            <div class="col-lg-12">
+                                                <p class="">Next Meeting Date:  <span class="text-danger"> {{date("M jS, Y H:i A", strtotime($meetingDetails->mt_nextDate))}}</span> </p>
 
                                             </div>
-                                            <div class="col-1">
-                                                <a href="####" data-toggle="tooltip" title="<h6>delete</h6>" data-html="true" data-placement="top"><i class="fas fa-trash-alt fa-lg text-danger"></i></a>
-                                            </div>
+
                                         </div>
                                     </div>
-
-                                    <div class="container-fluid bg-white">
-                                        <div class="row py-3 mb-4 task-border align-items-center">
-                                            <div class="col-1">
-                                                <input type="checkbox" >
-                                            </div>
-                                            <div class="col-sm-9 col-8">
-                                                This is supposed to be some kind of random test for testing.
-                                                <p class="text-primary">24th February 2020</p>
-
-                                            </div>
-                                            <div class="col-1">
-                                                <a href="####" data-toggle="tooltip" title="<h6>delete</h6>" data-html="true" data-placement="top"><i class="fas fa-trash-alt fa-lg text-danger"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="container-fluid bg-white">
-                                        <div class="row py-3 mb-4 task-border align-items-center">
-                                            <div class="col-1">
-                                                <input type="checkbox">
-                                            </div>
-                                            <div class="col-sm-9 col-8">
-                                                This is supposed to be some kind of random test for testing.
-                                                <p class="text-success">16th March 2020</p>
-
-                                            </div>
-                                            <div class="col-1">
-                                                <a href="####" data-toggle="tooltip" title="<h6>delete</h6>" data-html="true" data-placement="top"><i class="fas fa-trash-alt fa-lg text-danger"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
                                 </div>
                         </div>
                 </div>
-            </div>
-        </section>
+        @endif
 
-
-        <!-- Progress bar ends here  -->
 
 </div>
 </div>

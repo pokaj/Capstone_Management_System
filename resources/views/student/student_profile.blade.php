@@ -28,13 +28,18 @@
                                             </li>
                                         @endif
                                     @endforeach
+
+                                    @foreach($dummydata as $dummy)
+                                        @if($dummy->student_Id != null)
                                     <li class="nav-item">
                                         <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
                                     </li>
-                                </ul>
+                                        @endif
+                                        @endforeach
+                                    </ul>
                                 <div class="tab-content py-4">
                                     @if(session()->has('message'))
                                         <div class="alert alert-success">
@@ -53,7 +58,7 @@
                                         @endif
                                         <div class="tab-pane" id="updateProfile">
 
-                                            <h4 class="mb-3">Update your Profile</h4>
+                                            <h4 class="mb-3">Complete your Profile</h4>
                                         <form role="form" method="post" action="{{route('complete')}}">
                                             @csrf
                                             <input name="_method" type="hidden" value="PUT">
@@ -83,7 +88,8 @@
                                         </form>
                                   </div>
 
-
+                                    @foreach($dummydata as $dummy)
+                                        @if($dummy->student_Id != null)
                                     <div class="tab-pane active" id="profile">
                                             <h4 class="mb-3">User Profile</h4>
                                     <div class="row">
@@ -186,6 +192,8 @@
                                             </div>
                                         </form>
                                     </div>
+                                        @endif
+                                        @endforeach
                                 </div>
                             </div>
                         </div>

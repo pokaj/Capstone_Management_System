@@ -144,28 +144,31 @@
                             <div class="card-body">
                                 <form action="submit" method="post">
                                     @csrf
-                                    <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Project Title: </label>
+                                                <input name="project_title" type="text" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row col-md-6">
                                         <div class="form-group">
-                                            <label class="bmd-label-floating">Project Title: </label>
-                                            <input type="text" class="form-control" name="project_title" required>
+                                            <label class="bmd-label-floating">Project Type: </label>
+                                            <select name="project_type" type="text" class="form-control">
+                                                <option value="uncertain">Uncertain</option>
+                                                <option value="thesis">Thesis</option>
+                                                <option value="applied">Applied</option>
+                                                {{--                                                            <option value="entrepreneurship">Entrepreneurship</option>--}}
+
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Project Field: </label>
                                             <input type="text" class="form-control" name="project_field" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">Project Type: </label>
-                                            <select name="project_type" type="text" class="form-control">
-                                                <option value="thesis">Thesis</option>
-                                                <option value="applied">Applied</option>
- {{--                                           <option value="entrepreneurship">Entrepreneurship</option>--}}
-
-                                            </select>
                                         </div>
                                     </div>
 

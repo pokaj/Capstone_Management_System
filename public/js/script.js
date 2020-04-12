@@ -141,4 +141,17 @@ $("#limit").submit(function (e) {
     });
 });
 
-
+var btn = document.getElementById('button');
+var bar = document.getElementById('bar');
+var count = 0;
+// Listen for an event on the button
+// Increase the width of the bar by 10 percent(10%)
+btn.addEventListener('click', ()=>{
+    bar.style.width = count + '%';
+    if(count === 100){
+        count = 0;
+    }
+    else {
+        count = count + 20;
+    }
+});

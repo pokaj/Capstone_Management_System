@@ -17,45 +17,7 @@
                     <div class="tab-pane active" id="milestones">
                             <h3 class="text-muted mb-3 mt-3">Milestones</h3>
                         <div class="row mb-9 ml-auto mt-3">
-                            <table class="table table-striped bg-light text-center">
-                                <thead>
-                                <tr class="text-muted">
-                                    <th>Milestone</th>
-                                    <th>Due Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                <tr>
-                                    <td>References</td>
-                                    <td>24th June 2020</td>
-                                    <td>
-                                        <a href="" class="nav-link" data-toggle="modal" data-target="#edit_milestone"><i class="fas fa-edit text-muted fa-lg"></i></a>
-                                    </td>
-
-                                </tr>
-                                <tr>
-
-                                    <td>Annotated Bibliograpny</td>
-                                    <td>30th June 2020</td>
-                                    <td>
-                                        <a href="" class="nav-link" data-toggle="modal" data-target="#edit_milestone"><i class="fas fa-edit text-muted fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-
-                                    <td>Chapter One (Introduction) </td>
-                                    <td>5th July 2020</td>
-                                    <td>
-                                        <a href="" class="nav-link" data-toggle="modal" data-target="#edit_milestone"><i class="fas fa-edit text-muted fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                </tbody>
-
-                            </table>
-
-                            <!-- beginning of modal -->
+                                                                <!-- beginning of modal -->
                             <div class="modal fade" id="edit_milestone">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
