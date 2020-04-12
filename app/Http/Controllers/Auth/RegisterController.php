@@ -59,17 +59,20 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required','regex:/^[a-zA-Z]+$/u','max:255|'],
+            'last_name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'max:255'],
             'gender' => ['required', 'string'],
-            'username' => ['required', 'string', 'max:255','unique:users'],
+            'username' => ['required','alpha_dash', 'string', 'max:255','unique:users'],
             'phone' => 'required|regex:/(0)[0-9]{9}/|max:10',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'regex:/[A-Z]/', 'min:8', 'confirmed'],
         ],
             [
                     'phone.regex' => 'Please check the phone number entered.',
                     'phone.max' => 'Phone number must be 10 digits',
+                    'first_name.regex' => 'This field only accepts alphabets',
+                    'last_name.regex' => 'This field only accepts alphabets',
+                    'password.regex' => 'The password must contain at least one Uppercase letter'
 
                 ]);
 

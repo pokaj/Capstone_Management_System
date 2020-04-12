@@ -45,15 +45,15 @@ class coordinatorController extends Controller
             'fname' => 'required|alpha|max:255',
             'lname' => 'required|alpha|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'username' => 'required|max:255|unique:users',
+            'username' => 'required|max:255|alpha_dash|unique:users',
             'password' => 'required',
 
         ],
             [
                 'fname.required' => 'The first name field is required',
-                'fname.alpha' => 'Only Text is allowed for the first name',
+                'fname.alpha' => 'First name field can only be text',
                 'lname.required' => 'The Last name field is required',
-                'lname.alpha' => 'Only Text is allowed for the Last name'
+                'lname.alpha' => 'Last name field can only be text'
             ]);
 
         $user = new User;

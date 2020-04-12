@@ -154,10 +154,12 @@ class StudentController extends Controller
     public function complete(Request $request){
 
         $validatedData = $request->validate([
-            'student_Id' => 'required|max:8|unique:student',
+            'student_Id' => 'required|max:8|unique:student|min:8',
         ],
             [
                 'student_Id.unique'=>'The student ID you entered belongs to another student',
+                'student_Id.min' => 'Please check your student Id',
+                'student_Id.max' => 'Please check your student Id',
             ]);
 
 
