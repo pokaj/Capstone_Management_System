@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Faculty;
+use App\Mail\NewFaculty;
 use App\Project;
 use Illuminate\Http\Request;
 //use App\Auth;
@@ -10,6 +11,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class coordinatorController extends Controller
 {
@@ -71,6 +73,8 @@ class coordinatorController extends Controller
         $faculty->faculty_dept = $request->dept;
         $faculty->number_of_students = 0;
         $faculty->save();
+
+        Mail::to($user->email)->send(new NewFaculty());
 
         return redirect()->back()
             ->with('message', 'New faculty member added');

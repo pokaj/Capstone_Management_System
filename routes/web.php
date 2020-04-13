@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something gr*/
 
 
+use App\Mail\ReminderMail;
+use Illuminate\Support\Facades\Mail;
+
 Route::get('/', function () {
     return view('login');
 });
@@ -28,7 +31,8 @@ Route::put('studentProfile', 'StudentController@update')->name('update');
 Route::get('supervisor_requests', 'ProjectsController@supervisor_requests');
 Route::post('createMeeting','FacultyController@createMeeting')->name('createMeeting');
 Route::post('/meetingDetails', 'FacultyController@searchMeeting')->name('searchMeeting');
-Route::get('/feedback', 'FacultyController@feedback')->name('feedback');
+//Route::get('/feedback', 'FacultyController@feedback')->name('feedback');
+Route::post('/reminder', 'FacultyController@reminder')->name('reminder');
 
 
 /*

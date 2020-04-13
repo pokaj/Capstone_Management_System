@@ -19,14 +19,14 @@
 {{--                Beginning of navigation tabs--}}
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a href="" data-target="#my_topics" data-toggle="tab" class="nav-link active">My Topic</a>
+                        <a href="" data-target="#my_topics" data-toggle="tab" class="nav-link active">My Capstone</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#available_topics" data-toggle="tab" class="nav-link">Available Topics @if($count > 0)<span class="text-danger">[{{$count}}]</span>@endif</a>
+                        <a href="" data-target="#faculty_topics" data-toggle="tab" class="nav-link">Faculty Projects @if($count > 0)<span class="text-danger">[{{$count}}]</span>@endif</a>
 
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#propose_topic" data-toggle="tab" class="nav-link">Propose Topic @if($usersProjects > 0)<span class="text-danger">[{{$usersProjects}}]</span> @endif</a>
+                        <a href="" data-target="#propose_topic" data-toggle="tab" class="nav-link">Submit Topic @if($usersProjects > 0)<span class="text-danger">[{{$usersProjects}}]</span> @endif</a>
 
                     </li>
                     <li class="nav-item">
@@ -72,7 +72,7 @@
 
 
                     {{--                    Beginning of section for available projects (faculty suggested projects)--}}
-                    <div class="tab-pane" id="available_topics">
+                    <div class="tab-pane" id="faculty_topics">
                         <h3 class="text-muted mb-3">Projects Proposed by Faculty</h3>
                         <table class="table text-center table-dark table-hover">
                             <thead>
@@ -154,7 +154,7 @@
                                             <td>{{$user->project_title}}</td>
                                             <td>{{$user->project_type}}</td>
                                             <td>{{$user->project_field}}</td>
-                                            <td class="text-danger">Unapproved</td>
+                                            <td class="text-danger">Pending approval</td>
 
                                             <td>
                                                 <a href="" class="nav-link" data-toggle="modal" data-target="#{{$user->project_Id}}"><i class="fas fa-eye text-muted"></i></a>

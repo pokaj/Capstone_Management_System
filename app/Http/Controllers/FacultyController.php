@@ -159,8 +159,12 @@ class FacultyController extends Controller
 
     }
 
-    public function feedback(){
-        return view('faculty/feedback');
+//    public function feedback(){
+//        return view('faculty/feedback');
+//    }
+
+    public function reminder(){
+        return  view('exist');
     }
 
 

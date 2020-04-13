@@ -15,7 +15,7 @@
                     <div class="tab-pane active" id="approved">
                         <div class="row">
 
-                             <h3 class="text-muted mb-3 mt-3">Supervised Students</h3>
+                             <h3 class="text-muted mb-3 mt-3">My capstone students</h3>
                                     <table class="table table-striped bg-light text-center">
                                         <thead class="thead-dark">
                                         <tr class="text-muted">
