@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Casptone_Table;
+use App\Mail\ProjectAccepted;
+use App\Mail\ProjectApproved;
 use App\Notifications\AppliedForProject;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Project;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ProjectsController extends Controller
 {
@@ -272,8 +275,8 @@ class ProjectsController extends Controller
                 'status' => 'taken'
             ));
 
-
         $capstone->save();
+        Mail::to(User::find($studentID)->email)->send(new ProjectAccepted());
         return redirect()->back()->with('message','New student added!');
 
     }
@@ -332,6 +335,8 @@ class ProjectsController extends Controller
         DB::table('faculty')
             ->where('faculty_Id','=',Auth::user()->userId)
             ->increment('number_of_students', 1);
+
+        Mail::to(User::find($student_ID)->email)->send(new ProjectApproved());
 
         return redirect()->back()->with('message','New student added!');
     }

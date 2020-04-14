@@ -149,23 +149,17 @@ class FacultyController extends Controller
         }
 
 
-    public function searchMeeting(Request $request){
+    public function searchMeeting(Request $request)
+    {
 
         $meetingInformation = DB::table('person_meeting')
-                ->where('mt_id','=',$request->get('inputVal'))
-                ->get();
+            ->where('mt_id', '=', $request->get('inputVal'))
+            ->get();
 
         return ['success' => true, 'data' => $meetingInformation];
 
     }
 
-//    public function feedback(){
-//        return view('faculty/feedback');
-//    }
-
-    public function reminder(){
-        return  view('exist');
-    }
 
 
 }

@@ -52,7 +52,7 @@
                                             <th>Name</th>
                                             <th>Department</th>
                                             <th>Number of Students</th>
-                                            <th>View</th>
+                                            <th>View Students</th>
                                         </tr>
                                         </thead>
                                         <div id="hidden">

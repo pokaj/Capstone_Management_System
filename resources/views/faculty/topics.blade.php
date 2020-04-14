@@ -236,9 +236,8 @@
                                                 <button class="btn btn-success">Accept</button>
                                             </form>
                                             <span>
-                                                <form>
-                                                <a href="" class="btn btn-danger">Decline</a>
-                                                    </form>
+{{--                                                <a href="" class="btn btn-danger">Decline</a>--}}
+                                                <button class="btn btn-danger">Decline</button>
                                                 </span>
 
                                         </div>
