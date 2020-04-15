@@ -32,8 +32,8 @@
                                     <div>
                                         <form id="limit" method="post">
                                     <label class="text-black-50">limit number of students per supervisor: </label>
-                                    <input class="form-control" type="number"placeholder="Enter a number" id="limit_number" required></input>
-                                            <button class="btn btn-primary btn-primary mt-2">Confirm</button>
+                                    <input class="form-control" type="number"placeholder="Enter a number" id="limit_number" required>
+                                            <button class="btn btn-primary mt-2">Confirm</button>
                                         </form>
                                     </div>
                                     <div class="form-group row mt-5">

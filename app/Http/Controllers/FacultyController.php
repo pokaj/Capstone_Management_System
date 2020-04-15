@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReminderMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Meeting;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class FacultyController extends Controller
 {
@@ -157,6 +159,18 @@ class FacultyController extends Controller
             ->get();
 
         return ['success' => true, 'data' => $meetingInformation];
+
+    }
+
+    public function reminder(Request $request){
+        $reminder = $request->post('date');
+        $student = $request->post('student');
+        $supervisor = Auth::user()->userId;
+
+        $send = Mail::to(User::find($student))->send(new ReminderMail($student, $reminder, $supervisor));
+
+            return ['success' => true, 'data' =>$send ];
+
 
     }
 

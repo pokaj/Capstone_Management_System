@@ -110,11 +110,9 @@
                                         </div>
 
                                         <div class="modal-footer">
-                                            <form action="{{url('apply',$facultyProject->project_Id)}}">
-                                                <button class="btn btn-success">Apply</button>
-                                            </form>
+                                            <button class="btn btn-success" onclick="application({{$facultyProject->project_Id}})">Apply</button>
                                             <span>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Ignore </button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Ignore</button>
                                                 </span>
 
                                         </div>
@@ -165,7 +163,6 @@
                                         </tr>
 
                                         <!-- beginning of modal for viewing and editing project details-->
-
                                         <div class="modal fade" id="{{$user->project_Id}}">
                                             <form>
                                                 <div class="modal-dialog">
@@ -342,7 +339,7 @@
                                     </div>
                                     <div class="card-body">
 
-                                        <form role="form" method="post" action="{{url('studentTopics')}}">
+                                        <form role="form" method="post" action="{{route('studentTopics')}}">
                                             @csrf
 
 

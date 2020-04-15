@@ -1,7 +1,7 @@
 @component('mail::message')
-# Introduction
+# Hello {{$student}}
 
-Your project has been Approved.
+Your project has been approved by {{$first}} {{$last}}.
 
 Thanks,<br>
 {{ config('app.name') }}

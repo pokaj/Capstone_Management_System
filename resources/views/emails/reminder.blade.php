@@ -1,8 +1,8 @@
 @component('mail::message')
-# Introduction
+# Hello {{$username}},
 
-your meeting with mr.sampah is on 1st march 2o20
+Please be reminded of our meeting on {{$reminder}}
 
 Thanks,<br>
-{{ config('app.name') }}
+{{$first}} {{$last}}
 @endcomponent

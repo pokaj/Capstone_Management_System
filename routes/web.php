@@ -41,13 +41,13 @@ Route::post('/reminder', 'FacultyController@reminder')->name('reminder');
 Route::get('project{id}','ProjectsController@go_to_project')->name('viewProject'); //REVIEW
 Route::post('/submit','ProjectsController@store');
 Route::get('/show','ProjectsController@view_faculty_Projects');
-Route::post('studentTopics','ProjectsController@select_supervisor');
+//Route::post('studentTopics','ProjectsController@select_supervisor');
 Route::put('completeProfile', 'StudentController@complete')->name('complete');
-Route::post('studentTopics','ProjectsController@select_supervisor');
+Route::post('studentTopics','ProjectsController@select_supervisor')->name('studentTopics');
 Route::delete('deleteproject/{id}','ProjectsController@deleteproject')->name('deleteproject');
 Route::get('acceptProject/{id}','ProjectsController@acceptProject')->name('acceptProject');
-Route::get('apply/{id}','ProjectsController@apply')->name('apply');
-Route::get('acceptProposal/{project_ID}/{student_ID}','ProjectsController@acceptProposal')->name('acceptProposal');
+Route::post('apply','ProjectsController@apply')->name('apply');
+Route::get('acceptProposal','ProjectsController@acceptProposal')->name('acceptProposal');
 
 /*
  * Routes for students

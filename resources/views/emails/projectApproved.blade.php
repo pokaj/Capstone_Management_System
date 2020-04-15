@@ -1,8 +1,8 @@
 @component('mail::message')
-# Introduction
+# Hello {{$student}}
 
-Faculty has approved for you to work on his project.
-
+{{$first}} {{$last}} has agreed that you work on project:
+<p>{{$project}}</p>
 Thanks,<br>
 {{ config('app.name') }}
 @endcomponent

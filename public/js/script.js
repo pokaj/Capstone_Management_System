@@ -141,17 +141,124 @@ $("#limit").submit(function (e) {
     });
 });
 
-var btn = document.getElementById('button');
-var bar = document.getElementById('bar');
-var count = 0;
-// Listen for an event on the button
-// Increase the width of the bar by 10 percent(10%)
-btn.addEventListener('click', ()=>{
-    bar.style.width = count + '%';
-    if(count === 100){
-        count = 0;
-    }
-    else {
-        count = count + 20;
-    }
+$("#next").submit(function (e) {
+    e.preventDefault();
+    let date = document.getElementById("reminder").value;
+    let student = document.getElementById("student").value;
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        type: 'POST',
+        url: '/reminder',
+        data: {
+            date:date,
+            student:student
+        },
+        success: function (data) {
+            if (data.success === true) {
+                Swal.fire(
+                    "Great",
+                    "Reminder sent successfully",
+                    "success"
+                );
+
+            }
+            else{
+                Swal.fire(
+                    "Sorry",
+                    "Reminder failed to send",
+                    "error"
+                );
+            }
+        },
+    });
+
 });
+
+function application(id) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: 'apply',
+            data: {
+                project_ID: id
+            },
+            success: function (data) {
+                if (data.success === true) {
+                    Swal.fire(
+                        "Great",
+                        "You have applied for this project",
+                        "success"
+                    );
+                } else {
+                    Swal.fire(
+                        "Sorry",
+                        "Reminder failed to send",
+                        "error"
+                    );
+                }
+            },
+        });
+}
+
+function approve(project_ID,student_ID){
+    console.log(project_ID);
+    console.log(student_ID);
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        type: 'get',
+        url: 'acceptProposal',
+        data: {
+            project_ID: project_ID,
+            student_ID: student_ID
+        },
+        success: function (data) {
+            if (data.success === true) {
+                console.log(data);
+
+                // Swal.fire(
+                //     "Great",
+                //     "You have applied for this project",
+                //     "success"
+                // );
+            } else {
+                // Swal.fire(
+                //     "Sorry",
+                //     "Reminder failed to send",
+                //     "error"
+                // );
+            }
+        },
+    });
+
+
+}
+// var btn = document.getElementById('button');
+// var bar = document.getElementById('bar');
+// var count = 0;
+// // Listen for an event on the button
+// // Increase the width of the bar by 10 percent(10%)
+// btn.addEventListener('click', ()=>{
+//     bar.style.width = count + '%';
+//     if(count === 100){
+//         count = 0;
+//     }
+//     else {
+//         count = count + 20;
+//     }
+// });
+//

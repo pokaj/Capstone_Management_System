@@ -261,8 +261,8 @@
                             <tr class="text-muted">
                                 <th>Name</th>
                                 <th>Project </th>
-                                <th>Accept</th>
-                                <th>Decline</th>
+                                <th>Actions</th>
+{{--                                <th>Decline</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -271,40 +271,31 @@
                                     <td>{{$appliedinfo->first_name}} {{$appliedinfo->last_name}}</td>
                                     <td>{{$appliedinfo->project_title}}</td>
                                     <td>
-                                        <form>
-                                       <a href="{{route('acceptProposal',['project_ID'=>$appliedinfo->project_Id, 'student_ID' => $appliedinfo->userId])}}"> <i class="fas fa-check text-success"></i></a>
-{{--                                            <a class="btn btn-success" href="{{route('post.show',['id'=>$post->id,'name'=>$post->title])}}">Show</a>--}}
-                                        </form>
-                                    </td>
-                                    <td>
-                                       <a href="####"><i class="fas fa-times text-danger"></i></a>
+                                        <a href="" data-toggle="modal" data-target="#{{$appliedinfo->project_Id}}{{$appliedinfo->userId}}"><i class="fas fa-eye text-muted"></i></a>
+
                                     </td>
                                 </tr>
 
                                 <!-- beginning of modal -->
-                                <div class="modal fade" id="">
+                                <div class="modal fade" id="{{$appliedinfo->project_Id}}{{$appliedinfo->userId}}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <div class="modal-header">
-                                                <p class="modal-title font-weight-bold">
-{{--                                                head here--}}
-                                                </p><br>
 
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <div class="modal-header">
+                                                <p><span class="font-weight-bold">Student Name: </span>{{$appliedinfo->first_name}} {{$appliedinfo->last_name}}</p>
                                             </div>
 
                                             <div class="modal-body">
-{{--                                       body here--}}
+                                                <p class="font-weight-bold">Project Title </p>
+
+                                                        <p>{{$appliedinfo->project_title}}</p>
                                             </div>
 
                                             <div class="modal-footer">
-                                                <form action="">
-                                                    <button class="btn btn-success">Accept</button>
-                                                </form>
+                                                <button class="btn btn-success" onclick='approve({{$appliedinfo->project_Id}},{{$appliedinfo->userId}})'>Accept</button>
+{{--                                                <a id="reply" onclick='loginmodal("#collapseBox{{ $comment->id }}", {{ Auth::user() ? true : false }})' role="button">Reply</a>--}}
                                                 <span>
-                                                <form>
-                                                <a href="" class="btn btn-danger">Decline</a>
-                                                    </form>
+                                                    <button class="btn btn-danger" data-dismiss="modal">Decline</button>
                                                 </span>
 
                                             </div>

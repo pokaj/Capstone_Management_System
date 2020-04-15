@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Casptone_Table;
 use App\Mail\ProjectAccepted;
 use App\Mail\ProjectApproved;
-use App\Notifications\AppliedForProject;
+use App\Mail\AppliedForProject;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -276,43 +276,49 @@ class ProjectsController extends Controller
             ));
 
         $capstone->save();
-        Mail::to(User::find($studentID)->email)->send(new ProjectAccepted());
+        Mail::to(User::find($studentID)->email)->send(new ProjectAccepted($studentID, $facultyID));
         return redirect()->back()->with('message','New student added!');
 
     }
 
 //    Function for students to apply for projects proposed by faculty members.
-    public function apply($id){
-        $find = Project::find($id);
+    public function apply(Request $request){
+
+        $project_ID = $request->post('project_ID');
+        $find = Project::find($project_ID);
         $studentID = Auth::user()->userId;
         $facultyID = $find->project_user;
-        $random =  User::find($facultyID);
-        $random->notify(new AppliedForProject());
 
         DB::table('pending_request')
             ->insert(array(
                 'faculty_Id' => $facultyID,
                 'student_Id' => $studentID,
-                'project_Id' => $id,
+                'project_Id' => $project_ID,
                 'status' => 'pending',
             ));
 
-       return redirect()->back()->with('message','You have just applied for a project!');
+        $send = Mail::to(User::find($facultyID)->email)->send(new AppliedForProject($studentID, $facultyID, $project_ID));
+
+        return ['success' => true, 'data' => $send ];
     }
 
 //    Function for faculty member to accept a student to work on his proposed topic
-    public function acceptProposal($project_ID,$student_ID){
+    public function acceptProposal(Request $request){
+
+        $project_ID = $request->get('project_ID');
+        $student_ID = $request->get('student_ID');
+        $faculty_ID = Auth::user()->userId;
 
         DB::table('capstone_table')
             ->insert(array(
-                'cp_supervisor' => Auth::user()->userId,
+                'cp_supervisor' => $faculty_ID,
                 'cp_Student' => $student_ID,
                 'cp_project' => $project_ID,
                 'cp_startdate' => now(),
             ));
 
-        DB::table('pending_request')
-            ->where('faculty_Id', Auth::user()->userId)
+        $data = DB::table('pending_request')
+            ->where('faculty_Id', $faculty_ID)
             ->where('student_Id',$student_ID)
             ->where('project_Id', $project_ID)
             ->update(array(
@@ -333,12 +339,16 @@ class ProjectsController extends Controller
             ));
 
         DB::table('faculty')
-            ->where('faculty_Id','=',Auth::user()->userId)
+            ->where('faculty_Id','=',$faculty_ID)
             ->increment('number_of_students', 1);
 
-        Mail::to(User::find($student_ID)->email)->send(new ProjectApproved());
+        Mail::to(User::find($student_ID)->email)->send(new ProjectApproved($student_ID,$faculty_ID,$project_ID));
 
-        return redirect()->back()->with('message','New student added!');
+
+        return ['success' => true, 'data' => $data ];
+
+
+//        return redirect()->back()->with('message','New student added!');
     }
 
 }

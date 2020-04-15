@@ -183,19 +183,17 @@
                     <div class="tab-pane" id="nextMeeting">
                         <div class="card">
                         <div class="card-body">
-                            <form>
-                                @csrf
                                 <div class="col-md-5">
-                                    <div class="form-group">
+                                        <form id="next" method="post">
+                                            @csrf
                                         <label class="bmd-label-floating">Next Meeting Date & Time:</label>
-                                        <form method="POST" action="{{route('reminder')}}">
-                                        <input class="form-control text-danger" value=" @if(count($meetingInfo) > 0) {{date("M jS, Y H:i A", strtotime($last->mt_nextDate))}}   @endif">
+                                        <input id="reminder" class="form-control text-danger" value=" @if(count($meetingInfo) > 0) {{date("M jS, Y H:i A", strtotime($last->mt_nextDate))}}   @endif">
+                                            @foreach($users as $student_ID)
+                                            <input type="hidden" id="student" value="{{$student_ID->student_user_id}}">
+                                            @endforeach
                                         <button class="btn btn-primary mt-2">Send Reminder</button>
                                         </form>
-                                    </div>
-
                                 </div>
-                            </form>
                         </div>
                         </div>
 
