@@ -11,8 +11,7 @@ use Illuminate\Queue\SerializesModels;
 class ProjectAccepted extends Mailable
 {
     use Queueable, SerializesModels;
-    public $studentID;
-    public $facultyID;
+    public $studentID, $facultyID;
 
     /**
      * Create a new message instance.

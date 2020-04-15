@@ -305,9 +305,10 @@ class ProjectsController extends Controller
 //    Function for faculty member to accept a student to work on his proposed topic
     public function acceptProposal(Request $request){
 
-        $project_ID = $request->get('project_ID');
-        $student_ID = $request->get('student_ID');
+        $project_ID = $request->post('project');
+        $student_ID = $request->post('student');
         $faculty_ID = Auth::user()->userId;
+
 
         DB::table('capstone_table')
             ->insert(array(
@@ -317,7 +318,7 @@ class ProjectsController extends Controller
                 'cp_startdate' => now(),
             ));
 
-        $data = DB::table('pending_request')
+        DB::table('pending_request')
             ->where('faculty_Id', $faculty_ID)
             ->where('student_Id',$student_ID)
             ->where('project_Id', $project_ID)
@@ -342,13 +343,10 @@ class ProjectsController extends Controller
             ->where('faculty_Id','=',$faculty_ID)
             ->increment('number_of_students', 1);
 
-        Mail::to(User::find($student_ID)->email)->send(new ProjectApproved($student_ID,$faculty_ID,$project_ID));
+        $send = Mail::to(User::find($student_ID)->email)->send(new ProjectApproved($student_ID, $faculty_ID, $project_ID));
 
+        return ['success' => true, 'data' => $send ];
 
-        return ['success' => true, 'data' => $data ];
-
-
-//        return redirect()->back()->with('message','New student added!');
     }
 
 }

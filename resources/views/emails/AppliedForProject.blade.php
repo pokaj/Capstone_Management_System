@@ -1,7 +1,7 @@
 @component('mail::message')
 # Hello {{$facutly_username}},
 
-<p class="text-capitalize">{{$student_first_name}} {{$student_last_name}}</p> just applied for the project with title
+<p> <span class="text-capitalize">{{$student_first_name}} {{$student_last_name}}</span> just applied for the project with title:</p>
 <strong>{{$project_title}}</strong>
 
 Thanks,<br>

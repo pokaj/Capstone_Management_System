@@ -293,9 +293,8 @@
 
                                             <div class="modal-footer">
                                                 <button class="btn btn-success" onclick='approve({{$appliedinfo->project_Id}},{{$appliedinfo->userId}})'>Accept</button>
-{{--                                                <a id="reply" onclick='loginmodal("#collapseBox{{ $comment->id }}", {{ Auth::user() ? true : false }})' role="button">Reply</a>--}}
                                                 <span>
-                                                    <button class="btn btn-danger" data-dismiss="modal">Decline</button>
+                                                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
                                                 </span>
 
                                             </div>

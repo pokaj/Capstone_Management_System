@@ -45,7 +45,7 @@ class coordinatorController extends Controller
     {
         $validatedData = $request->validate([
             'fname' => 'required|alpha|max:255',
-            'lname' => 'required|alpha|max:255',
+            'lname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'username' => 'required|max:255|alpha_dash|unique:users',
             'password' => 'required',
@@ -55,7 +55,6 @@ class coordinatorController extends Controller
                 'fname.required' => 'The first name field is required',
                 'fname.alpha' => 'First name field can only be text',
                 'lname.required' => 'The Last name field is required',
-                'lname.alpha' => 'Last name field can only be text'
             ]);
 
         $user = new User;

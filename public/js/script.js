@@ -210,9 +210,6 @@ function application(id) {
 }
 
 function approve(project_ID,student_ID){
-    console.log(project_ID);
-    console.log(student_ID);
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -220,27 +217,26 @@ function approve(project_ID,student_ID){
     });
 
     $.ajax({
-        type: 'get',
+        type: 'post',
         url: 'acceptProposal',
         data: {
-            project_ID: project_ID,
-            student_ID: student_ID
+            project: project_ID,
+            student: student_ID,
         },
         success: function (data) {
             if (data.success === true) {
-                console.log(data);
-
-                // Swal.fire(
-                //     "Great",
-                //     "You have applied for this project",
-                //     "success"
-                // );
+                Swal.fire(
+                    "Great",
+                    "You have accepted to supervise this student",
+                    "success",
+                    setTimeout("location.href = '/topics'",2000)
+                    );
             } else {
-                // Swal.fire(
-                //     "Sorry",
-                //     "Reminder failed to send",
-                //     "error"
-                // );
+                Swal.fire(
+                    "Sorry",
+                    "Could not add student",
+                    "error"
+                );
             }
         },
     });

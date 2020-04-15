@@ -47,7 +47,7 @@ Route::post('studentTopics','ProjectsController@select_supervisor')->name('stude
 Route::delete('deleteproject/{id}','ProjectsController@deleteproject')->name('deleteproject');
 Route::get('acceptProject/{id}','ProjectsController@acceptProject')->name('acceptProject');
 Route::post('apply','ProjectsController@apply')->name('apply');
-Route::get('acceptProposal','ProjectsController@acceptProposal')->name('acceptProposal');
+Route::post('acceptProposal','ProjectsController@acceptProposal');
 
 /*
  * Routes for students
