@@ -1,5 +1,5 @@
 @component('mail::message')
-# Hello {{$student}}
+# Hello {{$student}},
 
 Your project has been approved by {{$first}} {{$last}}.
 

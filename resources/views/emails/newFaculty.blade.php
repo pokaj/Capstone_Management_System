@@ -1,11 +1,13 @@
 @component('mail::message')
-# Introduction
+# Hello {{$first}} {{$last}}
 
-Your account has just been created. login with the button below:
+<p>Your account has just been created with the following credentials:</p>
+    <ul>
+        <li><span class="text-primary">E-mail: </span>{{$email}}</li>
+        <li><span class="text-primary">Password: </span>{{$password}}</li>
+    </ul>
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+<h5 class="text-danger">Please change your password after logging in!</h5>
 
 Thanks,<br>
 {{ config('app.name') }}

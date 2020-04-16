@@ -1,7 +1,7 @@
 @component('mail::message')
 # Hello {{$username}},
 
-Please be reminded of our meeting on {{$reminder}}
+<p>Please be reminded of our meeting on {{$reminder}}</p>
 
 Thanks,<br>
 {{$first}} {{$last}}

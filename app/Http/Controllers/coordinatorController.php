@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 //use App\Auth;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -47,6 +48,7 @@ class coordinatorController extends Controller
             'fname' => 'required|alpha|max:255',
             'lname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
+            'dept' => 'required',
             'username' => 'required|max:255|alpha_dash|unique:users',
             'password' => 'required',
 
@@ -73,7 +75,7 @@ class coordinatorController extends Controller
         $faculty->number_of_students = 0;
         $faculty->save();
 
-        Mail::to($user->email)->send(new NewFaculty());
+        Mail::to($user->email)->send(new NewFaculty($user->first_name,$user->last_name,$user->email,$validatedData['password']));
 
         return redirect()->back()
             ->with('message', 'New faculty member added');

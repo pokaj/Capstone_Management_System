@@ -1,8 +1,8 @@
 @component('mail::message')
-# Hello {{$student_username}}
+# Hello {{$student_username}},
 
-{{$faculty_firstname}} {{$faculty_lastname}} has approved that you work on project:
-{{$project_title}}
+<p>{{$faculty_firstname}} {{$faculty_lastname}} has approved that you work on project:</p>
+<strong>{{$project_title}}</strong>
 
 
 Thanks,<br>

@@ -275,6 +275,10 @@ class ProjectsController extends Controller
                 'status' => 'taken'
             ));
 
+        DB::table('faculty')
+            ->where('faculty_Id','=',$facultyID)
+            ->increment('number_of_students', 1);
+
         $capstone->save();
         Mail::to(User::find($studentID)->email)->send(new ProjectAccepted($studentID, $facultyID));
         return redirect()->back()->with('message','New student added!');
