@@ -34,11 +34,15 @@
                                                             <div class="col-md-8">
                                                                 <p><i class="fa fa-user" aria-hidden="true"></i>  {{Auth::user()->first_name}} {{Auth::user()->last_name}}</p>
                                                                 <p><i class="fa fa-envelope" aria-hidden="true"></i>  {{Auth::user()->email}} </p>
+                                                                @foreach($depart as $dept)
+                                                                <p><i class="fa fa-building" aria-hidden="true"></i> {{$dept->department_name}}</p>
+                                                                @endforeach
                                                                 <p><i class="fa fa-phone" aria-hidden="true"></i> {{Auth::user()->phone}} </p>
-                                                                <h4>Interests</h4>
-                                                                <p>
-                                                                    Indie music, skiing and hiking. I love the great outdoors.
-                                                                </p>
+                                                                <h4>Bio</h4>
+                                                                @foreach($bio as $about)
+                                                                <p>{{$about->Bio}}</p>
+                                                                @endforeach
+
                                                             </div>
                                                         </div>
                                                         <!--/row-->
@@ -90,9 +94,9 @@
                                                                     </select>
                                                                 </div>
 
-                                                                <label class="col-lg-3 col-form-label form-control-label">Interests</label>
+                                                                <label class="col-lg-3 col-form-label form-control-label">Bio</label>
                                                                 <div class="col-lg-9">
-                                                                    <textarea name="interests" class="form-control mt-3" type="text" value=""></textarea>
+                                                                    <textarea name="bio" class="form-control mt-3" type="text" value=""></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">

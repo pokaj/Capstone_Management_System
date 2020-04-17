@@ -16,18 +16,6 @@
                         <div class="row my-2">
                             <div class="col-lg-8 order-lg-2">
                                 <ul class="nav nav-tabs">
-                                    @foreach($dummydata as $dummy)
-                                    @if($dummy->student_Id == null)
-                                            <li class="nav-item">
-                                                <a href="" data-target="#updateProfile" data-toggle="tab" class="nav-link text-danger">
-                                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Complete Profile
-                                                    <i class="fa fa-exclamation" aria-hidden="true"></i>
-                                                    <i class="fa fa-exclamation" aria-hidden="true"></i>
-                                                    <i class="fa fa-exclamation" aria-hidden="true"></i>
-                                                </a>
-                                            </li>
-                                        @endif
-                                    @endforeach
 
                                     @foreach($dummydata as $dummy)
                                         @if($dummy->student_Id != null)
@@ -56,9 +44,15 @@
                                                 </ul>
                                             </div>
                                         @endif
-                                        <div class="tab-pane" id="updateProfile">
 
-                                            <h4 class="mb-3">Complete your Profile</h4>
+                                        @foreach($dummydata as $dummy)
+                                            @if($dummy->student_Id == null)
+                                        <div>
+                                            <span class="mb-3 h4 text-danger">Complete your Profile</span>
+                                            <i class="fa fa-exclamation-triangle text-danger" aria-hidden="true"></i>
+                                            <i class="fa fa-exclamation text-danger" aria-hidden="true"></i>
+                                            <i class="fa fa-exclamation text-danger" aria-hidden="true"></i>
+                                            <i class="fa fa-exclamation text-danger" aria-hidden="true"></i>
                                         <form role="form" method="post" action="{{route('complete')}}">
                                             @csrf
                                             <input name="_method" type="hidden" value="PUT">
@@ -87,6 +81,9 @@
                                             </div>
                                         </form>
                                   </div>
+                                            @endif
+                                        @endforeach
+
 
                                     @foreach($dummydata as $dummy)
                                         @if($dummy->student_Id != null)

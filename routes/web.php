@@ -33,6 +33,8 @@ Route::post('createMeeting','FacultyController@createMeeting')->name('createMeet
 Route::post('/meetingDetails', 'FacultyController@searchMeeting')->name('searchMeeting');
 //Route::get('/feedback', 'FacultyController@feedback')->name('feedback');
 Route::post('/reminder', 'FacultyController@reminder')->name('reminder');
+Route::get('/contact', 'FacultyController@contact')->name('contact');
+
 
 
 /*
@@ -41,7 +43,6 @@ Route::post('/reminder', 'FacultyController@reminder')->name('reminder');
 Route::get('project{id}','ProjectsController@go_to_project')->name('viewProject'); //REVIEW
 Route::post('/submit','ProjectsController@store');
 Route::get('/show','ProjectsController@view_faculty_Projects');
-//Route::post('studentTopics','ProjectsController@select_supervisor');
 Route::put('completeProfile', 'StudentController@complete')->name('complete');
 Route::post('studentTopics','ProjectsController@select_supervisor')->name('studentTopics');
 Route::delete('deleteproject/{id}','ProjectsController@deleteproject')->name('deleteproject');

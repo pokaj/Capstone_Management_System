@@ -1,5 +1,5 @@
 @component('mail::message')
-# Hello {{$first}} {{$last}}
+# Hello {{$first}} {{$last}},
 
 <p>Your account has just been created with the following credentials:</p>
     <ul>

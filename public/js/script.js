@@ -92,7 +92,7 @@ function run(id) {
 
 $('#find').on('keyup',function (){
     if($('#find').val()===""){
-        $('#tbody').html("");
+        $('#faculty_details').html("");
         return;
     }
     value = $(this).val();
@@ -101,7 +101,7 @@ $('#find').on('keyup',function (){
         url:'/viewFaculty',
         data:{search:value},
         success:function(data){
-            $('tbody').html(data);
+            $('#faculty_details').html(data);
             console.log(data);
 
         }
@@ -243,6 +243,8 @@ function approve(project_ID,student_ID){
 
 
 }
+
+
 // var btn = document.getElementById('button');
 // var bar = document.getElementById('bar');
 // var count = 0;

@@ -65,12 +65,21 @@ class StudentController extends Controller
                 ->where('cp_student','=',Auth::user()->userId)
                 ->get();
 
+            $selected = DB::table('faculty_student')
+                ->join('faculty','faculty.faculty_Id','=','faculty_student.faculty_Id')
+                ->join('users','userId','=','faculty.faculty_Id')
+                ->join('department','department_Id','=','faculty_dept')
+                ->where('student_Id','=',Auth::user()->userId)
+                ->where('status','=','picked')
+                ->get();
+
+//            return $selected;
 
             $count = count($facultyProjects);
             $usersProjects = count($users);
 
             return view('student/student_topics' ,compact('users','facultyProjects','facultyDropdown',
-                'approvedProjects','count','usersProjects'));
+                'approvedProjects','count','usersProjects','selected'));
         }
 
 
@@ -194,6 +203,7 @@ class StudentController extends Controller
                 $output.= '<tr>'.
                     '<td>'. $faculty->first_name.' '.' '.$faculty->last_name.'</td>'.
                     '<td>'.$faculty->department_name.'</td>'.
+                    '<td>'.$faculty->Bio.'</td>'.
                     '</tr>';
             }
             return Response($output);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Contact;
 use App\Mail\ReminderMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -69,10 +70,19 @@ class FacultyController extends Controller
     {
         if (Auth::user()->category == 'faculty') {
 
+            $bio = DB::table('users')
+                ->join('faculty','faculty_Id','=','userId')
+                ->where('faculty_Id','=',Auth::user()->userId)
+                ->get();
+
+            $depart = DB::table('department')
+                ->join('faculty','faculty_dept','=','department_Id')
+                ->where('faculty_Id','=',Auth::user()->userId)
+                ->get();
+
             $depts = DB::table('department')->get();
 
-
-            return view('faculty/faculty_profile' ,compact('depts'));
+            return view('faculty/faculty_profile' ,compact('depts','bio','depart'));
         }
         return view('student_profile');
     }
@@ -118,7 +128,7 @@ class FacultyController extends Controller
                 ->where('faculty_Id','=', Auth::user()->userId)
                 ->update(array(
                     'faculty_dept' => $request->input('department'),
-                    'faculty_interests' => $request->input('interests')
+                    'Bio' => $request->input('bio')
                 ));
 
             return redirect()->back()
@@ -172,7 +182,13 @@ class FacultyController extends Controller
             return ['success' => true, 'data' =>$send ];
 
 
+    }   public function contact(Request $request){
+        $faculty = Auth::user()->userId;
+        Mail::to($request->mail)->send(new Contact($faculty,$request->subject, $request->message));
+            return redirect('/topics')->with('message','Mail sent');
+
     }
+
 
 
 

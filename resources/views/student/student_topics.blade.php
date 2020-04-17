@@ -303,31 +303,14 @@
                                     <tr class="text-muted">
                                         <th>Name</th>
                                         <th>Department</th>
+                                        <th>View Bio</th>
                                     </tr>
                                     </thead>
                                     <div id="hidden">
-                                        <tbody id="tbody">
+                                        <tbody id="faculty_details">
                                         <tr>
                                             <td></td>
                                             <td></td>
-
-                                            <!-- beginning of modal to view details -->
-                                            <div class="modal fade " id="viewFaculty">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <p class="modal-title font-weight-bold">Student Information
-                                                            </p><br>
-
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                        </div>
-
-                                                        <div class="modal-body align-content-center" id="content">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- end of modal to view details -->
                                         </tr>
                                         </tbody>
                                     </div>
@@ -409,6 +392,30 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                        <table class="table table-striped bg-light text-center mt-5">
+                            <h4 class="mt-5 text-capitalize text-muted">chosen faculty members</h4>
+
+                            <thead class="thead-dark">
+                            <tr class="text-muted">
+                                <th>Name</th>
+                                <th>Department</th>
+                            </tr>
+                            </thead>
+                            <div>
+                                <tbody>
+                                @foreach($selected as $faculty)
+                                <tr>
+
+                                    <td>{{$faculty->first_name}} {{$faculty->last_name}}</td>
+                                    <td>{{$faculty->department_name}}</td>
+
+                                </tr>
+                                @endforeach
+                                </tbody>
+                            </div>
+                        </table>
                         </div>
                     </div>
 

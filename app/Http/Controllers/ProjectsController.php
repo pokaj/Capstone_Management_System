@@ -18,19 +18,19 @@ class ProjectsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
         $facultyID = Auth::user()->userId;
-        if (Auth::user()->category == 'faculty') {
-            $faculty_projects = DB::table('users')
+
+        $faculty_projects = DB::table('users')
                 ->join('project', 'project.project_user', '=', 'users.userId')
                 ->where('project.project_user', '=', $facultyID)
                 ->select('users.first_name', 'users.last_name', 'project.*')
                 ->get();
 
-        }
+
         $users = DB::table('users')
             ->join('project', 'project.project_user', '=', 'users.userId')
             ->select('users.first_name', 'users.last_name', 'project.*')
@@ -53,16 +53,24 @@ class ProjectsController extends Controller
             ->select('users.*','project.*')
             ->get();
 
-        $select = DB::table('users')
-            ->join('faculty_student','student_Id','=','userId')
-            ->where('faculty_Id','=',Auth::user()->userId)
-            ->where('status','=','picked')
-             ->get();
+//        $select = DB::table('users')
+//            ->join('faculty_student','student_Id','=','userId')
+//            ->where('faculty_Id','=',Auth::user()->userId)
+//            ->where('status','=','picked')
+//             ->get();
+
+        $all_student_projects = DB::table('Project')
+            ->join('users','userId','=','project_user')
+            ->join('student','student_user_id','=','project_user')
+            ->where('project.status','=','pending')
+            ->get();
+
+        $count = count($all_student_projects);
 
         $pendingCount = count($showapplied);
 
         return View('faculty/topics', compact('users', 'faculty_projects',
-            'studentProjects','proposedCount','showapplied','pendingCount','select'));
+            'studentProjects','proposedCount','showapplied','pendingCount','all_student_projects','count'));
     }
 
     /**
@@ -79,7 +87,7 @@ class ProjectsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
 
 //    Function for both students and faculty members to create projects

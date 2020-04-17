@@ -191,3 +191,12 @@ width:230px;
 #button:hover {
     transform: translateY(-10px);
 }
+
+.to {
+   width: 10%;
+    background-color: #1d68a7;
+}
+.subject{
+    width: 20%;
+    background-color: #1d68a7;
+}

@@ -5,7 +5,6 @@
     <div class="container">
         <div class="row my-2">
             <div class="col-lg-8 order-lg-2">
-
 {{--                Beginning of navigation tab--}}
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -22,8 +21,10 @@
                         <a href="" data-target="#pending_projects" data-toggle="tab" class="nav-link">Pending Requests
                             <span class="text-danger">[{{$pendingCount}}]</span></a>
                     </li>
-
-
+                    <li class="nav-item">
+                        <a href="" data-target="#all_student_topics" data-toggle="tab" class="nav-link">All student projects
+                            <span class="text-danger">[{{$count}}]</span></a>
+                    </li>
                 </ul>
                 {{--                End of navigation tab--}}
 
@@ -46,27 +47,27 @@
                             <thead>
                             <tr class="text-muted">
                                 <th>Topic</th>
-                                <th>Student Name</th>
                                 <th>Field</th>
                                 <th>Type</th>
                                 <th>Actions</th>
-
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 @foreach($faculty_projects as $faculty_project)
                                     <td>{{$faculty_project->project_title}}</td>
-                                    <td>-</td>
-                                    <td>{{$faculty_project->project_field}}</td>
-                                    <td>{{$faculty_project->project_type}}</td>
+                                    <td class="text-capitalize">{{$faculty_project->project_field}}</td>
+                                    <td class="text-capitalize">{{$faculty_project->project_type}}</td>
 
                                     <td>
-                                        <a href="" class="nav-link" data-toggle="modal" data-target="#edit_topic"><i class="fas fa-eye text-muted "></i></a>
+                                        <a href="" class="nav-link" data-toggle="modal" data-target="#{{$faculty_project->project_user}}{{$faculty_project->project_Id}}">
+                                            <i class="fas fa-eye text-muted "></i></a>
                                     </td>
+                                    @if($faculty_project->status == 'pending')
                                     <td>
                                         <a href="" class="nav-link" data-toggle="modal" data-target="#{{$faculty_project->project_Id}}"><i class="fas fa-trash-alt text-danger "></i></a>
                                     </td>
+                                    @endif
                             </tr>
 
                             <!-- beginning of modal to delete project-->
@@ -94,7 +95,7 @@
 
                             <!-- beginning of modal -->
 
-                            <div class="modal fade" id="edit_topic">
+                            <div class="modal fade" id="{{$faculty_project->project_user}}{{$faculty_project->project_Id}}">
                                 <form>
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -189,7 +190,6 @@
                     {{--                    End of section for adding new capstone topic--}}
 
                     {{--                        Beginning of section for projects proposed by students--}}
-
                     <div class="tab-pane" id="project_proposals">
 
                         <h3 class="text-muted mb-3 mt-3">Projects proposed by students</h3>
@@ -251,9 +251,7 @@
                     </div>
                     {{--                    --}}{{--                    End of section for projects proposed by students--}}
 
-
                     {{--                        Beginning of section for pending student projects--}}
-
                     <div class="tab-pane" id="pending_projects">
                         <h3 class="text-muted mb-3 mt-3">Students awaiting approval</h3>
                         <table class="table text-center table-dark table-hover">
@@ -305,14 +303,152 @@
                                 <!-- end of modal -->
                             </tbody>
                         </table>
-
-                        <label>These students chose you but dont have projects yet: </label>
-                        @foreach($select as $selected)
-                           <p> {{$selected->first_name}} {{$selected->last_name}}</p>
-                            @endforeach
                     </div>
                     {{--                    --}}{{--                    End of section for pending student projects--}}
 
+
+                    {{--                        Beginning of section for projects proposed by students--}}
+                    <div class="tab-pane" id="project_proposals">
+
+                        <h3 class="text-muted mb-3 mt-3">Projects proposed by students</h3>
+                        <table class="table text-center table-dark table-hover">
+                            <thead>
+                            <tr class="text-muted">
+                                <th>Name</th>
+                                <th>Project Type</th>
+                                <th>Field</th>
+                                <th>Actions</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($studentProjects as $studentProject)
+                                <tr>
+                                    <td>{{$studentProject->first_name}} {{$studentProject->last_name}}</td>
+                                    <td>{{$studentProject->project_type}}</td>
+                                    <td>{{$studentProject->project_field}}</td>
+                                    <td>
+                                        <a href="" class="nav-link" data-toggle="modal" data-target="#{{$studentProject->project_Id}}"><i class="fas fa-eye text-muted fa-lg"></i></a>
+                                    </td>
+                                    <td><span class="badge badge-warning w-80 py-2">Pending</span></td>
+                                </tr>
+
+                                <!-- beginning of modal -->
+                                <div class="modal fade" id="{{$studentProject->project_Id}}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <p class="modal-title font-weight-bold">
+                                                    {{$studentProject->project_title}}
+                                                </p><br>
+
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                {{$studentProject->project_desc}}
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <form action="{{route('acceptProject',$studentProject->project_Id)}}">
+                                                    <button class="btn btn-success">Accept</button>
+                                                </form>
+                                                <span>
+{{--                                                <a href="" class="btn btn-danger">Decline</a>--}}
+                                                <button class="btn btn-danger">Decline</button>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end of modal -->
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    {{--                    --}}{{--                    End of section for projects proposed by students--}}
+
+                    {{--                        Beginning of section for all student projects--}}
+                    <div class="tab-pane" id="all_student_topics">
+                        <h3 class="text-muted mb-3 mt-3">Student projects without supervisors</h3>
+                        <table class="table text-center table-dark table-hover">
+                            <thead>
+                            <tr class="text-muted">
+                                <th>Name</th>
+                                <th>Project Type</th>
+                                <th>Project Field</th>
+                                <th>View Description</th>
+                                <th>contact</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($all_student_projects as $project)
+                                <tr>
+                                    <td>{{$project->first_name}} {{$project->last_name}}</td>
+                                    <td>{{$project->project_type}}</td>
+                                    <th>{{$project->project_field}}</th>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#{{$project->project_Id}}{{$project->userId}}"><i class="fas fa-eye text-muted"></i></a>
+                                    </td>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#{{$project->project_Id}}{{$project->last_name}}"><i class="fas fa-envelope text-muted"></i></a>
+                                    </td>
+                                </tr>
+
+                                <!-- beginning of modal -->
+                                <div class="modal fade" id="{{$project->project_Id}}{{$project->userId}}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <p class="font-weight-bold">{{$project->first_name}} {{$project->last_name}}</p>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <p class="text-danger">Project Title </p>
+
+                                                <p>{{$project->project_title}}</p>
+                                                <hr>
+                                                <p class="text-danger">Project Description</p>
+                                                <p>{{$project->project_desc}}</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end of modal -->
+
+                                <!-- beginning of modal -->
+                                <div class="modal fade" id="{{$project->project_Id}}{{$project->last_name}}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <form method="get" action="{{route('contact')}}">
+                                            <div class="modal-header">
+                                                <label class="to text-white form-control">To: </label>
+                                                <input class="form-control" name="mail" value="{{$project->email}}">
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <label class="subject text-white form-control">Subject: </label>
+                                                <input class="form-control" name="subject">
+
+                                                <hr>
+                                                <label>Message</label>
+                                                <textarea class="form-control" name="message"></textarea>
+                                                <button class="mt-2 btn btn-primary">Send</button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end of modal -->
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    {{--                    --}}{{--                    End of section for all student projects--}}
                 </div>
             </div>
         </div>
