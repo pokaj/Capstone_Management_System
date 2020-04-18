@@ -102,7 +102,6 @@ $('#find').on('keyup',function (){
         data:{search:value},
         success:function(data){
             $('#faculty_details').html(data);
-            console.log(data);
 
         }
     })
@@ -123,7 +122,6 @@ $("#limit").submit(function (e) {
         data: {limit:value},
         success: function (data) {
             if (data.success === true) {
-                console.log(data);
                 Swal.fire(
                     "Great",
                     "Limit on number of students changed to " + value,
@@ -243,6 +241,70 @@ function approve(project_ID,student_ID){
 
 
 }
+$(document).ready(function() {
+    $(document).on('click', '.page-link', function (event) {
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page);
+    })
+
+    function fetch_data(page) {
+        var _token = $("input[name=_token]").val();
+        $.ajax({
+            url: "/super_dashboard/fetch_data",
+            type:'post',
+            data:{_token:_token, page:page},
+            success: function (data) {
+                $('#table_data').html(data);
+            }
+        })
+    }
+});
+
+
+$(document).ready(function() {
+    $(document).on('click', '.page-link', function (event) {
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page);
+    })
+
+    function fetch_data(page) {
+        var _token = $("input[name=_token]").val();
+        $.ajax({
+            url: "/super_dashboard/super",
+            type:'post',
+            data:{_token:_token, page:page},
+            success: function (data) {
+                $('#supervised_student').html(data);
+            }
+        })
+    }
+});
+
+
+
+$(document).ready(function() {
+    $(document).on('click', '.page-link', function (event) {
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page);
+    })
+
+    function fetch_data(page) {
+        var _token = $("input[name=_token]").val();
+        $.ajax({
+            url: "/super_dashboard/unsuper",
+            type:'post',
+            data:{_token:_token, page:page},
+            success: function (data) {
+                $('#unsupervised_student').html(data);
+            }
+        })
+    }
+});
+
+
 
 
 // var btn = document.getElementById('button');

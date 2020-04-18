@@ -185,7 +185,7 @@ class FacultyController extends Controller
     }   public function contact(Request $request){
         $faculty = Auth::user()->userId;
         Mail::to($request->mail)->send(new Contact($faculty,$request->subject, $request->message));
-            return redirect('/topics')->with('message','Mail sent');
+            return redirect()->back()->with('message','Mail sent');
 
     }
 

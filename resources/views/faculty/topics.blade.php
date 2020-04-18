@@ -432,11 +432,11 @@
 
                                             <div class="modal-body">
                                                 <label class="subject text-white form-control">Subject: </label>
-                                                <input class="form-control" name="subject">
+                                                <input class="form-control" name="subject" required>
 
                                                 <hr>
                                                 <label>Message</label>
-                                                <textarea class="form-control" name="message"></textarea>
+                                                <textarea class="form-control" name="message" required></textarea>
                                                 <button class="mt-2 btn btn-primary">Send</button>
                                             </div>
                                             </form>

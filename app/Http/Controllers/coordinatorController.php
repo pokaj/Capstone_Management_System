@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Faculty;
 use App\Mail\NewFaculty;
-use App\Project;
 use Illuminate\Http\Request;
-//use App\Auth;
 use App\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -18,21 +14,87 @@ class coordinatorController extends Controller
 {
     public function index()
     {
+        $faculty = DB::table('faculty')
+            ->join('users','userId','=','faculty_Id')
+            ->join('department','department_Id','=','faculty_dept')
+            ->paginate(5);
 
-        $faculty = DB::table('faculty')->get();
-        $students = DB::table('student')->get();
-        $capstone = DB::table('capstone_table')->get();
+        $unsuper = DB::table('student')
+            ->leftJoin('capstone_table','student.student_user_id','=','capstone_table.cp_student')
+            ->join('users','userId','=','student.student_user_id')
+            ->join('major','major_Id','=','student_major')
+            ->where('capstone_table.cp_student','=',NULL)
+            ->paginate(5);
 
-        $facultyCount = count($faculty);
-        $studentCount = count($students);
-        $capstoneCount = count($capstone);
+        $supervised = DB::table('student')
+            ->join('capstone_table','cp_student','=','student_user_id')
+            ->join('project','project_Id','=','cp_project')
+            ->join('users','userId','=','student_user_id')
+            ->join('major','major_Id','=','student_major')
+            ->paginate(5);
 
-        return view('coordinator/super_dashboard', compact('facultyCount', 'studentCount', 'capstoneCount'));
+//        return $supervised;
+
+        $supervisedCount = count(DB::table('student')
+            ->join('capstone_table','cp_student','=','student_user_id')
+            ->join('project','project_Id','=','cp_project')
+            ->join('users','userId','=','student_user_id')
+            ->join('major','major_Id','=','student_major')
+            ->get());
+
+        $facultyCount = count(DB::table('faculty')->get());
+
+        $unsuperCount = count(DB::table('student')
+            ->leftJoin('capstone_table','student.student_user_id','=','capstone_table.cp_student')
+            ->join('users','userId','=','student.student_user_id')
+            ->where('capstone_table.cp_student','=',NULL)
+            ->get());
+
+        return view('coordinator/super_dashboard', compact('faculty','unsuper','facultyCount','unsuperCount',
+        'supervised','supervisedCount'));
+    }
+
+    public function fetch_data(Request $request){
+        if($request->ajax()){
+            $faculty = DB::table('faculty')
+                ->join('users','userId','=','faculty_Id')
+                ->join('department','department_Id','=','faculty_dept')
+                ->paginate(5);
+
+            return view('coordinator/faculty_pagination', compact('faculty'))->render();
+        }
+    }
+
+    public function unsupervised_student(Request $request){
+        if($request->ajax()){
+            $unsuper = DB::table('student')
+                ->leftJoin('capstone_table','student.student_user_id','=','capstone_table.cp_student')
+                ->join('users','userId','=','student.student_user_id')
+                ->join('major','major_Id','=','student_major')
+                ->where('capstone_table.cp_student','=',NULL)
+                ->paginate(5);
+
+            return view('coordinator/unsupervised_students', compact('unsuper'))->render();
+
+
+        }
+    }
+
+    public function supervised_students(Request $request){
+        if($request->ajax()){
+            $supervised = DB::table('student')
+                ->join('capstone_table','cp_student','=','student_user_id')
+                ->join('project','project_Id','=','cp_project')
+                ->join('users','userId','=','student_user_id')
+                ->join('major','major_Id','=','student_major')
+                ->paginate(5);
+
+            return view('coordinator/supervised_students', compact('supervised'))->render();
+        }
     }
 
     public function addFaculty()
     {
-
         $dept = DB::table('department')->get();
         return view('coordinator/addFaculty', compact('dept'));
     }

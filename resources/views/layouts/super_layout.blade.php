@@ -134,6 +134,7 @@
         <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
             <div class="row pt-5 mt-md-3 mb-5">
 
+
                 @yield('content')
                 @yield('addFaculty')
                 @yield('super_profile')
@@ -177,6 +178,7 @@
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
