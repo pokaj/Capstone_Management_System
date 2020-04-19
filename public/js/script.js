@@ -107,7 +107,7 @@ $('#find').on('keyup',function (){
     })
 });
 
-
+// #######################   Coordinator manage faculty -> limit number of student for each faculty member  ##########################
 $("#limit").submit(function (e) {
     e.preventDefault();
     let value = document.getElementById("limit_number").value;
@@ -138,6 +138,30 @@ $("#limit").submit(function (e) {
         },
     });
 });
+
+
+// #######################   Coordinator manage faculty -> search for faculty  ##########################
+$(document).ready(function() {
+    $(document).on('click', '.page-link', function (event) {
+        event.preventDefault();
+        var currentpage = $(this).attr('href').split('page=')[1];
+        fetch_data(currentpage);
+
+    })
+
+    function fetch_data(currentpage) {
+        var _token = $("input[name=_token]").val();
+        $.ajax({
+            url: "/searchFaculty",
+            type:'get',
+            data:{_token:_token, page:currentpage},
+            success: function (data) {
+                $('#faculty_information').html(data);
+            }
+        })
+    }
+});
+
 
 $("#next").submit(function (e) {
     e.preventDefault();
@@ -241,6 +265,8 @@ function approve(project_ID,student_ID){
 
 
 }
+
+// #######################   Coordinator dashboard -> table list for supervisors  ##########################
 $(document).ready(function() {
     $(document).on('click', '.page-link', function (event) {
         event.preventDefault();
@@ -261,7 +287,7 @@ $(document).ready(function() {
     }
 });
 
-
+// #######################  Coordinator dashboard ->  table list for supervised students  ##########################
 $(document).ready(function() {
     $(document).on('click', '.page-link', function (event) {
         event.preventDefault();
@@ -282,8 +308,7 @@ $(document).ready(function() {
     }
 });
 
-
-
+// #######################  Coordinator dashboard -> table list for unsupervised students ##########################
 $(document).ready(function() {
     $(document).on('click', '.page-link', function (event) {
         event.preventDefault();
@@ -303,6 +328,113 @@ $(document).ready(function() {
         })
     }
 });
+
+
+// #######################  Coordinator dashboard -> searching for faculty ##########################
+$('#search_faculty').on('keyup',function (){
+    // if($('#search_faculty').val()===""){
+    //     $('#faculty_search').html("");
+    //     return;
+    // }
+    find = $(this).val();
+    $.ajax({
+        type:'get',
+        url:'/search_faculty_dash',
+        data:{value:find},
+        success:function(data){
+            $('#faculty_search').html(data);
+
+        }
+    })
+});
+
+// #######################  Coordinator dashboard -> searching for supervised students ##########################
+$('#superStudents').on('keyup',function (){
+    // if($('#search_faculty').val()===""){
+    //     $('#faculty_search').html("");
+    //     return;
+    // }
+    find = $(this).val();
+    $.ajax({
+        type:'get',
+        url:'/search_supervised_dash',
+        data:{value:find},
+        success:function(data){
+            $('#supervised_students').html(data);
+
+        }
+    })
+});
+
+
+// #######################  Coordinator dashboard -> searching for unsupervised students ##########################
+$('#unsuperStudents').on('keyup',function (){
+    // if($('#search_faculty').val()===""){
+    //     $('#faculty_search').html("");
+    //     return;
+    // }
+    find = $(this).val();
+    $.ajax({
+        type:'get',
+        url:'/search_unsupervised_dash',
+        data:{value:find},
+        success:function(data){
+            $('#unsupervised_students').html(data);
+
+        }
+    })
+});
+
+$(document).ready(function(){
+
+    // Initialize select2
+    $("#selUser").select2();
+
+    // Read selected option
+    $('#but_read').click(function(){
+        // var username = $('#selUser option:selected').text();
+        var userid = $('#selUser').val();
+        var feedback = $('#feedback').val();
+
+        $.ajax({
+            type:'get',
+            url:'/send_feedback',
+            data:{
+                studentID:userid,
+                feedback:feedback,},
+            success:function(data){
+                if (data.success === true) {
+                    Swal.fire(
+                        "Great",
+                        "Feedback sent to student",
+                        "success",
+                    );
+                } else {
+                    Swal.fire(
+                        "Sorry",
+                        "Could not send feedback",
+                        "error"
+                    );
+                }
+
+            }
+        })
+
+
+        // $('#result').html("id : " + userid + ", name : " + username);
+
+    });
+});
+
+
+//
+// $("#provide_feedback").submit(function(e) {
+//     e.preventDefault();
+//     let student_name = document.getElementById('student_name').value;
+//     let feedback = document.getElementById('feedback').value;
+//     console.log(student_name,feedback);
+// });
+
 
 
 

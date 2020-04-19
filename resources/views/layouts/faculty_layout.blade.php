@@ -6,8 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="title icon" href="images/title-img png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" crossorigin="anonymous">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link href='select2/dist/css/select2.min.css' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <title>Capstone Management System </title>
@@ -52,10 +52,9 @@
                                 <i class="fas fa-calendar-check text-white text-light fa-lg mr-3"></i>Milestones</a>
                         </li>
 
-{{--                        <li class="nav-item {{'feedback' == request()->path() ? 'current' : ''}}"><a href="/feedback" class="nav-link text-white p-3 mb-2 sidebar-link ">--}}
-{{--                                <i class="fas fa-comment text-white text-light fa-lg mr-3"></i>Provide Feedback</a>--}}
-{{--                        </li>--}}
-
+                        <li class="nav-item {{'feedback' == request()->path() ? 'current' : ''}}"><a href="/feedback" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                                <i class="fas fa-comment text-white text-light fa-lg mr-3"></i> Feedback</a>
+                        </li>
 
                     </ul>
 
@@ -189,9 +188,12 @@
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src='select2/dist/js/select2.min.js' type='text/javascript'></script>
 <script src="js/script.js"></script>
 </body>
 </html>

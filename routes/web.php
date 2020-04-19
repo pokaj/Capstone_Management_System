@@ -31,9 +31,10 @@ Route::put('studentProfile', 'StudentController@update')->name('update');
 Route::get('supervisor_requests', 'ProjectsController@supervisor_requests');
 Route::post('createMeeting','FacultyController@createMeeting')->name('createMeeting');
 Route::post('/meetingDetails', 'FacultyController@searchMeeting')->name('searchMeeting');
-//Route::get('/feedback', 'FacultyController@feedback')->name('feedback');
+Route::get('/feedback', 'FacultyController@feedback')->name('feedback');
 Route::post('/reminder', 'FacultyController@reminder')->name('reminder');
 Route::get('/contact', 'FacultyController@contact')->name('contact');
+Route::get('/send_feedback', 'FacultyController@send_feedback')->name('send_feedback');
 
 
 
@@ -74,6 +75,9 @@ Route::get('/manage_faculty','coordinatorController@manage_faculty');
 Route::get('/searchFaculty','coordinatorController@searchFaculty');
 Route::get('/details','coordinatorController@details');
 Route::post('/limit','coordinatorController@limit');
+Route::get('/search_faculty_dash','coordinatorController@search_faculty_dash');
+Route::get('/search_supervised_dash','coordinatorController@search_supervised_dash');
+Route::get('/search_unsupervised_dash','coordinatorController@search_unsupervised_dash');
 
 
 

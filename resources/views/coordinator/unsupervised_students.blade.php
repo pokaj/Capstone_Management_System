@@ -7,6 +7,7 @@
             <th>Contact</th>
         </tr>
         </thead>
+        <tbody id="unsupervised_students">
         @foreach($unsuper as $data)
             <tr>
                 <td>{{$data->first_name}} {{$data->last_name}}</td>
@@ -14,6 +15,7 @@
                 <td><a href="" data-toggle="modal" data-target="#{{$data->student_user_id}}" ><i class="fas fa-envelope text-muted"></i></a></td>
             </tr>
         @endforeach
+        </tbody>
     </table>
     <div class="col-12 d-flex pt-3 justify-content-center">
         {!! $unsuper->links() !!}

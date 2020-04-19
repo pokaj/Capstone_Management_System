@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Feedback;
 use App\Mail\Contact;
 use App\Mail\ReminderMail;
 use Illuminate\Http\Request;
@@ -186,6 +187,28 @@ class FacultyController extends Controller
         $faculty = Auth::user()->userId;
         Mail::to($request->mail)->send(new Contact($faculty,$request->subject, $request->message));
             return redirect()->back()->with('message','Mail sent');
+
+    }
+
+    public function feedback(){
+        $details = DB::table('student')
+            ->join('users','userId','=','student_user_id')
+            ->join('capstone_table','cp_student','=','student_user_id')
+            ->join('project','project_Id','=','cp_project')
+            ->get();
+
+        return view('faculty/feedback',compact('details'));
+    }
+
+    public function send_feedback(Request $request){
+            $feedback = new Feedback;
+            $feedback->faculty_Id = Auth::user()->userId;
+            $feedback->student_Id = $request->get('studentID');
+            $feedback->date = now();
+            $feedback->comments = $request->get('feedback');
+            $feedback->save();
+
+            return ['success' => true, 'data' => 1];
 
     }
 

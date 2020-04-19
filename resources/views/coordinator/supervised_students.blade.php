@@ -8,6 +8,7 @@
             <th>Contact</th>
         </tr>
         </thead>
+        <thead id="supervised_students">
         @foreach($supervised as $student)
             <tr>
                 <td class="text-capitalize">{{$student->first_name}} {{$student->last_name}}</td>
@@ -16,6 +17,7 @@
                 <td><a href="" data-toggle="modal" data-target="#{{$student->student_user_id}}" ><i class="fas fa-envelope text-muted"></i></a></td>
             </tr>
         @endforeach
+        </thead>
     </table>
     <div class="col-12 d-flex pt-3 justify-content-center">
         {!! $supervised->links() !!}

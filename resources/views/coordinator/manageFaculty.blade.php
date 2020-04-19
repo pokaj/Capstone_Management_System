@@ -49,41 +49,48 @@
                                     <table class="table table-striped bg-light text-center mt-5 col-lg-4">
                                         <thead class="thead-dark">
                                         <tr class="text-muted">
-                                            <th>Name</th>
-                                            <th>Department</th>
-                                            <th>Number of Students</th>
-                                            <th>View Students</th>
+                                            <th class="text-capitalize">name</th>
+                                            <th class="text-capitalize">department</th>
+                                            <th class="text-capitalize">number of students</th>
+                                            <th class="text-capitalize">view students</th>
                                         </tr>
                                         </thead>
                                         <div id="hidden">
-                                        <tbody id="tbody">
+                                        <tbody id="faculty_information">
+                                        @foreach($faculty_info as $data)
                                             <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-
-                                                <!-- beginning of modal to view details -->
-                                                <div class="modal fade " id="viewFaculty">
-                                                    <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <p class="modal-title font-weight-bold">Student Information
-                                                                </p><br>
-
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                            </div>
-
-                                                            <div class="modal-body align-content-center" id="content">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- end of modal to view details -->
+                                                <td>{{$data->first_name}} {{$data->last_name}}</td>
+                                                <td>{{$data->department_name}}</td>
+                                                <td>{{$data->number_of_students}}</td>
+                                                <td><a href=""  class="nav-link" data-toggle="modal" onclick="run({{$data->userId}})" data-target="#viewFaculty"><i class="fas fa-eye text-muted"></i></a></td>
+                                            @endforeach
                                             </tr>
                                         </tbody>
                                         </div>
                                     </table>
+                                    <div class="col-12 d-flex pt-3 justify-content-center">
+                                        {{$faculty_info->links()}}
+
+                                    </div>
+
+
+                                <!-- beginning of modal to view details -->
+                                    <div class="modal fade " id="viewFaculty">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <p class="modal-title font-weight-bold">Student Information
+                                                    </p><br>
+
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+
+                                                <div class="modal-body align-content-center" id="content">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end of modal to view details -->
                             </div>
                         </div>
                     </div>

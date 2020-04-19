@@ -7,6 +7,7 @@
 
     <!-- Beginning of cards  -->
                         <div class="col-xl-3 col-sm-6 p-2 mt-3">
+                            <a href="/students">
                             <div class="card card-common">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
@@ -18,9 +19,11 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
 
                         <div class="col-xl-3 col-sm-6 p-2 mt-3">
+                            <a href="/topics">
                             <div class="card card-common">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
@@ -32,6 +35,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
 
 

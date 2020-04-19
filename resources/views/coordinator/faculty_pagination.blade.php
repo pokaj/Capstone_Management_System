@@ -8,6 +8,7 @@
             <th>Contact</th>
         </tr>
         </thead>
+        <tbody id="faculty_search">
         @foreach($faculty as $data)
             <tr>
                 <td>{{$data->first_name}} {{$data->last_name}}</td>
@@ -16,6 +17,7 @@
                 <td><a href="" data-toggle="modal" data-target="#{{$data->faculty_Id}}" ><i class="fas fa-envelope text-muted"></i></a></td>
             </tr>
         @endforeach
+        </tbody>
     </table>
     <div class="col-12 d-flex pt-3 justify-content-center">
     {!! $faculty->links()  !!}

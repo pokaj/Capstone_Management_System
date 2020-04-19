@@ -31,11 +31,11 @@
 </div>
 
 <div class="modal fade" id="faculty">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
             <div class="modal-header">
-                <input class="form-control" placeholder="Search for faculty . . .">
+                <input class="form-control" id="search_faculty" placeholder="Search for faculty . . .">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <p class="font-weight-bold"></p>
             </div>
@@ -67,11 +67,11 @@
 </div>
 
 <div class="modal fade" id="supervised">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
             <div class="modal-header">
-                <input class="form-control" placeholder="Search for student . . .">
+                <input class="form-control" id="superStudents" placeholder="Search for student . . .">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <p class="font-weight-bold"></p>
             </div>
@@ -106,11 +106,11 @@
 </div>
 
 <div class="modal fade" id="unsuper">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
             <div class="modal-header">
-                <input class="form-control" placeholder="Search for student . . .">
+                <input class="form-control" id="unsuperStudents" placeholder="Search for student . . .">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <p class="font-weight-bold"></p>
             </div>
