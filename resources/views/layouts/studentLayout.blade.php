@@ -44,10 +44,14 @@
                         <li class="nav-item  {{'studentTopics' == request()->path() ? 'current' : ''}}"><a href="/studentTopics" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Topics/Supervisor</a>
                         </li>
+
                         <li class="nav-item  {{'myProject' == request()->path() ? 'current' : ''}}"><a href="/myProject" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-tasks text-white text-light fa-lg mr-3 "></i>My Project</a>
                         </li>
 
+                        <li class="nav-item  {{'student_project_feedback' == request()->path() ? 'current' : ''}}"><a href="/student_project_feedback" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                                <i class="fas fa-comment text-white text-light fa-lg mr-3"></i>Feedback</a>
+                        </li>
 
                     </ul>
 
@@ -64,19 +68,13 @@
                         <div class="col-md-5">
                             <form action="">
                                 <div class="input-group">
-                                    <input type="" class="form-control search-input" placeholder="search . .  .">
+                                    <input type="text" class="form-control search-input" placeholder="search . .  .">
                                     <button type="button" class="btn btn-white search-button"><i class="fas fa-search text-danger "></i></button>
                                 </div>
                             </form>
                         </div>
                         <div class="col-md-3">
                             <ul class="navbar-nav">
-{{--                                <li class="nav-item icon-parent">--}}
-{{--                                    <a href="" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a>--}}
-{{--                                </li>--}}
-{{--                                <li class="nav-item icon-parent">--}}
-{{--                                    <a href="" class="nav-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a>--}}
-{{--                                </li>--}}
                                 <li class="nav-item ml-md-auto mt-2">
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                         <a class="text-danger" href="{{ route('logout') }}"
@@ -113,7 +111,7 @@
                 @yield('student_profile')
                 @yield('student_topics')
                 @yield('myProject')
-{{--                @yield('milestones')--}}
+                @yield('student_project_feedback')
             </div>
         </div>
     </div>

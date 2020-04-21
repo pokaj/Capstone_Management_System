@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -209,6 +208,17 @@ class StudentController extends Controller
             return Response($output);
 
         }
+    }
+
+    public function student_project_feedback(){
+        $feedback = DB::table('feedback')
+            ->join('faculty','faculty.faculty_Id','=','feedback.faculty_Id')
+            ->join('department','department_Id','=','faculty.faculty_dept')
+            ->join('users','userId','=','faculty.faculty_Id')
+            ->where('feedback.student_Id','=',Auth::user()->userId)
+            ->get();
+//        return $feedback;
+        return view('student/projectFeedback',compact('feedback'));
     }
 
 
