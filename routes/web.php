@@ -35,6 +35,7 @@ Route::get('/feedback', 'FacultyController@feedback')->name('feedback');
 Route::post('/reminder', 'FacultyController@reminder')->name('reminder');
 Route::get('/contact', 'FacultyController@contact')->name('contact');
 Route::get('/send_feedback', 'FacultyController@send_feedback')->name('send_feedback');
+Route::post('/upload_image', 'FacultyController@upload_image')->name('upload_image');
 
 
 

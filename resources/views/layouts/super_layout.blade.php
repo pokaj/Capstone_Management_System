@@ -26,7 +26,11 @@
                 <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
                     <a href="/super_dashboard" class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">Dashboard</a>
                     <div class="bottom-border pb-3">
-                        <img src="images/avatar.png" width="40" class="rounded-circle mr-3">
+                        @if(Auth::user()->image == null)
+                            <img src="images/no_image.png" width="50" class="rounded-circle mr-3">
+                        @else
+                            <img src="images/{{Auth::user()->image}}" width="50" class="rounded-circle mr-3">
+                        @endif
                         <a href="/super_profile" class="text-white"> {{Auth::user()->username}}</a>
                     </div>
 

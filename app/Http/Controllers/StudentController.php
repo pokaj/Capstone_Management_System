@@ -131,6 +131,10 @@ class StudentController extends Controller
     //    Function to update student information
     public function update(Request $request){
 
+        $this->validate($request,[
+            'picture' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
         $updatefaculty = DB::table('users')
         ->where('userId','=',Auth::user()->userId)
             ->update([
@@ -139,9 +143,17 @@ class StudentController extends Controller
                 'username' => $request->input('username'),
                 'email' => $request->input('email'),
                 'phone' => $request->input('phone'),
-
-
             ]);
+
+        $image = $request->file( 'picture');
+        $image_name = $image->getClientOriginalName();
+        DB::table('users')
+            ->where('userId','=',Auth::user()->userId)
+            ->update([
+                'image' => $image_name,
+            ]);
+        $image->move(public_path("images"),$image_name);
+
 
 
         DB::table('student')
@@ -163,12 +175,24 @@ class StudentController extends Controller
 
         $validatedData = $request->validate([
             'student_Id' => 'required|max:8|unique:student|min:8',
+            'picture' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+
         ],
             [
                 'student_Id.unique'=>'The student ID you entered belongs to another student',
                 'student_Id.min' => 'Please check your student Id',
                 'student_Id.max' => 'Please check your student Id',
             ]);
+        $image = $request->file( 'picture');
+        $image_name = $image->getClientOriginalName();
+
+        DB::table('users')
+            ->where('userId','=',Auth::user()->userId)
+            ->update([
+                'image' => $image_name,
+            ]);
+
+        $image->move(public_path("images"),$image_name);
 
 
         DB::table('student')

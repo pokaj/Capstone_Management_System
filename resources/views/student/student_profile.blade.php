@@ -53,9 +53,9 @@
                                             <i class="fa fa-exclamation text-danger" aria-hidden="true"></i>
                                             <i class="fa fa-exclamation text-danger" aria-hidden="true"></i>
                                             <i class="fa fa-exclamation text-danger" aria-hidden="true"></i>
-                                        <form role="form" method="post" action="{{route('complete')}}">
+                                        <form role="form" method="post" action="{{route('complete')}}" enctype="multipart/form-data">
                                             @csrf
-                                            <input name="_method" type="hidden" value="PUT">
+                                            <input name="_method" type="hidden" value="PUT" >
                                                      <div class="form-group row col-lg-9">
                                                             <label>Student ID: </label>
                                                             <input class="form-control " name="student_Id" type="number" value="{{old('student_Id')}}" required>
@@ -76,7 +76,12 @@
                                                             <input class="form-control" name="yearGroup" type="number"  value="{{old('yearGroup')}}" required>
                                                     </div>
 
-                                            <div>
+                                                    <label class="text-capitalize">choose profile picture</label>
+
+                                                    <input class="form-control" type="file" name="picture" required>
+
+
+                                            <div class="mt-3">
                                             <button class="btn btn-primary">Complete</button>
                                             </div>
                                         </form>
@@ -91,7 +96,19 @@
                                             <h4 class="mb-3">User Profile</h4>
                                     <div class="row">
                                         <div class="col-md-8">
-
+                                            <form method="post" class="col-xs-6" enctype="multipart/form-data" action="{{route('upload_image')}}">
+                                                {{csrf_field()}}
+                                            <img src="images/{{Auth::user()->image}}" class="image rounded-circle">
+                                            <div class="row mt-3">
+                                                <div class="col-xs-6">
+                                                    <input class="form-control" type="file" name="picture" required>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                <button class="btn btn-primary">Upload</button>
+                                                </div>
+                                            </div>
+                                            </form>
+                                                        <div class="mt-3">
                                             <p><i class="fa fa-user" aria-hidden="true"></i> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</p>
                                             <p ><i class="fa fa-envelope" aria-hidden="true"></i>  {{Auth::user()->email}} </p>
                                         @foreach($studentData as $user)
@@ -103,11 +120,11 @@
                                             @endforeach
                                                         <p><i class="fa fa-phone" aria-hidden="true"></i> {{Auth::user()->phone}} </p>
 
-
-{{--                                            <h4>Interests</h4>--}}
-{{--                                            <p>--}}
-{{--                                                Indie music, skiing and hiking. I love the great outdoors.--}}
-{{--                                            </p>--}}
+                                            <h4>Interests</h4>
+                                            <p>
+                                                Indie music, skiing and hiking. I love the great outdoors.
+                                            </p>
+                                                        </div>
                                         </div>
                                     </div>
                                     </div>

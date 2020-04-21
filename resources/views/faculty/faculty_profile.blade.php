@@ -28,17 +28,54 @@
                                                             {{ session()->get('message') }}
                                                         </div>
                                                     @endif
+                                                        @if ($errors->any())
+                                                            <div class="alert alert-danger">
+                                                                <ul>
+                                                                    @foreach ($errors->all() as $error)
+                                                                        <li>{{ $error }}</li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        @endif
+
                                                     <div class="tab-pane active" id="profile">
                                                         <h4 class="mb-3">User Profile</h4>
                                                         <div class="row">
-                                                            <div class="col-md-8">
+                                                            <form method="post" class="col-xs-6" enctype="multipart/form-data" action="{{route('upload_image')}}">
+                                                                {{csrf_field()}}
+                                                            <div class="row">
+                                                                @if(Auth::user()->image == null)
+                                                                    <img src="images/no_image.png" width="500" class="rounded-circle mr-3">
+                                                                @else
+                                                                    <div class="col-xs-6">
+                                                                        <img src="images/{{Auth::user()->image}}" class="rounded-circle image">
+                                                                    </div>
+                                                                @endif
+                                                                    <div class="col-xs-6">
+                                                                        <input class="form-control" type="file" name="picture" required>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                    <button class="btn btn-primary">Upload</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div>
+                                                                <p class="mt-3 text-muted">jpeg, jpg, png</p>
+                                                                </div>
+
+                                                            </form>
+                                                            @if(Auth::user()->image == null)
+                                                                <p class="text-capitalize mt-3 text-danger">
+                                                                    <i class="fas fa-exclamation-triangle text-danger"></i>
+                                                                    Please Upload Profile picture</p>
+                                                            @endif
+                                                            <div class="col-md-8 mt-3">
                                                                 <p><i class="fa fa-user" aria-hidden="true"></i>  {{Auth::user()->first_name}} {{Auth::user()->last_name}}</p>
                                                                 <p><i class="fa fa-envelope" aria-hidden="true"></i>  {{Auth::user()->email}} </p>
                                                                 @foreach($depart as $dept)
                                                                 <p><i class="fa fa-building" aria-hidden="true"></i> {{$dept->department_name}}</p>
                                                                 @endforeach
                                                                 <p><i class="fa fa-phone" aria-hidden="true"></i> {{Auth::user()->phone}} </p>
-                                                                <h4>Bio</h4>
+                                                                <h4>Research Interests</h4>
                                                                 @foreach($bio as $about)
                                                                 <p>{{$about->Bio}}</p>
                                                                 @endforeach

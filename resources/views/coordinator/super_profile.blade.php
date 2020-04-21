@@ -30,9 +30,21 @@
                                             {{ session()->get('message') }}
                                         </div>
                                     @endif
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
                                     <div class="tab-pane active" id="profile">
                                         <h4 class="mb-3">User Profile</h4>
-                                        <div class="row">
+                                        <div class="mt-3">
+                                            <img src="images/{{Auth::user()->image}}" class="rounded-circle image">
+                                        </div>
+                                        <div class="row mt-3">
                                             <div class="col-md-8">
                                                 <p><i class="fa fa-user" aria-hidden="true"></i>  {{Auth::user()->first_name}} {{Auth::user()->last_name}}</p>
                                                 <p><i class="fa fa-envelope" aria-hidden="true"></i>  {{Auth::user()->email}} </p>
@@ -43,7 +55,7 @@
                                     <!--/row-->
 
                                     <div class="tab-pane" id="edit">
-                                        <form role="form" method="post" enctype="multipart/form-dataupload" action="{{url('studentProfile')}}">
+                                        <form role="form" method="post" enctype="multipart/form-data" action="{{url('studentProfile')}}">
                                             @csrf
                                             <input name="_method" type="hidden" value="PUT">
                                             <div class="form-group row">
@@ -76,8 +88,14 @@
                                                     <input name="phone" class="form-control" type="number" value="{{Auth::user()->phone}}">
                                                     <br>
                                                 </div>
+                                            </div>
 
-
+                                            <div class="form-group row">
+                                                <label class="col-lg-3 col-form-label form-control-label text-capitalize">profile picture</label>
+                                                <div class="col-lg-9">
+                                                    <input name="picture" class="form-control" type="file">
+                                                    <br>
+                                                </div>
                                             </div>
 
 

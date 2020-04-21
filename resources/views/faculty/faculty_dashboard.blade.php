@@ -13,7 +13,7 @@
                                     <div class="d-flex justify-content-between">
                                         <i class="fas fa-users fa-3x text-info"></i>
                                         <div class="text-right text-secondary">
-                                            <h6>Capstone students: </h6>
+                                            <h6 class="text-capitalize">my Capstone students: </h6>
                                             <h1 class="text-danger">{{$totalSupervisedStudents}}</h1>
                                         </div>
                                     </div>

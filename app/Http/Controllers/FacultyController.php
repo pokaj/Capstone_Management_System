@@ -212,6 +212,23 @@ class FacultyController extends Controller
 
     }
 
+    public function upload_image(Request $request){
+        $this->validate($request,[
+            'picture' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        $image = $request->file( 'picture');
+        $image_name = $image->getClientOriginalName();
+        DB::table('users')
+            ->where('userId','=',Auth::user()->userId)
+            ->update([
+                'image' => $image_name,
+            ]);
+        $image->move(public_path("images"),$image_name);
+        return back()
+            ->with('message','Image uploaded successfully');
+    }
+
 
 
 
