@@ -36,13 +36,13 @@
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">First name: </label>
                                             <div class="col-lg-9">
-                                                <input name="fname" id="fname" class="form-control" type="text" value="{{old('fname')}}" >
+                                                <input id="fname"  type="text" class="form-control search-input" placeholder="Enter first name . . ." name="fname" value="{{old('fname')}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">Last name: </label>
                                             <div class="col-lg-9">
-                                                <input name="lname" id="lname" class="form-control" type="text" value="{{old('lname')}}" required>
+                                                <input id="lname"  type="text" class="form-control search-input" placeholder="Enter last name . . ." name="lname" value="{{old('lname')}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -59,20 +59,20 @@
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">Email: </label>
                                             <div class="col-lg-9">
-                                                <input name="email" id="email" class="form-control" type="email" value="{{old('email')}}" required>
+                                                <input id="email"  type="text" class="form-control search-input" placeholder="Enter E-mail . . ." name="email" value="{{old('email')}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">Username: </label>
                                             <div class="col-lg-9">
-                                                <input name="username" id="username" class="form-control" type="text" value="{{old('username')}}" required>
+                                                <input id="username"  type="text" class="form-control search-input" placeholder="Enter Username . . ." name="username" value="{{old('username')}}" required>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label">Password: </label>
                                             <div class="col-lg-9">
-                                                <input name="password" id="password" class="form-control" type="password" required>
+                                                <input id="password"  type="password" class="form-control search-input" placeholder="Enter password . . ." name="password"  required>
                                                 <br>
                                             </div>
 

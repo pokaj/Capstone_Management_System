@@ -71,12 +71,12 @@
                             <img src="images/ashesi.png" height="50" width="230">
                         </div>
                         <div class="col-md-5">
-                            <form action="">
-                                <div class="input-group">
-                                    <input type="text" class="form-control search-input" placeholder="search . .  .">
-                                    <button type="button" class="btn btn-white search-button"><i class="fas fa-search text-danger "></i></button>
-                                </div>
-                            </form>
+{{--                            <form action="">--}}
+{{--                                <div class="input-group">--}}
+{{--                                    <input type="text" class="form-control search-input" placeholder="search . .  .">--}}
+{{--                                    <button type="button" class="btn btn-white search-button"><i class="fas fa-search text-danger "></i></button>--}}
+{{--                                </div>--}}
+{{--                            </form>--}}
                         </div>
                         <div class="col-md-3">
                             <ul class="navbar-nav">

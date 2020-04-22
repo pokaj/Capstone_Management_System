@@ -61,31 +61,32 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">First name</label>
                                                 <div class="col-lg-9">
-                                                    <input name="fname" class="form-control" type="text" value="{{Auth::user()->first_name}}">
+                                                    <input name="fname" type="text"  class="form-control search-input" value="{{Auth::user()->first_name}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                                                 <div class="col-lg-9">
-                                                    <input name="lname" class="form-control" type="text" value="{{Auth::user()->last_name}}">
+                                                    <input name="lname" type="text"class="form-control search-input" value="{{Auth::user()->last_name}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Username</label>
                                                 <div class="col-lg-9">
-                                                    <input name="username" class="form-control" type="text" value="{{Auth::user()->username}}">
+                                                    <input name="username" type="text"class="form-control search-input" value="{{Auth::user()->username}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                                 <div class="col-lg-9">
-                                                    <input name="email" class="form-control" type="email" value="{{Auth::user()->email}}">
+                                                    <input name="email" type="email"class="form-control search-input" value="{{Auth::user()->email}}">
+
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Phone</label>
                                                 <div class="col-lg-9">
-                                                    <input name="phone" class="form-control" type="number" value="{{Auth::user()->phone}}">
+                                                    <input name="phone" type="number"class="form-control search-input" value="{{Auth::user()->phone}}">
                                                     <br>
                                                 </div>
                                             </div>
@@ -93,7 +94,7 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label text-capitalize">profile picture</label>
                                                 <div class="col-lg-9">
-                                                    <input name="picture" class="form-control" type="file">
+                                                    <input name="picture" type="file"class="form-control search-input">
                                                     <br>
                                                 </div>
                                             </div>

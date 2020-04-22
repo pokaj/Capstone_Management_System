@@ -66,20 +66,10 @@
                             <img src="images/ashesi.png" height="50" width="230">
                         </div>
                         <div class="col-md-5">
-                            <form action="">
-                                <div class="input-group">
-                                    <input type="" class="form-control search-input" placeholder="search . .  .">
-                                    <button type="button" class="btn btn-white search-button"><i class="fas fa-search text-danger "></i></button>
-                                </div>
-                            </form>
+
                         </div>
                         <div class="col-md-3">
                             <ul class="navbar-nav">
-
-                                <li class="nav-item icon-parent">
-                                    <a href="" class="nav-link "><i class="fas fa-bell text-danger"></i>
-                                        <span class="badge text-danger">{{count(Auth::user()->unreadNotifications)}}</span></a>
-                                </li>
                                 <li class="nav-item ml-md-auto mt-2">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                     <a class="text-danger" href="{{ route('logout') }}"

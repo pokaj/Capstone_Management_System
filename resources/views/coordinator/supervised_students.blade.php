@@ -34,16 +34,16 @@
                 <form method="get" action="{{route('contact')}}">
                     <div class="modal-header">
                         <label class="to text-white form-control">To: </label>
-                        <input class="form-control" name="mail" value="{{$student->email}}">
+                        <input class="form-control search-input" name="mail" value="{{$student->email}}">
                     </div>
 
                     <div class="modal-body">
                         <label>Subject: </label>
-                        <input class="form-control" name="subject" required>
+                        <input class="form-control search-input" name="subject" required>
 
                         <hr>
                         <label>Message</label>
-                        <textarea class="form-control" name="message" required></textarea>
+                        <textarea class="form-control search-input" name="message" required></textarea>
                         <button class="mt-2 btn btn-primary">Send</button>
                     </div>
                 </form>

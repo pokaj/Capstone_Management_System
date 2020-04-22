@@ -58,8 +58,10 @@
                                             <input name="_method" type="hidden" value="PUT" >
                                                      <div class="form-group row col-lg-9">
                                                             <label>Student ID: </label>
-                                                            <input class="form-control " name="student_Id" type="number" value="{{old('student_Id')}}" required>
-                                                    </div>
+                                                         <input name="student_Id" type="number" class="form-control search-input"  value="{{old('student_Id')}}" required>
+
+
+                                                     </div>
 
                                                     <div class="form-group row col-lg-9">
                                                              <label>Major: </label>
@@ -73,12 +75,14 @@
 
                                                     <div class="form-group row col-lg-9">
                                                             <label>Year Group: </label>
-                                                            <input class="form-control" name="yearGroup" type="number"  value="{{old('yearGroup')}}" required>
+                                                        <input name="yearGroup" type="number" class="form-control search-input"  value="{{old('yearGroup')}}" required>
+
                                                     </div>
 
                                                     <label class="text-capitalize">choose profile picture</label>
 
-                                                    <input class="form-control" type="file" name="picture" required>
+                                            <input name="picture" type="file" class="form-control search-input" required>
+
 
 
                                             <div class="mt-3">
@@ -101,7 +105,7 @@
                                             <img src="images/{{Auth::user()->image}}" class="image rounded-circle">
                                             <div class="row mt-3">
                                                 <div class="col-xs-6">
-                                                    <input class="form-control" type="file" name="picture" required>
+                                                    <input name="picture" type="file"class="form-control search-input" required>
                                                 </div>
                                                 <div class="col-xs-6">
                                                 <button class="btn btn-primary">Upload</button>
@@ -138,13 +142,14 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">First name</label>
                                                 <div class="col-lg-9">
-                                                    <input name="fname" id="fname" class="form-control" type="text" value="{{Auth::user()->first_name}}">
+                                                    <input name="fname"  id="fname"  type="text" class="form-control search-input" value="{{Auth::user()->first_name}}" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                                                 <div class="col-lg-9">
-                                                    <input name="lname" id="lname" class="form-control" type="text" value="{{Auth::user()->last_name}}">
+                                                    <input name="lname"  id="lname"  type="text" class="form-control search-input" value="{{Auth::user()->last_name}}" required>
+
                                                 </div>
                                             </div>
 
@@ -152,7 +157,7 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">ID Number</label>
                                                 <div class="col-lg-9">
-                                                    <input name="id" id="id"class="form-control" type="number" value="{{$ID->student_Id}}">
+                                                    <input name="id" id="id"class="form-control search-input" type="number" value="{{$ID->student_Id}}">
                                                 </div>
                                             </div>
                                             @endforeach
@@ -161,7 +166,7 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Year Group</label>
                                                 <div class="col-lg-9">
-                                                    <input name="yearGroup" id="yearGroup" class="form-control" type="number" value="{{$yearGroup->student_yeargroup}}">
+                                                    <input name="yearGroup" id="yearGroup" class="form-control search-input" type="number" value="{{$yearGroup->student_yeargroup}}">
                                                 </div>
                                             </div>
                                             @endforeach
@@ -169,19 +174,19 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Username</label>
                                                 <div class="col-lg-9">
-                                                    <input name="username" id="username" class="form-control" type="text" value="{{Auth::user()->username}}">
+                                                    <input name="username" id="username" class="form-control search-input" type="text" value="{{Auth::user()->username}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                                 <div class="col-lg-9">
-                                                    <input name="email" id="email" class="form-control" type="email" value="{{Auth::user()->email}}">
+                                                    <input name="email" id="email" class="form-control search-input" type="email" value="{{Auth::user()->email}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Phone</label>
                                                 <div class="col-lg-9">
-                                                    <input name="phone" id="phone" class="form-control" type="number" value="{{Auth::user()->phone}}">
+                                                    <input name="phone" id="phone" class="form-control search-input " type="number" value="{{Auth::user()->phone}}">
                                                     <br>
                                                 </div>
 
@@ -202,7 +207,7 @@
                                                 <label class="col-lg-3 col-form-label form-control-label">Interests</label>
                                                 <div class="col-lg-9">
                                                     @foreach($studentData as $interests)
-                                                    <textarea class="form-control" name="interests" value="{{$interests->interests}}"></textarea>
+                                                    <textarea class="form-control search-input" name="interests" value="{{$interests->interests}}" rows="4" ></textarea>
                                                         @endforeach
                                                 </div>
                                             </div>

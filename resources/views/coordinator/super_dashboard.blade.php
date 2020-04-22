@@ -35,7 +35,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <input class="form-control" id="search_faculty" placeholder="Search for faculty . . .">
+                <input id="search_faculty" class="form-control search-input" placeholder="Search for faculty . . .">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <p class="font-weight-bold"></p>
             </div>
@@ -71,7 +71,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <input class="form-control" id="superStudents" placeholder="Search for student . . .">
+                <input id="superStudents" class="form-control search-input" placeholder="Search for student . . .">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <p class="font-weight-bold"></p>
             </div>
@@ -110,7 +110,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <input class="form-control" id="unsuperStudents" placeholder="Search for student . . .">
+                <input id="unsuperStudents" class="form-control search-input" placeholder="Search for student . . .">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <p class="font-weight-bold"></p>
             </div>

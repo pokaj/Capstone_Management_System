@@ -100,20 +100,20 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <p><strong>Project Title: </strong></p>
-                                                <input class="form-control" value="{{$faculty_project->project_title}}">
+                                                <input class="form-control search-input" value="{{$faculty_project->project_title}}">
 
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             </div>
 
                                             <div class="modal-body">
                                                 <p><strong>Project Field: </strong></p>
-                                                <input class="form-control" value="{{$faculty_project->project_field}}">
+                                                <input class="form-control search-input" value="{{$faculty_project->project_field}}">
 
                                                 <p><strong>Project Type: </strong></p>
-                                                <input class="form-control" value="{{$faculty_project->project_type}}">
+                                                <input class="form-control search-input" value="{{$faculty_project->project_type}}">
 
                                                 <p><strong>Project Description: </strong></p>
-                                                <textarea class="form-control" placeholder="{{$faculty_project->project_desc}}"></textarea>
+                                                <textarea class="form-control search-input" placeholder="{{$faculty_project->project_desc}}"></textarea>
 
                                             </div>
 
@@ -148,7 +148,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="bmd-label-floating">Project Title: </label>
-                                                <input name="project_title" type="text" class="form-control" required>
+                                                <input name="project_title" type="text" class="form-control search-input" required>
                                             </div>
                                         </div>
                                     </div>
@@ -168,7 +168,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Project Field: </label>
-                                            <input type="text" class="form-control" name="project_field" required>
+                                            <input type="text" class="form-control search-input" name="project_field" required>
                                         </div>
                                     </div>
 
@@ -177,7 +177,7 @@
                                             <label>Project Description: </label>
                                             <div class="form-group">
                                                 <label class="bmd-label-floating"> </label>
-                                                <textarea class="form-control" rows="5" name="project_description" required></textarea>
+                                                <textarea class="form-control search-input" rows="5" name="project_description" required></textarea>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary pull-right">ADD</button>
@@ -472,16 +472,16 @@
                                             <form method="get" action="{{route('contact')}}">
                                             <div class="modal-header">
                                                 <label class="to text-white form-control">To: </label>
-                                                <input class="form-control" name="mail" value="{{$project->email}}">
+                                                <input class="form-control search-input" name="mail" value="{{$project->email}}">
                                             </div>
 
                                             <div class="modal-body">
                                                 <label class="subject text-white form-control">Subject: </label>
-                                                <input class="form-control" name="subject" required>
+                                                <input class="form-control search-input" name="subject" required>
 
                                                 <hr>
                                                 <label>Message</label>
-                                                <textarea class="form-control" name="message" required></textarea>
+                                                <textarea class="form-control search-input" name="message" required></textarea>
                                                 <button class="mt-2 btn btn-primary">Send</button>
                                             </div>
                                             </form>

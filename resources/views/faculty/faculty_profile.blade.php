@@ -52,7 +52,7 @@
                                                                     </div>
                                                                 @endif
                                                                     <div class="col-xs-6">
-                                                                        <input class="form-control" type="file" name="picture" required>
+                                                                        <input class="form-control search-input" type="file" name="picture" required>
                                                                     </div>
                                                                     <div class="col-xs-6">
                                                                     <button class="btn btn-primary">Upload</button>
@@ -93,32 +93,32 @@
                                                             <div class="form-group row">
                                                                 <label class="col-lg-3 col-form-label form-control-label">First name</label>
                                                                 <div class="col-lg-9">
-                                                                    <input name="fname" class="form-control" type="text" value="{{Auth::user()->first_name}}">
+                                                                    <input name="fname" class="form-control search-input" type="text" value="{{Auth::user()->first_name}}">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
 
                                                                 <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                                                                 <div class="col-lg-9">
-                                                                    <input name="lname" class="form-control" type="text" value="{{Auth::user()->last_name}}">
+                                                                    <input name="lname" class="form-control search-input" type="text" value="{{Auth::user()->last_name}}">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-lg-3 col-form-label form-control-label">Username</label>
                                                                 <div class="col-lg-9">
-                                                                    <input name="username" class="form-control" type="text" value="{{Auth::user()->username}}">
+                                                                    <input name="username" class="form-control search-input" type="text" value="{{Auth::user()->username}}">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                                                 <div class="col-lg-9">
-                                                                    <input name="email" class="form-control" type="email" value="{{Auth::user()->email}}">
+                                                                    <input name="email" class="form-control search-input" type="email" value="{{Auth::user()->email}}">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label class="col-lg-3 col-form-label form-control-label">Phone</label>
                                                                 <div class="col-lg-9">
-                                                                    <input name="phone" class="form-control" type="number" value="{{Auth::user()->phone}}">
+                                                                    <input name="phone" class="form-control search-input" type="number" value="{{Auth::user()->phone}}">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -133,7 +133,7 @@
 
                                                                 <label class="col-lg-3 col-form-label form-control-label">Research Interests</label>
                                                                 <div class="col-lg-9">
-                                                                    <textarea name="interests" class="form-control mt-3" type="text" value=""></textarea>
+                                                                    <textarea name="interests" class="form-control mt-3 search-input" type="text" rows="4"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">

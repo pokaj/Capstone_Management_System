@@ -112,35 +112,35 @@
                                     <div class="col-md-6 mt-4">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Objective for Period: </label>
-                                            <textarea type="text" class="form-control" name="currentObj" id="formWidth" required></textarea>
+                                            <textarea type="text" class="form-control search-input" name="currentObj" id="formWidth" required></textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Progress Summary: </label>
-                                            <textarea type="text" class="form-control" name="progress" id="formWidth" required></textarea>
+                                            <textarea type="text" class="form-control search-input" name="progress" id="formWidth" required></textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Problem Areas & Suggested Solutions: </label>
-                                            <textarea type="text" class="form-control" name="problems" id="formWidth" required></textarea>
+                                            <textarea type="text" class="form-control search-input" name="problems" id="formWidth" required></textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Objectives for next meeting: </label>
-                                            <textarea type="text" class="form-control" name="nextObj" id="formWidth" required></textarea>
+                                            <textarea type="text" class="form-control search-input" name="nextObj" id="formWidth" required></textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Next meeting date & time: </label>
-                                            <input type="datetime-local" class="form-control" name="nextDate" required/>
+                                            <input type="datetime-local" class="form-control search-input" name="nextDate" required/>
                                         </div>
                                     </div>
 
@@ -187,7 +187,7 @@
                                         <form id="next" method="post">
                                             @csrf
                                         <label class="bmd-label-floating">Next Meeting Date & Time:</label>
-                                        <input id="reminder" class="form-control text-danger" value=" @if(count($meetingInfo) > 0) {{date("M jS, Y H:i A", strtotime($last->mt_nextDate))}}   @endif">
+                                        <input id="reminder" class="form-control text-danger search-input" value=" @if(count($meetingInfo) > 0) {{date("M jS, Y H:i A", strtotime($last->mt_nextDate))}}   @endif">
                                             @foreach($users as $student_ID)
                                             <input type="hidden" id="student" value="{{$student_ID->student_user_id}}">
                                             @endforeach

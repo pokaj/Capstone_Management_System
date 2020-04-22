@@ -32,15 +32,18 @@
                                     <div>
                                         <form id="limit" method="post">
                                     <label class="text-black-50">limit number of students per supervisor: </label>
-                                    <input class="form-control" type="number"placeholder="Enter a number" id="limit_number" required>
+                                                <input id="limit_number"  type="number" class="form-control search-input" placeholder="Enter a number" required>
                                             <button class="btn btn-primary mt-2">Confirm</button>
                                         </form>
                                     </div>
                                     <div class="form-group row mt-5">
                                         <label class="col-lg-3 col-form-label form-control-label text-black-50">Faculty name: </label>
                                         <div class="col-lg-9">
-                                            <input placeholder="Type faculty name . . ." name="search" id="search" class="form-control" type="text" value="{{old('name')}}">
+                                            <div class="input-group">
+                                                <input id="search"  type="text" class="form-control search-input" placeholder="Type faculty name . . ." name="search" value="{{old('name')}}">
+                                            </div>
                                         </div>
+
                                     </div>
                                     <p></p>
                                     <div class="form-group row ">
@@ -72,7 +75,6 @@
                                         {{$faculty_info->links()}}
 
                                     </div>
-
 
                                 <!-- beginning of modal to view details -->
                                     <div class="modal fade " id="viewFaculty">
