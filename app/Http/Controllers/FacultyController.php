@@ -71,7 +71,7 @@ class FacultyController extends Controller
     {
         if (Auth::user()->category == 'faculty') {
 
-            $bio = DB::table('users')
+            $interests = DB::table('users')
                 ->join('faculty','faculty_Id','=','userId')
                 ->where('faculty_Id','=',Auth::user()->userId)
                 ->get();
@@ -83,7 +83,7 @@ class FacultyController extends Controller
 
             $depts = DB::table('department')->get();
 
-            return view('faculty/faculty_profile' ,compact('depts','bio','depart'));
+            return view('faculty/faculty_profile' ,compact('depts','interests','depart'));
         }
         return view('student_profile');
     }
@@ -129,7 +129,7 @@ class FacultyController extends Controller
                 ->where('faculty_Id','=', Auth::user()->userId)
                 ->update(array(
                     'faculty_dept' => $request->input('department'),
-                    'Bio' => $request->input('bio')
+                    'interests' => $request->input('interests')
                 ));
 
             return redirect()->back()

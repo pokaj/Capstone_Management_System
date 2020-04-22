@@ -61,6 +61,7 @@ Route::get('/studentTopics','StudentController@student_topics');
 Route::get('/myProject','StudentController@myProject');
 Route::get('/viewFaculty','StudentController@viewFaculty');
 Route::get('/student_project_feedback','StudentController@student_project_feedback');
+Route::get('/faculty_details','StudentController@faculty_details');
 
 
 /*

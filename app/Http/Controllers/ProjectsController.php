@@ -37,6 +37,7 @@ class ProjectsController extends Controller
             ->get();
 
         $studentProjects=  DB::table('Project')
+            ->join('student','student_user_id','=','project_user')
             ->join('faculty_student','faculty_student.project_Id','=','project.project_Id')
             ->join('users','userId','=','faculty_student.student_Id')
             ->where('faculty_student.faculty_Id','=',Auth::user()->userId)
@@ -46,20 +47,14 @@ class ProjectsController extends Controller
         $proposedCount = count($studentProjects);
 
         $showapplied = DB::table('pending_request')
-            ->join('users','userId','=','student_Id')
+            ->join('student','student_user_id','=','pending_request.student_Id')
+            ->join('users','userId','=','pending_request.student_Id')
             ->join('project','project.project_Id','=','pending_request.project_Id')
             ->where('pending_request.faculty_id','=',Auth::user()->userId)
             ->where('pending_request.status','=','pending')
-            ->select('users.*','project.*')
             ->get();
 
-//        $select = DB::table('users')
-//            ->join('faculty_student','student_Id','=','userId')
-//            ->where('faculty_Id','=',Auth::user()->userId)
-//            ->where('status','=','picked')
-//             ->get();
-
-        $all_student_projects = DB::table('Project')
+     $all_student_projects = DB::table('Project')
             ->join('users','userId','=','project_user')
             ->join('student','student_user_id','=','project_user')
             ->where('project.status','=','pending')

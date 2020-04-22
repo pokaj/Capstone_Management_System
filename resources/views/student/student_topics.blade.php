@@ -86,16 +86,18 @@
                             <tbody>
                             @foreach($facultyProjects as $facultyProject)
                             <tr>
-                                <td>{{$facultyProject->first_name}} {{$facultyProject->last_name}}</td>
+                                <td  class="text-white"><a href="##" data-toggle="modal" data-target="#{{$facultyProject->faculty_Id}}{{$facultyProject->first_name}}{{$facultyProject->last_name}}">
+                                        {{$facultyProject->first_name}} {{$facultyProject->last_name}}</a></td>
                                 <td>{{$facultyProject->project_type}}</td>
                                 <td>{{$facultyProject->project_field}}</td>
                                 <td>
-                                    <a href="" class="nav-link" data-toggle="modal" data-target="#{{$facultyProject->project_Id}}"><i class="fas fa-eye text-muted fa-lg"></i></a>
+                                    <a href="" class="nav-link" data-toggle="modal" data-target="#{{$facultyProject->project_Id}}">
+                                        <i class="fas fa-eye text-muted fa-lg"></i></a>
                                 </td>
                             </tr>
-                            <!-- beginning of modal -->
+                            <!-- beginning of modal for project details-->
                             <div class="modal fade" id="{{$facultyProject->project_Id}}">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <p class="modal-title">
@@ -119,6 +121,35 @@
                                     </div>
                                 </div>
                             </div>
+{{--                                end of modal for project details--}}
+
+
+                            <!-- beginning of modal faculty details-->
+                            <div class="modal fade" id="{{$facultyProject->faculty_Id}}{{$facultyProject->first_name}}{{$facultyProject->last_name}}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <p class="modal-title">
+                                                <strong>{{$facultyProject->first_name}} {{$facultyProject->last_name}}</strong>
+                                            </p><br>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                        <img class="rounded-circle" src="images/{{$facultyProject->image}}" height="400" width="420">
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <div class="mr-auto">
+                                                <label><strong>Interests</strong></label>
+                                        <p>{{$facultyProject->interests}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+{{--                                end of modal for faculty details--}}
                                 @endforeach
                             </tbody>
                         </table>
@@ -298,23 +329,60 @@
                                     </div>
 
                                 </div>
-                                <table class="table table-striped bg-light text-center mt-5 col-lg-4">
-                                    <thead class="thead-dark">
-                                    <tr class="text-muted">
-                                        <th>Name</th>
-                                        <th>Department</th>
-                                        <th>View Bio</th>
-                                    </tr>
-                                    </thead>
-                                    <div id="hidden">
-                                        <tbody id="faculty_details">
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        </tbody>
-                                    </div>
-                                </table>
+                                <div class="table-responsive" id="fac_dets">
+                                    @include('student/faculty_details')
+                                </div>
+{{--                                <table class="table table-striped bg-light text-center mt-5 col-lg-4">--}}
+{{--                                    <thead class="thead-dark">--}}
+{{--                                    <tr class="text-muted">--}}
+{{--                                        <th>Name</th>--}}
+{{--                                        <th>Department</th>--}}
+{{--                                        <th>View Interests</th>--}}
+{{--                                    </tr>--}}
+{{--                                    </thead>--}}
+{{--                                    <div>--}}
+{{--                                        <tbody id="fac_details">--}}
+{{--                                        @foreach($facultydets as $details)--}}
+{{--                                        <tr>--}}
+{{--                                            <td>{{$details->first_name}} {{$details->last_name}}</td>--}}
+{{--                                            <td>{{$details->department_name}}</td>--}}
+{{--                                            <td><a href="" data-toggle="modal" data-target="#{{$details->first_name}}{{$details->last_name}}{{$details->faculty_Id}}">--}}
+{{--                                                    <i class="fas fa-eye text-muted"></i></a></td>--}}
+{{--                                        </tr>--}}
+
+{{--                                        <!-- beginning of modal to view faculty details-->--}}
+{{--                                        <div class="modal fade" id="{{$details->first_name}}{{$details->last_name}}{{$details->faculty_Id}}">--}}
+{{--                                            <div class="modal-dialog">--}}
+{{--                                                <div class="modal-content">--}}
+{{--                                                    <div class="modal-header">--}}
+{{--                                                        <p class="modal-title font-weight-bold">--}}
+{{--                                                            <strong>{{$details->first_name}} {{$details->last_name}}</strong>--}}
+{{--                                                        </p><br>--}}
+
+{{--                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>--}}
+{{--                                                    </div>--}}
+
+{{--                                                    <div class="modal-body align-content-center">--}}
+{{--                                                        <img src="images/{{$details->image}}" width="400" height="400" class="rounded-circle">--}}
+{{--                                                    </div>--}}
+
+{{--                                                    <div class="modal-footer">--}}
+{{--                                                        <div class="mr-auto">--}}
+{{--                                                            <label><strong>Interests</strong></label>--}}
+{{--                                                            <p>{{$details->interests}}</p>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <!-- end of modal to view faculty details-->--}}
+{{--                                            @endforeach--}}
+{{--                                        </tbody>--}}
+{{--                                    </div>--}}
+{{--                                </table>--}}
+{{--                                <div class="col-12 d-flex pt-3 justify-content-center">--}}
+{{--                                {{$facultydets->links()}}--}}
+{{--                                </div>--}}
                                 <div class="card  mt-3">
                                     <div class="card-header card-header-primary">
                                         <h4 class="card-title">Select Preferred Supervisor</h4>

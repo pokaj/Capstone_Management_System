@@ -121,9 +121,11 @@
                                                         <p><i class="fa fa-phone" aria-hidden="true"></i> {{Auth::user()->phone}} </p>
 
                                             <h4>Interests</h4>
+                                            @foreach($studentData as $interest)
                                             <p>
-                                                Indie music, skiing and hiking. I love the great outdoors.
+                                                {{$interest->interests}}
                                             </p>
+                                                @endforeach
                                                         </div>
                                         </div>
                                     </div>
@@ -194,6 +196,14 @@
                                                             @endif
                                                         @endforeach
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-3 col-form-label form-control-label">Interests</label>
+                                                <div class="col-lg-9">
+                                                    @foreach($studentData as $interests)
+                                                    <textarea class="form-control" name="interests" value="{{$interests->interests}}"></textarea>
+                                                        @endforeach
                                                 </div>
                                             </div>
 

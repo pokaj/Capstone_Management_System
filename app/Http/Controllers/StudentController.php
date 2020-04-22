@@ -30,7 +30,7 @@ class StudentController extends Controller
                 ->where('mt_student','=',Auth::user()->userId)
                 ->orderBy('person_meeting.mt_id', 'DESC')
                 ->first();
-//            ->get();
+
 
             $count = count($approvedProjects);
 
@@ -49,7 +49,7 @@ class StudentController extends Controller
                 ->join('faculty','faculty_id','=','project.project_user')
                 ->join('users','userId','=','faculty.faculty_id')
                 ->where('status','!=','taken')
-                ->select('users.*','project.*')
+//                ->select('users.*','project.*')
                 ->get();
 
 
@@ -72,13 +72,17 @@ class StudentController extends Controller
                 ->where('status','=','picked')
                 ->get();
 
-//            return $selected;
+
+              $facultydets = DB::table('users')
+            ->join('faculty','faculty_Id','=','users.userId')
+            ->join('department','department_Id','=','faculty_dept')
+            ->paginate(5);
 
             $count = count($facultyProjects);
             $usersProjects = count($users);
 
             return view('student/student_topics' ,compact('users','facultyProjects','facultyDropdown',
-                'approvedProjects','count','usersProjects','selected'));
+                'approvedProjects','count','usersProjects','selected','facultydets'));
         }
 
 
@@ -131,10 +135,6 @@ class StudentController extends Controller
     //    Function to update student information
     public function update(Request $request){
 
-        $this->validate($request,[
-            'picture' => 'required|image|mimes:jpeg,png,jpg|max:2048'
-        ]);
-
         $updatefaculty = DB::table('users')
         ->where('userId','=',Auth::user()->userId)
             ->update([
@@ -145,23 +145,13 @@ class StudentController extends Controller
                 'phone' => $request->input('phone'),
             ]);
 
-        $image = $request->file( 'picture');
-        $image_name = $image->getClientOriginalName();
-        DB::table('users')
-            ->where('userId','=',Auth::user()->userId)
-            ->update([
-                'image' => $image_name,
-            ]);
-        $image->move(public_path("images"),$image_name);
-
-
-
         DB::table('student')
             ->where('student_user_id', Auth::user()->userId)
             ->update(array(
                 'student_Id' => $request->input('id'),
                 'student_yeargroup' => $request->input('yearGroup'),
                 'student_major' => $request->input('major'),
+                'interests' => $request->input('interests'),
 
             ));
 
@@ -210,29 +200,73 @@ class StudentController extends Controller
     }
 
 
+//    public function viewFaculty(Request $request){
+//        $name = $request->get('search');
+//
+//        $facultyDropdown = DB::table('users')
+//            ->join('faculty','faculty_Id','=','users.userId')
+//            ->join('department','department_Id','=','faculty_dept')
+//            ->where('users.first_name','LIKE','%'.$name.'%')
+//            ->orWhere('users.last_name','LIKE','%'.$name.'%')
+//            ->paginate(5);
+//
+//        return ['success' => true, 'data' => $facultyDropdown];
+//    }
+
     public function viewFaculty(Request $request){
+        $output='';
         $name = $request->get('search');
-        $output = "";
 
         $facultyDropdown = DB::table('users')
             ->join('faculty','faculty_Id','=','users.userId')
             ->join('department','department_Id','=','faculty_dept')
             ->where('users.first_name','LIKE','%'.$name.'%')
             ->orWhere('users.last_name','LIKE','%'.$name.'%')
-            ->get();
+            ->paginate(5);
 
         if($facultyDropdown){
             foreach ($facultyDropdown as $faculty){
                 $output.= '<tr>'.
                     '<td>'. $faculty->first_name.' '.' '.$faculty->last_name.'</td>'.
                     '<td>'.$faculty->department_name.'</td>'.
-                    '<td>'.$faculty->Bio.'</td>'.
-                    '</tr>';
+                    '<td><a href=""  class="nav-link" data-toggle="modal" data-target='."#$faculty->first_name$faculty->last_name$faculty->faculty_Id".'><i class="fas fa-eye text-muted"></i></a></td>'.
+                    '</tr>'
+
+//                <!-- beginning of modal to view faculty details-->
+                                        .'<div class="modal fade" id='."$faculty->first_name$faculty->last_name$faculty->faculty_Id".'>'
+                                            .'<div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <p class="modal-title font-weight-bold">'
+                                                            .'<strong>'."$faculty->first_name $faculty->last_name".'</strong>
+                                                        </p><br>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body align-content-center">'
+                                                    .'<img src="images/'."$faculty->image".'">'
+                                                    .'</div>
+                                                </div>
+                                            </div>
+                                        </div>';
+//                                        <!-- end of modal to view faculty details-->
             }
             return Response($output);
 
         }
     }
+
+    public function faculty_details(Request $request){
+        if($request->ajax()){
+            $facultydets = DB::table('users')
+                ->join('faculty','faculty_Id','=','users.userId')
+                ->join('department','department_Id','=','faculty_dept')
+                ->paginate(5);
+
+            return view('student/faculty_details', compact('facultydets'))->render();
+        }
+    }
+
+
 
     public function student_project_feedback(){
         $feedback = DB::table('feedback')

@@ -76,8 +76,8 @@
                                                                 @endforeach
                                                                 <p><i class="fa fa-phone" aria-hidden="true"></i> {{Auth::user()->phone}} </p>
                                                                 <h4>Research Interests</h4>
-                                                                @foreach($bio as $about)
-                                                                <p>{{$about->Bio}}</p>
+                                                                @foreach($interests as $about)
+                                                                <p>{{$about->interests}}</p>
                                                                 @endforeach
 
                                                             </div>
@@ -131,9 +131,9 @@
                                                                     </select>
                                                                 </div>
 
-                                                                <label class="col-lg-3 col-form-label form-control-label">Bio</label>
+                                                                <label class="col-lg-3 col-form-label form-control-label">Research Interests</label>
                                                                 <div class="col-lg-9">
-                                                                    <textarea name="bio" class="form-control mt-3" type="text" value=""></textarea>
+                                                                    <textarea name="interests" class="form-control mt-3" type="text" value=""></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">

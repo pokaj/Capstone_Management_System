@@ -91,20 +91,41 @@ function run(id) {
 
 
 $('#find').on('keyup',function (){
-    if($('#find').val()===""){
-        $('#faculty_details').html("");
-        return;
-    }
+    // if($('#find').val()===""){
+    //     $('#faculty_details').html("");
+    //     return;
+    // }
     value = $(this).val();
     $.ajax({
         type:'get',
         url:'/viewFaculty',
         data:{search:value},
         success:function(data){
-            $('#faculty_details').html(data);
+            $('#fac_details').html(data);
 
         }
     })
+});
+
+// #######################   Student topics -> Faculty dropdown ##########################
+$(document).ready(function() {
+    $(document).on('click', '.page-link', function (event) {
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page);
+    })
+
+    function fetch_data(page) {
+        var _token = $("input[name=_token]").val();
+        $.ajax({
+            url: "/faculty_details",
+            type:'get',
+            data:{_token:_token, page:page},
+            success: function (data) {
+                $('#fac_dets').html(data);
+            }
+        })
+    }
 });
 
 // #######################   Coordinator manage faculty -> limit number of student for each faculty member  ##########################
@@ -309,6 +330,26 @@ $(document).ready(function() {
 });
 
 // #######################  Coordinator dashboard -> table list for unsupervised students ##########################
+$(document).ready(function() {
+    $(document).on('click', '.page-link', function (event) {
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page);
+    })
+
+    function fetch_data(page) {
+        var _token = $("input[name=_token]").val();
+        $.ajax({
+            url: "/super_dashboard/unsuper",
+            type:'post',
+            data:{_token:_token, page:page},
+            success: function (data) {
+                $('#unsupervised_student').html(data);
+            }
+        })
+    }
+});
+
 $(document).ready(function() {
     $(document).on('click', '.page-link', function (event) {
         event.preventDefault();

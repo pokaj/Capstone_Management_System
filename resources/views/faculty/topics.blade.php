@@ -94,7 +94,6 @@
                             <!-- end of modal to delete project-->
 
                             <!-- beginning of modal -->
-
                             <div class="modal fade" id="{{$faculty_project->project_user}}{{$faculty_project->project_Id}}">
                                 <form>
                                     <div class="modal-dialog">
@@ -199,14 +198,15 @@
                                 <th>Name</th>
                                 <th>Project Type</th>
                                 <th>Field</th>
-                                <th>Actions</th>
+                                <th>View Project</th>
                                 <th>Status</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($studentProjects as $studentProject)
                             <tr>
-                                <td>{{$studentProject->first_name}} {{$studentProject->last_name}}</td>
+                                <td><a href="##" data-toggle="modal" data-target="#{{$studentProject->project_Id}}{{$studentProject->first_name}}">
+                                        {{$studentProject->first_name}} {{$studentProject->last_name}}</a></td>
                                 <td>{{$studentProject->project_type}}</td>
                                 <td>{{$studentProject->project_field}}</td>
                                 <td>
@@ -214,6 +214,26 @@
                                 </td>
                                 <td><span class="badge badge-warning w-80 py-2">Pending</span></td>
                             </tr>
+
+                            <!-- beginning of modal -->
+                            <div class="modal fade" id="{{$studentProject->project_Id}}{{$studentProject->first_name}}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <p  class="font-weight-bold">{{$studentProject->first_name}} {{$studentProject->last_name}}</p>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <img src="images/{{$studentProject->image}}" class="rounded-circle" height="400" width="400">
+                                            <hr>
+                                            <p><strong>Interests</strong></p>
+                                            <p>{{$studentProject->interests}}</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <!-- beginning of modal -->
                             <div class="modal fade" id="{{$studentProject->project_Id}}">
@@ -284,7 +304,11 @@
                                             </div>
 
                                             <div class="modal-body">
-                                                <p class="font-weight-bold">Project Title </p>
+                                                <img src="images/{{$appliedinfo->image}}" class="rounded-circle" height="400" width="400">
+                                                <hr>
+                                                <p><strong>Interests</strong></p>
+                                                <p>{{$appliedinfo->interests}}</p>
+                                                <p class="font-weight-bold text-capitalize">project applied title: </p>
 
                                                         <p>{{$appliedinfo->project_title}}</p>
                                             </div>
@@ -369,7 +393,7 @@
                     </div>
                     {{--                    --}}{{--                    End of section for projects proposed by students--}}
 
-                    {{--                        Beginning of section for all student projects--}}
+                    {{--                        Beginning of section for all other student projects--}}
                     <div class="tab-pane" id="all_student_topics">
                         <h3 class="text-muted mb-3 mt-3">Student projects without supervisors</h3>
                         <table class="table text-center table-dark table-hover">
@@ -385,7 +409,7 @@
                             <tbody>
                             @foreach($all_student_projects as $project)
                                 <tr>
-                                    <td>{{$project->first_name}} {{$project->last_name}}</td>
+                                    <td><a href="" data-toggle="modal" data-target="#{{$project->first_name}}{{$project->project_Id}}{{$project->last_name}}" >{{$project->first_name}} {{$project->last_name}}</a></td>
                                     <td>{{$project->project_type}}</td>
                                     <th>{{$project->project_field}}</th>
                                     <td>
@@ -395,6 +419,27 @@
                                         <a href="" data-toggle="modal" data-target="#{{$project->project_Id}}{{$project->last_name}}"><i class="fas fa-envelope text-muted"></i></a>
                                     </td>
                                 </tr>
+
+
+                                <!-- beginning of modal -->
+                                <div class="modal fade" id="{{$project->first_name}}{{$project->project_Id}}{{$project->last_name}}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <p  class="font-weight-bold">{{$project->first_name}} {{$project->last_name}}</p>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <img src="images/{{$project->image}}" class="rounded-circle" height="400" width="400">
+                                                <hr>
+                                                <p><strong>Interests</strong></p>
+                                                <p>{{$project->interests}}</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <!-- beginning of modal -->
                                 <div class="modal fade" id="{{$project->project_Id}}{{$project->userId}}">
