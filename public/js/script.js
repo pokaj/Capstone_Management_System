@@ -107,6 +107,20 @@ $('#find').on('keyup',function (){
     })
 });
 
+
+$('#find_available').on('keyup',function (){
+    value = $(this).val();
+    $.ajax({
+        type:'get',
+        url:'/view_available',
+        data:{search:value},
+        success:function(data){
+            $('#available').html(data);
+
+        }
+    })
+});
+
 // #######################   Student topics -> Faculty dropdown ##########################
 $(document).ready(function() {
     $(document).on('click', '.page-link', function (event) {
@@ -123,6 +137,28 @@ $(document).ready(function() {
             data:{_token:_token, page:page},
             success: function (data) {
                 $('#fac_dets').html(data);
+            }
+        })
+    }
+});
+
+
+// #######################   Student topics -> pagination for topics suggested by faculty ##########################
+$(document).ready(function() {
+    $(document).on('click', '.page-link', function (event) {
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page);
+    })
+
+    function fetch_data(page) {
+        var _token = $("input[name=_token]").val();
+        $.ajax({
+            url: "/available_projects",
+            type:'get',
+            data:{_token:_token, page:page},
+            success: function (data) {
+                $('#available_projects').html(data);
             }
         })
     }
@@ -460,6 +496,7 @@ $(document).ready(function(){
 
     });
 });
+
 
 
 

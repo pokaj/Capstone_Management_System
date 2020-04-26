@@ -3,7 +3,7 @@
     <tr class="text-muted">
         <th>Name</th>
         <th>Department</th>
-        <th>View Interests</th>
+        <th>View Profile</th>
     </tr>
     </thead>
     <div>

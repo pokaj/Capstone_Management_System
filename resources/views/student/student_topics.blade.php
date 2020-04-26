@@ -22,7 +22,7 @@
                         <a href="" data-target="#my_topics" data-toggle="tab" class="nav-link active">My Capstone</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#faculty_topics" data-toggle="tab" class="nav-link">Faculty Projects @if($count > 0)<span class="text-danger">[{{$count}}]</span>@endif</a>
+                        <a href="" data-target="#faculty_topics" data-toggle="tab" class="nav-link">Faculty Projects @if($facultyProjectscount > 0)<span class="text-danger">[{{$facultyProjectscount}}]</span>@endif</a>
 
                     </li>
                     <li class="nav-item">
@@ -73,87 +73,12 @@
 
                     {{--                    Beginning of section for available projects (faculty suggested projects)--}}
                     <div class="tab-pane" id="faculty_topics">
-                        <h3 class="text-muted mb-3">Projects Proposed by Faculty</h3>
-                        <table class="table text-center table-dark table-hover">
-                            <thead>
-                            <tr class="text-muted">
-                                <th>Faculty</th>
-                                <th>Project Type</th>
-                                <th>Field</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($facultyProjects as $facultyProject)
-                            <tr>
-                                <td  class="text-white"><a href="##" data-toggle="modal" data-target="#{{$facultyProject->faculty_Id}}{{$facultyProject->first_name}}{{$facultyProject->last_name}}">
-                                        {{$facultyProject->first_name}} {{$facultyProject->last_name}}</a></td>
-                                <td>{{$facultyProject->project_type}}</td>
-                                <td>{{$facultyProject->project_field}}</td>
-                                <td>
-                                    <a href="" class="nav-link" data-toggle="modal" data-target="#{{$facultyProject->project_Id}}">
-                                        <i class="fas fa-eye text-muted fa-lg"></i></a>
-                                </td>
-                            </tr>
-                            <!-- beginning of modal for project details-->
-                            <div class="modal fade" id="{{$facultyProject->project_Id}}">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <p class="modal-title">
-                                                <strong> Title</strong>: {{$facultyProject->project_title}}
-                                            </p><br>
-
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <div class="modal-body">
-                                           <strong>Description</strong>: {{$facultyProject->project_desc}}
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button class="btn btn-success" onclick="application({{$facultyProject->project_Id}})">Apply</button>
-                                            <span>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Ignore</button>
-                                                </span>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-{{--                                end of modal for project details--}}
-
-
-                            <!-- beginning of modal faculty details-->
-                            <div class="modal fade" id="{{$facultyProject->faculty_Id}}{{$facultyProject->first_name}}{{$facultyProject->last_name}}">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <p class="modal-title">
-                                                <strong>{{$facultyProject->first_name}} {{$facultyProject->last_name}}</strong>
-                                            </p><br>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <div class="modal-body">
-                                        <img class="rounded-circle" src="images/{{$facultyProject->image}}" height="400" width="420">
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <div class="mr-auto">
-                                                <label><strong>Interests</strong></label>
-                                        <p>{{$facultyProject->interests}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-{{--                                end of modal for faculty details--}}
-                                @endforeach
-                            </tbody>
-                        </table>
-
+                        <div class="col-lg-9">
+                            <input placeholder="Type faculty name to search . . ." name="find_available" id="find_available" class="form-control search-input" type="text">
+                        </div>
+                        <div class="table-responsive mt-5" id="available_projects">
+                            @include('student/faculty_projects')
+                        </div>
 
                     </div>
 
@@ -327,7 +252,7 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Search Faculty : </label>
                                     <div class="col-lg-9">
-                                        <input placeholder="Type faculty name . . ." name="find" id="find" class="form-control search-input" type="text" value="{{old('find')}}">
+                                        <input placeholder="Type faculty name . . ." name="find" id="find" class="form-control search-input" type="text">
                                     </div>
 
                                 </div>

@@ -260,7 +260,6 @@ class coordinatorController extends Controller
             ->join('major','major_Id','=','student_major')
             ->where('capstone_table.cp_student','=',NULL)
             ->where('users.first_name','LIKE','%'.$request->get('value').'%')
-//            ->orwhere('users.last_name','LIKE','%'.$request->get('value').'%')
             ->get();
 
 

@@ -47,10 +47,16 @@ class StudentController extends Controller
 
             $facultyProjects = DB::table('project')
                 ->join('faculty','faculty_id','=','project.project_user')
+                ->join('department','department_Id','=','faculty_dept')
                 ->join('users','userId','=','faculty.faculty_id')
                 ->where('status','!=','taken')
-//                ->select('users.*','project.*')
-                ->get();
+                ->paginate(5);
+
+            $facultyProjectscount = count(DB::table('project')
+                ->join('faculty','faculty_id','=','project.project_user')
+                ->join('users','userId','=','faculty.faculty_id')
+                ->where('status','!=','taken')
+                ->get());
 
 
             $facultyDropdown = DB::select( DB::raw("SELECT * FROM users,faculty,department WHERE
@@ -78,11 +84,10 @@ class StudentController extends Controller
             ->join('department','department_Id','=','faculty_dept')
             ->paginate(5);
 
-            $count = count($facultyProjects);
             $usersProjects = count($users);
 
-            return view('student/student_topics' ,compact('users','facultyProjects','facultyDropdown',
-                'approvedProjects','count','usersProjects','selected','facultydets'));
+            return view('student/student_topics' ,compact('users','facultyProjects','facultyProjectscount','facultyDropdown',
+                'approvedProjects','usersProjects','selected','facultydets'));
         }
 
 
@@ -199,20 +204,6 @@ class StudentController extends Controller
 
     }
 
-
-//    public function viewFaculty(Request $request){
-//        $name = $request->get('search');
-//
-//        $facultyDropdown = DB::table('users')
-//            ->join('faculty','faculty_Id','=','users.userId')
-//            ->join('department','department_Id','=','faculty_dept')
-//            ->where('users.first_name','LIKE','%'.$name.'%')
-//            ->orWhere('users.last_name','LIKE','%'.$name.'%')
-//            ->paginate(5);
-//
-//        return ['success' => true, 'data' => $facultyDropdown];
-//    }
-
     public function viewFaculty(Request $request){
         $output='';
         $name = $request->get('search');
@@ -229,7 +220,7 @@ class StudentController extends Controller
                 $output.= '<tr>'.
                     '<td>'. $faculty->first_name.' '.' '.$faculty->last_name.'</td>'.
                     '<td>'.$faculty->department_name.'</td>'.
-                    '<td><a href=""  class="nav-link" data-toggle="modal" data-target='."#$faculty->first_name$faculty->last_name$faculty->faculty_Id".'><i class="fas fa-eye text-muted"></i></a></td>'.
+                    '<td><a href="" data-toggle="modal" data-target='."#$faculty->first_name$faculty->last_name$faculty->faculty_Id".'><i class="fas fa-eye text-muted"></i></a></td>'.
                     '</tr>'
 
 //                <!-- beginning of modal to view faculty details-->
@@ -255,6 +246,33 @@ class StudentController extends Controller
         }
     }
 
+    public function view_available(Request $request){
+        $output='';
+        $name = $request->get('search');
+
+       $facultyProjects = DB::table('project')
+            ->join('faculty','faculty_id','=','project.project_user')
+            ->join('department','department_Id','=','faculty_dept')
+            ->join('users','userId','=','faculty.faculty_id')
+            ->where('status','!=','taken')
+            ->where('users.first_name','LIKE','%'.$name.'%')
+            ->paginate(5);
+
+
+        if($facultyProjects){
+            foreach ($facultyProjects as $topic){
+                $output.= '<tr>'.
+                    '<td><a href="" data-toggle="modal" data-target='."#$topic->faculty_Id$topic->first_name$topic->last_name".'>'. $topic->first_name.' '.' '.$topic->last_name.'</a></td>'.
+                    '<td>'. $topic->project_type.'</td>'.
+                    '<td>'.$topic->project_field.'</td>'.
+                    '<td><a href="" data-toggle="modal" data-target='."#$topic->project_Id".'><i class="fas fa-eye text-muted"></i></a></td>'.
+                    '</tr>';
+            }
+            return Response($output);
+
+        }
+    }
+
     public function faculty_details(Request $request){
         if($request->ajax()){
             $facultydets = DB::table('users')
@@ -267,6 +285,18 @@ class StudentController extends Controller
     }
 
 
+    public function available_projects(Request $request){
+        if($request->ajax()){
+            $facultyProjects = DB::table('project')
+                ->join('faculty','faculty_id','=','project.project_user')
+                ->join('department','department_Id','=','faculty_dept')
+                ->join('users','userId','=','faculty.faculty_id')
+                ->where('status','!=','taken')
+                ->paginate(5);
+
+            return view('student/faculty_projects', compact('facultyProjects'))->render();
+        }
+    }
 
     public function student_project_feedback(){
         $feedback = DB::table('feedback')
@@ -275,7 +305,6 @@ class StudentController extends Controller
             ->join('users','userId','=','faculty.faculty_Id')
             ->where('feedback.student_Id','=',Auth::user()->userId)
             ->get();
-//        return $feedback;
         return view('student/projectFeedback',compact('feedback'));
     }
 
