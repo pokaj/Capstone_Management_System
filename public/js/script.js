@@ -66,7 +66,7 @@ $('#search').on('keyup',function (){
 });
 
 function run(id) {
-    let tab = "<table class='table table-hover'><thead class='thead-dark'><tr><th>Student ID</th><th>Name</th><th>Project Type</th><th>Project Title</th></tr></thead>";
+    let table = "<table class='table table-hover'><thead class='thead-dark'><tr><th>Student ID</th><th>Name</th><th>Project Type</th><th>Project Title</th></tr></thead>";
     $.ajax({
         type: 'get',
         url: '/details',
@@ -75,14 +75,14 @@ function run(id) {
             if (data.success === true) {
                 let ans = data['data'];
                     for(var here = 0; here < ans.length; here++) {
-                        tab += '<tr>';
-                        tab += '<td>' + ans[here]['student_Id'];
-                        tab += '<td>' + ans[here]['first_name'] + ' ' + ans[here]['last_name'];
-                        tab += '<td>' + ans[here]['project_type'];
-                        tab += '<td>' + ans[here]['project_title'];
-                        tab += '</tr>';
+                        table += '<tr>';
+                        table += '<td>' + ans[here]['student_Id'];
+                        table += '<td>' + ans[here]['first_name'] + ' ' + ans[here]['last_name'];
+                        table += '<td>' + ans[here]['project_type'];
+                        table += '<td>' + ans[here]['project_title'];
+                        table += '</tr>';
                     }
-                document.getElementById('content').innerHTML = tab;
+                document.getElementById('content').innerHTML = table;
 
             }
             },

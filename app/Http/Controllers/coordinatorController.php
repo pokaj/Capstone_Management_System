@@ -161,7 +161,7 @@ class coordinatorController extends Controller
                 ->join('faculty','faculty_Id','=','userId')
                 ->join('department','department_Id','=','faculty_dept')
                 ->where('users.first_name','LIKE','%'.$request->get('search').'%')
-                ->orWhere('users.last_name','LIKE','%'.$request->get('search').'%')
+//                ->orWhere('users.last_name','LIKE','%'.$request->get('search').'%')
                 ->paginate(5);
 
             if($faculty_data){
@@ -209,7 +209,7 @@ class coordinatorController extends Controller
             ->join('department','department_Id','=','faculty_dept')
             ->where('users.first_name','LIKE','%'.$request->get('value').'%')
             ->orWhere('users.last_name','LIKE','%'.$request->get('value').'%')
-            ->get();
+            ->paginate(5);
 
         if($faculty){
             foreach ($faculty as $faculty){
@@ -234,7 +234,7 @@ class coordinatorController extends Controller
             ->join('major','major_Id','=','student_major')
             ->where('users.first_name','LIKE','%'.$request->get('value').'%')
             ->orWhere('users.last_name','LIKE','%'.$request->get('value').'%')
-            ->get();
+            ->paginate(5);
 
         if($supervised){
             foreach ($supervised as $student){
@@ -260,7 +260,7 @@ class coordinatorController extends Controller
             ->join('major','major_Id','=','student_major')
             ->where('capstone_table.cp_student','=',NULL)
             ->where('users.first_name','LIKE','%'.$request->get('value').'%')
-            ->get();
+            ->paginate(5);
 
 
         if($unsupervised){

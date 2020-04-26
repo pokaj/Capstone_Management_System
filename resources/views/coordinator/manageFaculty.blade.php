@@ -58,7 +58,7 @@
                                             <th class="text-capitalize">view students</th>
                                         </tr>
                                         </thead>
-                                        <div id="hidden">
+                                        <div>
                                         <tbody id="faculty_information">
                                         @foreach($faculty_info as $data)
                                             <tr>
