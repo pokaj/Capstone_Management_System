@@ -276,5 +276,10 @@ class coordinatorController extends Controller
         }
     }
 
+    public function contact_students(){
+        return view('coordinator/contact_student');
+    }
+
+
 }
 

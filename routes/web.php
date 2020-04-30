@@ -83,6 +83,7 @@ Route::post('/limit','coordinatorController@limit');
 Route::get('/search_faculty_dash','coordinatorController@search_faculty_dash');
 Route::get('/search_supervised_dash','coordinatorController@search_supervised_dash');
 Route::get('/search_unsupervised_dash','coordinatorController@search_unsupervised_dash');
+Route::get('/contact_students','coordinatorController@contact_students');
 
 
 

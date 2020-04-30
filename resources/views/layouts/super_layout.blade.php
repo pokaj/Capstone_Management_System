@@ -41,7 +41,7 @@
 
 
                         <li class="nav-item {{'super_profile' == request()->path() ? 'current' : ''}}"><a href="/super_profile" class="nav-link text-white p-3 mb-2 sidebar-link ">
-                                <i class="fas fa-users text-white text-light fa-lg mr-3"></i>Profile</a>
+                                <i class="fas fa-user text-white text-light fa-lg mr-3"></i>Profile</a>
                         </li>
 
 
@@ -51,6 +51,10 @@
 
                         <li class="nav-item {{'manage_faculty' == request()->path() ? 'current' : ''}}"><a href="/manage_faculty" class="nav-link text-white p-3 mb-2 sidebar-link ">
                                 <i class="fas fa-book text-white text-light fa-lg mr-3"></i>Manage Faculty</a>
+                        </li>
+
+                        <li class="nav-item {{'contact_students' == request()->path() ? 'current' : ''}}"><a href="/contact_students" class="nav-link text-white p-3 mb-2 sidebar-link ">
+                                <i class="fas fa-users text-white text-light fa-lg mr-3"></i>Contact Students</a>
                         </li>
 
                     </ul>
@@ -133,6 +137,7 @@
                 @yield('addFaculty')
                 @yield('super_profile')
                 @yield('manage_faculty')
+                @yield('contact_students')
 
             </div>
         </div>
