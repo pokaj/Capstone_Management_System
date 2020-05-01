@@ -15,7 +15,7 @@
             <td>{{$facultyProject->project_type}}</td>
             <td>{{$facultyProject->project_field}}</td>
             <td>
-                <a href="" data-toggle="modal" data-target="#{{$facultyProject->project_Id}}">
+                <a href="" data-toggle="modal" data-target="#{{$facultyProject->project_Id}}{{$facultyProject->faculty_Id}}">
                     <i class="fas fa-eye text-muted fa-lg"></i></a>
             </td>
         </tr>
@@ -69,7 +69,7 @@
                     <div class="modal-footer">
                         <div class="mr-auto">
                             <label><strong>Interests</strong></label>
-                            <p>{{$facultyProject->interests}}</p>
+                            <p>{{$facultyProject->faculty_interests}}</p>
                         </div>
                     </div>
                 </div>

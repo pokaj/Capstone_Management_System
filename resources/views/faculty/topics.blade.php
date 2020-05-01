@@ -207,7 +207,7 @@
                             <tr>
                                 <td><a href="##" data-toggle="modal" data-target="#{{$studentProject->project_Id}}{{$studentProject->first_name}}">
                                         {{$studentProject->first_name}} {{$studentProject->last_name}}</a></td>
-                                <td>{{$studentProject->project_type}}</td>
+                                <td class="text-capitalize">{{$studentProject->project_type}}</td>
                                 <td>{{$studentProject->project_field}}</td>
                                 <td>
                                     <a href="" class="nav-link" data-toggle="modal" data-target="#{{$studentProject->project_Id}}"><i class="fas fa-eye text-muted fa-lg"></i></a>
@@ -256,8 +256,7 @@
                                                 <button class="btn btn-success">Accept</button>
                                             </form>
                                             <span>
-{{--                                                <a href="" class="btn btn-danger">Decline</a>--}}
-                                                <button class="btn btn-danger">Decline</button>
+                                                <button class="btn btn-danger" data-dismiss="modal">Close</button>
                                                 </span>
 
                                         </div>
@@ -308,6 +307,7 @@
                                                 <hr>
                                                 <p><strong>Interests</strong></p>
                                                 <p>{{$appliedinfo->interests}}</p>
+                                                <hr>
                                                 <p class="font-weight-bold text-capitalize">project applied title: </p>
 
                                                         <p>{{$appliedinfo->project_title}}</p>
@@ -349,7 +349,7 @@
                             @foreach($studentProjects as $studentProject)
                                 <tr>
                                     <td>{{$studentProject->first_name}} {{$studentProject->last_name}}</td>
-                                    <td>{{$studentProject->project_type}}</td>
+                                    <td class="text-capitalize">{{$studentProject->project_type}}</td>
                                     <td>{{$studentProject->project_field}}</td>
                                     <td>
                                         <a href="" class="nav-link" data-toggle="modal" data-target="#{{$studentProject->project_Id}}"><i class="fas fa-eye text-muted fa-lg"></i></a>
@@ -378,8 +378,7 @@
                                                     <button class="btn btn-success">Accept</button>
                                                 </form>
                                                 <span>
-{{--                                                <a href="" class="btn btn-danger">Decline</a>--}}
-                                                <button class="btn btn-danger">Decline</button>
+                                                <button class="btn btn-danger">Close</button>
                                                 </span>
 
                                             </div>
@@ -410,7 +409,7 @@
                             @foreach($all_student_projects as $project)
                                 <tr>
                                     <td><a href="" data-toggle="modal" data-target="#{{$project->first_name}}{{$project->project_Id}}{{$project->last_name}}" >{{$project->first_name}} {{$project->last_name}}</a></td>
-                                    <td>{{$project->project_type}}</td>
+                                    <td class="text-capitalize">{{$project->project_type}}</td>
                                     <th>{{$project->project_field}}</th>
                                     <td>
                                         <a href="" data-toggle="modal" data-target="#{{$project->project_Id}}{{$project->userId}}"><i class="fas fa-eye text-muted"></i></a>

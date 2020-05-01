@@ -77,7 +77,7 @@
                                                                 <p><i class="fa fa-phone" aria-hidden="true"></i> {{Auth::user()->phone}} </p>
                                                                 <h4>Research Interests</h4>
                                                                 @foreach($interests as $about)
-                                                                <p>{{$about->interests}}</p>
+                                                                <p>{{$about->faculty_interests}}</p>
                                                                 @endforeach
 
                                                             </div>
@@ -87,7 +87,7 @@
 
 
                                                     <div class="tab-pane" id="edit">
-                                                        <form role="form" method="post" enctype="multipart/form-dataupload" action="{{url('profile')}}">
+                                                        <form role="form" method="post" action="{{url('profile')}}">
                                                             @csrf
                                                             <input name="_method" type="hidden" value="PUT">
                                                             <div class="form-group row">

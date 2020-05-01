@@ -55,9 +55,8 @@
                                     <!--/row-->
 
                                     <div class="tab-pane" id="edit">
-                                        <form role="form" method="post" enctype="multipart/form-data" action="{{url('studentProfile')}}">
+                                        <form enctype="multipart/form-data" action="{{url('coord_update')}}">
                                             @csrf
-                                            <input name="_method" type="hidden" value="PUT">
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">First name</label>
                                                 <div class="col-lg-9">
@@ -94,7 +93,7 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label text-capitalize">profile picture</label>
                                                 <div class="col-lg-9">
-                                                    <input name="picture" type="file"class="form-control search-input">
+                                                    <input name="picture" type="file" class="form-control search-input">
                                                     <br>
                                                 </div>
                                             </div>

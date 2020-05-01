@@ -52,6 +52,7 @@ class StudentController extends Controller
                 ->where('status','!=','taken')
                 ->paginate(5);
 
+
             $facultyProjectscount = count(DB::table('project')
                 ->join('faculty','faculty_id','=','project.project_user')
                 ->join('users','userId','=','faculty.faculty_id')
@@ -139,7 +140,6 @@ class StudentController extends Controller
 
     //    Function to update student information
     public function update(Request $request){
-
         $updatefaculty = DB::table('users')
         ->where('userId','=',Auth::user()->userId)
             ->update([
@@ -265,7 +265,7 @@ class StudentController extends Controller
                     '<td><a href="" data-toggle="modal" data-target='."#$topic->faculty_Id$topic->first_name$topic->last_name".'>'. $topic->first_name.' '.' '.$topic->last_name.'</a></td>'.
                     '<td>'. $topic->project_type.'</td>'.
                     '<td>'.$topic->project_field.'</td>'.
-                    '<td><a href="" data-toggle="modal" data-target='."#$topic->project_Id".'><i class="fas fa-eye text-muted"></i></a></td>'.
+                    '<td><a href="" data-toggle="modal" data-target='."#$topic->project_Id$topic->faculty_Id".'><i class="fas fa-eye text-muted fa-lg"></i></a></td>'.
                     '</tr>';
             }
             return Response($output);

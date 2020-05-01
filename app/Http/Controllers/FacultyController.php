@@ -129,7 +129,7 @@ class FacultyController extends Controller
                 ->where('faculty_Id','=', Auth::user()->userId)
                 ->update(array(
                     'faculty_dept' => $request->input('department'),
-                    'interests' => $request->input('interests')
+                    'faculty_interests' => $request->input('interests')
                 ));
 
             return redirect()->back()

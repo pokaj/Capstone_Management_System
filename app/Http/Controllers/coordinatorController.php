@@ -6,6 +6,7 @@ use App\Faculty;
 use App\Mail\NewFaculty;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -278,6 +279,21 @@ class coordinatorController extends Controller
 
     public function contact_students(){
         return view('coordinator/contact_student');
+    }
+
+    public function coord_update(Request $request){
+        DB::table('users')
+            ->where('userId','=',Auth::user()->userId)
+            ->update([
+                'first_name' => $request->fname,
+                'last_name' => $request->lname,
+                'username' => $request->username,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'image' => $request->picture,
+            ]);
+
+        return redirect()->back()->with('message','Profile updated');
     }
 
 

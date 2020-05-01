@@ -34,7 +34,7 @@ Route::post('/meetingDetails', 'FacultyController@searchMeeting')->name('searchM
 Route::get('/feedback', 'FacultyController@feedback')->name('feedback');
 Route::post('/reminder', 'FacultyController@reminder')->name('reminder');
 Route::get('/contact', 'FacultyController@contact')->name('contact');
-Route::get('/send_feedback', 'FacultyController@send_feedback')->name('send_feedback');
+Route::get('/send_feedback', 'FacultyController@send_feedback');
 Route::post('/upload_image', 'FacultyController@upload_image')->name('upload_image');
 
 
@@ -84,6 +84,7 @@ Route::get('/search_faculty_dash','coordinatorController@search_faculty_dash');
 Route::get('/search_supervised_dash','coordinatorController@search_supervised_dash');
 Route::get('/search_unsupervised_dash','coordinatorController@search_unsupervised_dash');
 Route::get('/contact_students','coordinatorController@contact_students');
+Route::get('/coord_update','coordinatorController@coord_update');
 
 
 

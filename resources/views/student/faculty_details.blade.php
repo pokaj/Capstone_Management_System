@@ -35,7 +35,7 @@
                         <div class="modal-footer">
                             <div class="mr-auto">
                                 <label><strong>Interests</strong></label>
-                                <p>{{$details->interests}}</p>
+                                <p>{{$details->faculty_interests}}</p>
                             </div>
                         </div>
                     </div>
