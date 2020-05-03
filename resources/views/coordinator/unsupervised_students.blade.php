@@ -43,7 +43,7 @@
                         <hr>
                         <label>Message</label>
                         <textarea class="form-control search-input" name="message" required></textarea>
-                        <button class="mt-2 btn btn-primary">Send</button>
+                        <button class="mt-2 btn btn-primary float-right">Send</button>
                     </div>
                 </form>
             </div>

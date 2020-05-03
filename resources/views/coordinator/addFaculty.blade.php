@@ -83,8 +83,7 @@
                                         <div class="form-group row ">
                                             <label class="col-lg-3 col-form-label form-control-label"></label>
                                             <div class="col-lg-9">
-                                                <button class="btn btn-primary text-capitalize" >add faculty</button>
-
+                                                <button class="btn btn-primary text-capitalize float-right">add faculty</button>
                                             </div>
                                         </div>
                                     </form>

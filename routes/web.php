@@ -10,9 +10,6 @@
 | contains the "web" middleware group. Now create something gr*/
 
 
-use App\Mail\ReminderMail;
-use Illuminate\Support\Facades\Mail;
-
 Route::get('/', function () {
     return view('login');
 });
@@ -85,11 +82,13 @@ Route::get('/search_supervised_dash','coordinatorController@search_supervised_da
 Route::get('/search_unsupervised_dash','coordinatorController@search_unsupervised_dash');
 Route::get('/contact_students','coordinatorController@contact_students');
 Route::get('/coord_update','coordinatorController@coord_update');
+Route::get('/bulk_mail','coordinatorController@bulk_mail');
 
 
-
-
-
+/*
+ * Routes for all
+ */
+Route::put('changePassword','coordinatorController@changePassword')->name('changePassword');
 
 
 

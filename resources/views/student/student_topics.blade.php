@@ -232,7 +232,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary pull-right">Confirm</button>
+                                            <button type="submit" class="btn btn-primary float-right">Confirm</button>
                                         </form>
                                     </div>
                                 </div>
@@ -331,7 +331,7 @@
                                                 </div>
                                             </div>
 
-                                            <button class="btn btn-primary">Confirm</button>
+                                            <button class="btn btn-primary float-right">Confirm</button>
                                         </form>
                                     </div>
                                 </div>

@@ -145,7 +145,7 @@
                                     </div>
 
 
-                                    <a href="" class="btn btn-danger ml-3" data-toggle="modal" data-target="#{{$projectInfo->project_Id}}">Close Meeting</a>
+                                    <a href="" class="btn btn-danger ml-3 float-right" data-toggle="modal" data-target="#{{$projectInfo->project_Id}}">Close Meeting</a>
 
                                     <!-- modal to confirm closure of meeting-->
                                     <div class="modal fade" id="{{$projectInfo->project_Id}}">
@@ -191,7 +191,7 @@
                                             @foreach($users as $student_ID)
                                             <input type="hidden" id="student" value="{{$student_ID->student_user_id}}">
                                             @endforeach
-                                        <button class="btn btn-primary mt-2">Send Reminder</button>
+                                        <button class="btn btn-primary mt-2 float-right">Send Reminder</button>
                                         </form>
                                 </div>
                         </div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Faculty;
+use App\Mail\bulkMail;
+use App\Mail\Contact;
 use App\Mail\NewFaculty;
 use Illuminate\Http\Request;
 use App\User;
@@ -106,6 +108,7 @@ class coordinatorController extends Controller
     }
 
     public function newFaculty(Request $request)
+
     {
         $validatedData = $request->validate([
             'fname' => 'required|alpha|max:255',
@@ -129,7 +132,7 @@ class coordinatorController extends Controller
         $user->category = 'faculty';
         $user->user_role = 2;
         $user->username = $validatedData['username'];
-        $user->password = Hash::make($validatedData['password']);
+        $user->password = Hash::make($request->password);
         $user->save();
 
         $faculty = new Faculty;
@@ -213,12 +216,12 @@ class coordinatorController extends Controller
             ->paginate(5);
 
         if($faculty){
-            foreach ($faculty as $faculty){
+            foreach ($faculty as $faculty_details){
                 $output.= '<tr>'.
-                    '<td>'. $faculty->first_name.' '.' '.$faculty->last_name.'</td>'.
-                    '<td>'.$faculty->department_name.'</td>'.
-                    '<td>'.$faculty->number_of_students.'</td>'.
-                    '<td><a href=""  class="nav-link" data-toggle="modal" data-target='."#$faculty->faculty_Id".'><i class="fas fa-envelope text-muted"></i></a></td>'.
+                    '<td>'. $faculty_details->first_name.' '.' '.$faculty_details->last_name.'</td>'.
+                    '<td>'.$faculty_details->department_name.'</td>'.
+                    '<td>'.$faculty_details->number_of_students.'</td>'.
+                    '<td><a href=""  class="nav-link" data-toggle="modal" data-target='."#$faculty_details->faculty_Id".'><i class="fas fa-envelope text-muted"></i></a></td>'.
                     '</tr>';
             }
             return Response($output);
@@ -290,12 +293,52 @@ class coordinatorController extends Controller
                 'username' => $request->username,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'image' => $request->picture,
             ]);
 
         return redirect()->back()->with('message','Profile updated');
     }
 
+    public function changePassword(Request $request){
+        $validate = $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:7|required_with:confirm_password',
+        ]);
 
+        $user = User::find(Auth::user()->userId);
+        if($user){
+            if(Hash::check($request['current_password'],$user->password) && $validate){
+                if($request['new_password'] == $request['confirm_password']){
+                    $new_password = Hash::make($request['new_password']);
+                    DB::table('users')
+                        ->where('userId','=',Auth::user()->userId)
+                        ->update([
+                            'password' => $new_password
+                        ]);
+                    return redirect()->back()->with('message','Password successfully updated');
+                }else{
+                    return redirect()->back()->with('error','Confirm password does not match with new password!');
+                }
+            }else{
+                return redirect()->back()->with('error','The password entered does not match your current password');
+            }
+        }
+        return redirect()->back()->with('error','An error occurred!');
+    }
+
+    public function bulk_mail(Request $request){
+        $subject = $request->get('subject');
+        $message = $request->get('message');
+
+        $students = DB::table('student')
+            ->join('users','userId','=','student_user_id')
+            ->get();
+
+        for($student = 0; $student < count($students); $student++){
+            Mail::to($students[$student]->email)->send(new bulkMail($subject,$message));
+        }
+
+        return ['success' => true, 'data'=>1];
+
+    }
 }
 

@@ -25,6 +25,9 @@
                                     <li class="nav-item">
                                         <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="" data-target="#change_password" data-toggle="tab" class="nav-link">Change Password</a>
+                                    </li>
                                         @endif
                                         @endforeach
                                     </ul>
@@ -35,6 +38,12 @@
                                             {{ session()->get('message') }}
                                         </div>
                                     @endif
+                                        @if(session()->has('error'))
+                                            <div class="alert alert-danger">
+                                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                                {{ session()->get('error') }}
+                                            </div>
+                                        @endif
                                         @if ($errors->any())
                                             <div class="alert alert-danger">
                                                 <ul>
@@ -100,18 +109,6 @@
                                             <h4 class="mb-3">User Profile</h4>
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <form method="post" class="col-xs-6" enctype="multipart/form-data" action="{{route('upload_image')}}">
-                                                {{csrf_field()}}
-                                            <img src="images/{{Auth::user()->image}}" class="image rounded-circle">
-                                            <div class="row mt-3">
-                                                <div class="col-xs-6">
-                                                    <input name="picture" type="file"class="form-control search-input" required>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                <button class="btn btn-primary">Upload</button>
-                                                </div>
-                                            </div>
-                                            </form>
                                                         <div class="mt-3">
                                             <p><i class="fa fa-user" aria-hidden="true"></i> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</p>
                                             <p ><i class="fa fa-envelope" aria-hidden="true"></i>  {{Auth::user()->email}} </p>
@@ -216,15 +213,71 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label"></label>
                                                 <div class="col-lg-9">
-                                                    <button class="btn btn-primary">Save changes</button>
+                                                    <button class="btn btn-primary float-right">Save changes</button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
-                                        @endif
-                                        @endforeach
+                                        @endif @endforeach
+                                        <div class="tab-pane" id="change_password">
+                                            <form role="form" method="post" action="{{route('changePassword')}}">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="PUT">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-3 col-form-label form-control-label">Current Password</label>
+                                                    <div class="col-lg-9">
+                                                        <input name="current_password" class="form-control search-input" type="password" placeholder="Enter current password"  value="{{old('current_password')}}" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-lg-3 col-form-label form-control-label">New Password</label>
+                                                    <div class="col-lg-9">
+                                                        <input name="new_password" class="form-control search-input" type="password" placeholder="Enter new password"  value="{{old('new_password')}}" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-lg-3 col-form-label form-control-label">Confirm Password</label>
+                                                    <div class="col-lg-9">
+                                                        <input name="confirm_password" class="form-control search-input" type="password" placeholder="confirm new password"  value="{{old('confirm_password')}}" required>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-danger float-right">Confirm</button>
+                                            </form>
+                                        </div>
                                 </div>
                             </div>
+                            @foreach($dummydata as $dummy)
+                                @if($dummy->student_Id != null)
+                            <div class="col-lg-4 order-lg-1 text-center">
+                                <form method="post" class="col-xs-6" enctype="multipart/form-data" action="{{route('upload_image')}}">
+                                    {{csrf_field()}}
+                                    <div class="row">
+                                        @if(Auth::user()->image != null)
+                                            <div class="col-xs-6">
+                                                <img src="/images/{{Auth::user()->image}}" class="mx-auto img-fluid d-block rounded-circle">
+                                            </div>
+                                        @endif
+                                        <div>
+                                            @if(Auth::user()->image == null)
+                                                <p class="text-capitalize mt-3 text-danger">
+                                                    <i class="fas fa-exclamation-triangle text-danger"></i>
+                                                    Please Upload Profile picture
+                                                </p>
+                                            @endif
+                                            <p class="mt-3 ml-5 text-center text-muted">  Image Format: jpeg| jpg|  png</p>
+                                        </div>
+                                        <div class="col-xs-6 mt-3">
+                                            <input class="form-control search-input" type="file" name="picture" required>
+                                        </div>
+                                        <div class="col-xs-6 mt-3">
+                                            <button class="btn btn-primary float-right">Upload</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                                @endif @endforeach
                         </div>
                     </div>
                 </div>

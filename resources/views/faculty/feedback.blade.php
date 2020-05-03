@@ -18,7 +18,7 @@
                         <div class="col-lg-8 order-lg-2">
                             <label class="mt-3 "><strong>Feedback: </strong></label>
                             <textarea id="feedback" class="form-control search-input" rows="10" required></textarea>
-                            <button  id='but_read' class="btn btn-primary mt-3">Send feedback</button>
+                            <button  id='but_read' class="btn btn-primary mt-3 float-right">Send feedback</button>
                         </div>
                 </div>
             </div>

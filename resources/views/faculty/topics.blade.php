@@ -180,7 +180,7 @@
                                                 <textarea class="form-control search-input" rows="5" name="project_description" required></textarea>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary pull-right">ADD</button>
+                                        <button type="submit" class="btn btn-primary float-right">ADD</button>
                                     </div>
                                 </form>
                             </div>
