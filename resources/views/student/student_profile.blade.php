@@ -91,6 +91,8 @@
                                                     <label class="text-capitalize">choose profile picture</label>
 
                                             <input name="picture" type="file" class="form-control search-input" required>
+                                            <p class="mt-3 ml-5 text-center text-muted">  Image Format: jpeg| jpg|  png</p>
+
 
 
 

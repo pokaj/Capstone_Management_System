@@ -469,6 +469,11 @@
         $('#but_read').click(function () {
             var userid = $('#selUser').val();
             var feedback = $('#feedback').val();
+            if(feedback === ''){
+                Swal.fire(
+                    "Please make sure feedback field is not empty."
+                );
+            }
 
             $.ajax({
                 type: 'get',

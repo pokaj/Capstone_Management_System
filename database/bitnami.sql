@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 10, 2020 at 08:31 PM
+-- Generation Time: May 10, 2020 at 07:37 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.28
 
@@ -35,17 +35,6 @@ CREATE TABLE `capstone_table` (
   `cp_startdate` date DEFAULT NULL,
   `cp_enddate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `capstone_table`
---
-
-INSERT INTO `capstone_table` (`cp_supervisor`, `cp_student`, `cp_project`, `cp_startdate`, `cp_enddate`) VALUES
-(13, 38, 3, '2020-05-10', NULL),
-(16, 9, 1, '2020-05-10', NULL),
-(10, 11, 2, '2020-05-10', NULL),
-(7, 19, 4, '2020-05-10', NULL),
-(7, 33, 5, '2020-05-10', NULL);
 
 -- --------------------------------------------------------
 
@@ -87,13 +76,13 @@ CREATE TABLE `faculty` (
 --
 
 INSERT INTO `faculty` (`faculty_Id`, `faculty_dept`, `faculty_interests`, `number_of_students`) VALUES
-(7, 3, 'Web Development', 2),
+(7, 3, 'Web Development', 0),
 (8, 3, 'Mobile App Development', 0),
-(10, 3, 'Software Engineering', 1),
-(13, 1, 'Novels & African history.', 1),
+(10, 3, 'Software Engineering', 0),
+(13, 1, 'Novels & African history.', 0),
 (14, 2, NULL, 0),
 (15, 3, NULL, 0),
-(16, 1, 'African Cultural Integration', 1);
+(16, 1, 'African Cultural Integration', 0);
 
 -- --------------------------------------------------------
 
@@ -107,24 +96,6 @@ CREATE TABLE `faculty_student` (
   `project_Id` int(11) NOT NULL,
   `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `faculty_student`
---
-
-INSERT INTO `faculty_student` (`student_Id`, `faculty_Id`, `project_Id`, `status`) VALUES
-(9, 13, 1, 'unmatched'),
-(9, 16, 1, 'matched'),
-(9, 14, 1, 'unmatched'),
-(11, 15, 2, 'unmatched'),
-(11, 14, 2, 'unmatched'),
-(11, 10, 2, 'matched'),
-(38, 13, 3, 'matched'),
-(38, 7, 3, 'unmatched'),
-(38, 8, 3, 'unmatched'),
-(19, 15, 4, 'unmatched'),
-(19, 7, 4, 'matched'),
-(19, 10, 4, 'unmatched');
 
 -- --------------------------------------------------------
 
@@ -154,17 +125,6 @@ CREATE TABLE `feedback` (
   `date` date NOT NULL,
   `comments` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `feedback`
---
-
-INSERT INTO `feedback` (`feedback_Id`, `faculty_Id`, `student_Id`, `date`, `comments`) VALUES
-(1, 7, 33, '2020-05-10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
-(2, 7, 11, '2020-05-10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
-(3, 7, 19, '2020-05-10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
-(4, 10, 11, '2020-05-10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
-(5, 10, 19, '2020-05-10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
 
 -- --------------------------------------------------------
 
@@ -202,13 +162,6 @@ CREATE TABLE `meetings` (
   `mt_supervisor` int(11) NOT NULL,
   `mt_student` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `meetings`
---
-
-INSERT INTO `meetings` (`mt_id`, `mt_date`, `mt_project`, `mt_supervisor`, `mt_student`) VALUES
-(1, '2020-05-10 18:07:14', 2, 10, 11);
 
 -- --------------------------------------------------------
 
@@ -274,14 +227,6 @@ CREATE TABLE `pending_request` (
   `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `pending_request`
---
-
-INSERT INTO `pending_request` (`faculty_Id`, `student_Id`, `project_Id`, `status`) VALUES
-(7, 33, 5, 'accepted'),
-(7, 41, 5, 'declined');
-
 -- --------------------------------------------------------
 
 --
@@ -297,13 +242,6 @@ CREATE TABLE `person_meeting` (
   `mt_objnxtperiod` text NOT NULL,
   `mt_nextDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `person_meeting`
---
-
-INSERT INTO `person_meeting` (`mt_id`, `mt_date`, `mt_objective`, `mt_challenges`, `mt_sumofprogress`, `mt_objnxtperiod`, `mt_nextDate`) VALUES
-(1, '2020-05-10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2020-05-17 16:30:00');
 
 -- --------------------------------------------------------
 
@@ -321,17 +259,6 @@ CREATE TABLE `project` (
   `project_desc` text NOT NULL,
   `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `project`
---
-
-INSERT INTO `project` (`project_Id`, `project_user`, `project_date`, `project_title`, `project_field`, `project_type`, `project_desc`, `status`) VALUES
-(1, 9, '2020-05-10 17:50:52', 'Why does stress affect our personality and influence our behavior?', 'Human Study', 'thesis', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'taken'),
-(2, 11, '2020-05-10 17:53:21', 'How can crisis management influence business', 'Management Strategies', 'thesis', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'taken'),
-(3, 38, '2020-05-10 17:55:10', 'How to develop software that coordinates retail business supply and sales', 'Computer Technology', 'thesis', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'taken'),
-(4, 19, '2020-05-10 18:10:59', 'Mobile application for efficient management of the online store', 'Computer Technology', 'applied', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'taken'),
-(5, 7, '2020-05-10 18:16:30', 'Internet security measurement and current protective systems', 'Internet Security', 'thesis', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'taken');
 
 -- --------------------------------------------------------
 
@@ -609,13 +536,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `feedback_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `feedback_Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `meetings`
 --
 ALTER TABLE `meetings`
-  MODIFY `mt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `mt_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -627,7 +554,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `project_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `project_Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -640,56 +567,11 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `capstone_table`
---
-ALTER TABLE `capstone_table`
-  ADD CONSTRAINT `capstone_table_ibfk_1` FOREIGN KEY (`cp_project`) REFERENCES `project` (`project_Id`),
-  ADD CONSTRAINT `capstone_table_ibfk_2` FOREIGN KEY (`cp_student`) REFERENCES `users` (`userId`),
-  ADD CONSTRAINT `capstone_table_ibfk_3` FOREIGN KEY (`cp_supervisor`) REFERENCES `users` (`userId`);
-
---
--- Constraints for table `faculty`
---
-ALTER TABLE `faculty`
-  ADD CONSTRAINT `faculty_ibfk_1` FOREIGN KEY (`faculty_dept`) REFERENCES `department` (`department_Id`),
-  ADD CONSTRAINT `faculty_ibfk_2` FOREIGN KEY (`faculty_Id`) REFERENCES `users` (`userId`);
-
---
--- Constraints for table `faculty_student`
---
-ALTER TABLE `faculty_student`
-  ADD CONSTRAINT `faculty_student_ibfk_1` FOREIGN KEY (`faculty_Id`) REFERENCES `users` (`userId`),
-  ADD CONSTRAINT `faculty_student_ibfk_2` FOREIGN KEY (`project_Id`) REFERENCES `project` (`project_Id`),
-  ADD CONSTRAINT `faculty_student_ibfk_3` FOREIGN KEY (`student_Id`) REFERENCES `users` (`userId`);
-
---
 -- Constraints for table `feedback`
 --
 ALTER TABLE `feedback`
   ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`faculty_Id`) REFERENCES `users` (`userId`),
   ADD CONSTRAINT `feedback_ibfk_2` FOREIGN KEY (`student_Id`) REFERENCES `users` (`userId`);
-
---
--- Constraints for table `meetings`
---
-ALTER TABLE `meetings`
-  ADD CONSTRAINT `meetings_ibfk_1` FOREIGN KEY (`mt_project`) REFERENCES `project` (`project_Id`),
-  ADD CONSTRAINT `meetings_ibfk_2` FOREIGN KEY (`mt_student`) REFERENCES `users` (`userId`),
-  ADD CONSTRAINT `meetings_ibfk_3` FOREIGN KEY (`mt_supervisor`) REFERENCES `users` (`userId`);
-
---
--- Constraints for table `pending_request`
---
-ALTER TABLE `pending_request`
-  ADD CONSTRAINT `pending_request_ibfk_1` FOREIGN KEY (`faculty_Id`) REFERENCES `users` (`userId`),
-  ADD CONSTRAINT `pending_request_ibfk_2` FOREIGN KEY (`project_Id`) REFERENCES `project` (`project_Id`),
-  ADD CONSTRAINT `pending_request_ibfk_3` FOREIGN KEY (`student_Id`) REFERENCES `users` (`userId`);
-
---
--- Constraints for table `person_meeting`
---
-ALTER TABLE `person_meeting`
-  ADD CONSTRAINT `person_meeting_ibfk_1` FOREIGN KEY (`mt_id`) REFERENCES `meetings` (`mt_id`);
 
 --
 -- Constraints for table `project`

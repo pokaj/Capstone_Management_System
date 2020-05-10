@@ -45,7 +45,7 @@
                         </li>
 
                         <li class="nav-item {{'students' == request()->path() ? 'current' : ''}}"><a href="/students" class="nav-link text-white p-3 mb-2 sidebar-link ">
-                                <i class="fas fa-users text-white text-light fa-lg mr-3"></i>Students</a>
+                                <i class="fas fa-users text-white text-light fa-lg mr-3"></i>My Students</a>
                         </li>
 
                         <li class="nav-item {{'topics' == request()->path() ? 'current' : ''}}"><a href="/topics" class="nav-link text-white p-3 mb-2 sidebar-link ">

@@ -96,7 +96,7 @@
                             <!-- beginning of modal -->
                             <div class="modal fade" id="{{$faculty_project->project_user}}{{$faculty_project->project_Id}}">
                                 <form>
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <p><strong>Project Title: </strong></p>
